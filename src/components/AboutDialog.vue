@@ -18,7 +18,7 @@
       It's open-sourced at
       <n-a href="https://github.com/ouuan/codle">GitHub</n-a>
       under the
-      <n-a href="https://github.com/ouuan/codle/blob/master/LICENSE">AGPL-3.0</n-a>
+      <n-a href="/LICENSE">AGPL-3.0</n-a>
       license. It makes use of
       <n-a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</n-a>,
       <n-a href="https://v3.vuejs.org/">Vue 3</n-a>,
