@@ -15,7 +15,7 @@
     preset="card"
     :trap-focus="false"
     :title="title"
-    :style="dialogStyle ?? 'max-width: calc(min(80vw, 500px));'"
+    :style="dialogStyle"
   >
     <slot />
   </n-modal>
@@ -29,13 +29,16 @@ import {
   NModal,
 } from 'naive-ui';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   title: string,
   defaultShow?: boolean,
   dialogStyle?: string,
-}>();
+}>(), {
+  defaultShow: false,
+  dialogStyle: 'max-width: calc(min(80vw, 500px));',
+});
 
-const showModal = ref(props.defaultShow ?? false);
+const showModal = ref(props.defaultShow);
 
 const emit = defineEmits<{ (e: 'close'): void }>();
 watch(showModal, (show) => {
