@@ -1,0 +1,53 @@
+{
+  "name": "codle",
+  "version": "0.1.0",
+  "description": "Guess code like Wordle with AST nodes as letters",
+  "scripts": {
+    "lint": "pnpm lint:nofix --fix",
+    "lint:nofix": "eslint . --ignore-path .gitignore --ext .ts,.vue,.js",
+    "lint:types": "vue-tsc --noEmit",
+    "serve": "vite",
+    "build": "pnpm lint && pnpm lint:types && ./encode-puzzles.sh && vite build",
+    "build-treesitter:cpp": "tree-sitter build-wasm node_modules/tree-sitter-cpp && mv tree-sitter-cpp.wasm public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ouuan/codle.git"
+  },
+  "author": "Yufan You",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/ouuan/codle/issues"
+  },
+  "homepage": "https://github.com/ouuan/codle#readme",
+  "dependencies": {
+    "@vicons/ionicons5": "^0.12.0",
+    "axios": "^0.26.1",
+    "codemirror": "^5.65.2",
+    "codemirror-editor-vue3": "^2.0.6",
+    "dompurify": "^2.3.6",
+    "naive-ui": "^2.27.0",
+    "ts-exhaustive-check": "^1.0.0",
+    "vue": "^3.2.31",
+    "web-tree-sitter": "^0.20.5"
+  },
+  "devDependencies": {
+    "@types/codemirror": "^5.60.5",
+    "@types/dompurify": "^2.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "@vitejs/plugin-vue": "^2.2.4",
+    "@vue/eslint-config-typescript": "^10.0.0",
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-vue": "^8.5.0",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "tree-sitter-cli": "^0.20.6",
+    "tree-sitter-cpp": "^0.20.0",
+    "typescript": "^4.6.3",
+    "vite": "^2.8.6",
+    "vue-tsc": "^0.33.9"
+  }
+}

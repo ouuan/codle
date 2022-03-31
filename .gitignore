@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+dist/
+*.log
+*.wasm
+!tree-sitter.wasm
+public/targetCode/*
+public/statement/*
+puzzles/*
+!puzzles/0.*
+!0

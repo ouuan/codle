@@ -1,0 +1,238 @@
+<!-- eslint-disable vue/no-v-html -->
+
+<template>
+  <n-grid
+    cols="12"
+    responsive="screen"
+    item-responsive
+  >
+    <n-gi span="1 l:2" />
+    <n-gi span="10 l:8">
+      <n-page-header
+        class="page-header"
+        title="Codle"
+        subtitle="Wordle with AST nodes as letters"
+      >
+        <template #extra>
+          <about-dialog />
+          <game-rule-dialog />
+          <statistics-dialog />
+          <settings-dialog />
+        </template>
+      </n-page-header>
+      <n-space
+        v-if="correctRoot"
+        vertical
+      >
+        <n-card>
+          <n-p>
+            This week is puzzle #<strong>{{ puzzleNumber }}</strong>.
+            You have
+            <n-countdown
+              active
+              :duration="remainingTime"
+            />
+            to solve it.
+          </n-p>
+          <n-space vertical>
+            <n-form-item
+              label-placement="left"
+              label="Problem Statement"
+              size="small"
+              :show-feedback="false"
+            >
+              <n-switch v-model:value="showStatement" />
+            </n-form-item>
+            <n-collapse-transition :show="showStatement">
+              <div v-html="statement" />
+            </n-collapse-transition>
+          </n-space>
+        </n-card>
+        <n-card
+          v-if="!finished && !gaveUp"
+          title="Guess!"
+        >
+          <template #header-extra>
+            Length (max: 2 * length of target code):&nbsp;
+            <n-text
+              :type="lengthHintType"
+            >
+              {{ code.length }}/{{ lengthLimit }}
+            </n-text>
+          </template>
+          <code-editor
+            ref="editor"
+            v-model:code="code"
+            height="40vh"
+            :length-limit="lengthLimit"
+            :read-only="false"
+          />
+          <template #action>
+            <n-space justify="space-between">
+              <n-button
+                type="success"
+                @click="submitGuess"
+              >
+                Guess!
+              </n-button>
+              <n-button
+                type="warning"
+                @click="giveUp"
+              >
+                Give Up 😢
+              </n-button>
+            </n-space>
+          </template>
+        </n-card>
+        <finished-message v-if="finished" />
+        <n-card
+          v-if="gaveUp"
+          title="You gave up 😢"
+        >
+          <n-p>The target code is:</n-p>
+          <code-editor
+            :read-only="true"
+            :code="targetCode"
+          />
+        </n-card>
+        <n-card
+          v-if="guesses.length"
+          title="History"
+        >
+          <guess-history
+            :correct-root="correctRoot"
+            @standardize-code="code = standardizeCode()"
+          />
+        </n-card>
+      </n-space>
+      <n-space
+        v-else
+        vertical
+        style="margin-top: 20vh;"
+      >
+        <n-space justify="space-around">
+          <n-text>Loading...</n-text>
+        </n-space>
+        <n-space justify="space-around">
+          <n-spin size="large" />
+        </n-space>
+      </n-space>
+    </n-gi>
+    <n-gi span="1 l:2" />
+  </n-grid>
+</template>
+
+<script setup lang="ts">
+import {
+  computed,
+  onMounted,
+  ref,
+} from 'vue';
+import {
+  NButton,
+  NCard,
+  NCollapseTransition,
+  NCountdown,
+  NFormItem,
+  NGi,
+  NGrid,
+  NP,
+  NPageHeader,
+  NSpace,
+  NSpin,
+  NSwitch,
+  NText,
+  useDialog,
+} from 'naive-ui';
+import { SyntaxNode } from 'web-tree-sitter';
+
+import AboutDialog from './AboutDialog.vue';
+import CodeEditor from './CodeEditor.vue';
+import FinishedMessage from './FinishedMessage.vue';
+import GuessHistory from './GuessHistory.vue';
+import GameRuleDialog from './GameRuleDialog.vue';
+import StatisticsDialog from './StatisticsDialog.vue';
+import SettingsDialog from './SettingsDialog.vue';
+
+import {
+  finished,
+  firstGame,
+  gaveUp,
+  guesses,
+  lastPlay,
+  playCount,
+  puzzleNumber,
+  showStatement,
+  statement,
+  targetCode,
+  updatePuzzle,
+} from '../store/useLocalStorage';
+import { standardizeCode } from '../store/useRootTreeOption';
+import parse from '../parse';
+
+const code = ref('');
+
+const correctRoot = ref<SyntaxNode>();
+
+const editor = ref();
+
+const dialog = useDialog();
+
+onMounted(async () => {
+  await updatePuzzle(dialog);
+  if (targetCode.value === '') return;
+  if (guesses.value.length) {
+    code.value = guesses.value[guesses.value.length - 1];
+  }
+  const tree = await parse(targetCode.value);
+  correctRoot.value = tree.rootNode;
+});
+
+const lengthLimit = computed(() => targetCode.value.length * 2);
+const lengthHintType = computed(() => {
+  if (code.value.length <= targetCode.value.length) return 'success';
+  if (code.value.length === lengthLimit.value) return 'error';
+  return 'warning';
+});
+
+function submitGuess() {
+  if (lastPlay.value !== puzzleNumber.value) {
+    lastPlay.value = puzzleNumber.value;
+    playCount.value += 1;
+  }
+  if (firstGame.value === 0) {
+    firstGame.value = puzzleNumber.value;
+  }
+  guesses.value.push(code.value);
+}
+
+function giveUp() {
+  if (new Date().getUTCDay() === 6) {
+    dialog.warning({
+      title: 'Give Up?',
+      content: "Don't you want to try once more?",
+      positiveText: "I'm sure to give up",
+      negativeText: "I'll keep trying",
+      onPositiveClick() {
+        gaveUp.value = true;
+      },
+    });
+  } else {
+    dialog.error({
+      title: "Don't give up!",
+      content: 'You can give up only on UTC Saturday (i.e. the last 24 hours of a weekly puzzle). Come here tomorrow if you are tired today.',
+      negativeText: "I'll keep trying",
+    });
+  }
+}
+
+const A_WEEK = 1000 * 60 * 60 * 24 * 7;
+const remainingTime = computed(() => A_WEEK - ((new Date().valueOf() - new Date('2000-01-02T00:00:00Z').valueOf()) % A_WEEK));
+</script>
+
+<style scoped>
+.page-header {
+  margin-top: 12px;
+  margin-bottom: 10px;
+}
+</style>
