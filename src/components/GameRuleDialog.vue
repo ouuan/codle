@@ -54,8 +54,7 @@
         (remember to set the language to C++ first)
         and you'll roughly know what node types look like.
         You may also use this Playground as an assistant when solving the puzzle.
-        To know which part of your code a node corresponds to, just hover on the node
-        (or tap the node on smartphone).
+        To know which part of your code a node corresponds to, just hover on the node.
       </n-p>
       <n-p>
         In order to provide more information to you,
