@@ -7,5 +7,4 @@ dist/
 public/targetCode/*
 public/statement/*
 puzzles/*
-!puzzles/0.*
-!0
+!0.*
