@@ -9,6 +9,16 @@
     >
       <n-gi>
         <n-statistic
+          label="First Game"
+          :value="firstGame"
+        >
+          <template #prefix>
+            #
+          </template>
+        </n-statistic>
+      </n-gi>
+      <n-gi>
+        <n-statistic
           label="Games Played"
           :value="playCount"
         />
@@ -34,16 +44,6 @@
           label="Max Streak"
           :value="maxStreak"
         />
-      </n-gi>
-      <n-gi>
-        <n-statistic
-          label="First Game"
-          :value="firstGame"
-        >
-          <template #prefix>
-            #
-          </template>
-        </n-statistic>
       </n-gi>
       <n-gi>
         <n-statistic
