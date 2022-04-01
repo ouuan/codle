@@ -61,7 +61,7 @@
         you'll also get the number of children of each green node.
         When you have found a whole subtree,
         each node in this subtree will have a "✅" displayed.
-        If the code of a correct subtree is different from the corresponding target code,
+        If your code of a correct subtree is different from the corresponding target code,
         you'll have a chance to view the target code of this subtree.
       </n-p>
       <n-p>
