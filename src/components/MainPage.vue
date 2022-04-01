@@ -170,7 +170,15 @@ import {
 import { standardizeCode } from '../store/useRootTreeOption';
 import parse from '../parse';
 
-const code = ref('');
+const code = ref(`#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+    return 0;
+}`);
 
 const correctRoot = ref<SyntaxNode>();
 
