@@ -42,7 +42,7 @@
         In short, a node is neither green nor yellow if its parent is not green,
         otherwise, the "correct position" means the correct position within its siblings.
         Particularly, the root node is always green.
-        When a green node has more than one misplaced type-correct child,
+        When a green node has more than one misplaced type-correct child with the same type,
         and the number of such children is greater than the correct one,
         only the first correct number of such children will be yellow.
       </n-p>
