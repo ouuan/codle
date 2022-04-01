@@ -76,7 +76,9 @@ defineExpose({
 </script>
 
 <style>
-.CodeMirror {
+/* double class names to get higher specificity than CodeMirror's CSS */
+.CodeMirror.CodeMirror {
   font-size: 14px;
+  font-family: monospace !important;
 }
 </style>
