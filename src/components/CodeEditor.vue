@@ -73,12 +73,14 @@ function setSelection(pos1: CodeMirror.Position, pos2: CodeMirror.Position) {
 defineExpose({
   setSelection,
 });
+
+const codeFontFamilyFallback = computed(() => codeFontFamily.value || 'monospace');
 </script>
 
 <style>
 /* double class names to get higher specificity than CodeMirror's CSS */
 .CodeMirror.CodeMirror {
   font-size: 14px;
-  font-family: v-bind(codeFontFamily) !important;
+  font-family: v-bind(codeFontFamilyFallback), monospace !important;
 }
 </style>

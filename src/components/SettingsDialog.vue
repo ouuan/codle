@@ -12,7 +12,10 @@
           <n-switch v-model:value="uiDark" />
         </n-form-item>
         <n-form-item label="Code Font Family">
-          <n-input v-model:value="codeFontFamily" />
+          <n-input
+            v-model:value="codeFontFamily"
+            placeholder="monospace"
+          />
         </n-form-item>
       </n-form>
     </n-space>
