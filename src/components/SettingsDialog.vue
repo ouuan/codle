@@ -4,19 +4,26 @@
       <settings-sharp />
     </template>
     <n-space vertical>
-      <n-form-item
+      <n-form
         label-placement="left"
-        label="Dark Theme"
+        label-width="auto"
       >
-        <n-switch v-model:value="uiDark" />
-      </n-form-item>
+        <n-form-item label="Dark Theme">
+          <n-switch v-model:value="uiDark" />
+        </n-form-item>
+        <n-form-item label="Code Font Family">
+          <n-input v-model:value="codeFontFamily" />
+        </n-form-item>
+      </n-form>
     </n-space>
   </dialog-with-icon-button>
 </template>
 
 <script setup lang="ts">
 import {
+  NForm,
   NFormItem,
+  NInput,
   NSpace,
   NSwitch,
 } from 'naive-ui';
@@ -24,5 +31,5 @@ import { SettingsSharp } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
 
-import { uiDark } from '../store/useLocalStorage';
+import { uiDark, codeFontFamily } from '../store/useLocalStorage';
 </script>

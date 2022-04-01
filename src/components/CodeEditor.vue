@@ -21,7 +21,7 @@ import { Editor, EditorConfiguration } from 'codemirror';
 import 'codemirror/mode/clike/clike.js';
 import 'codemirror/theme/gruvbox-dark.css';
 
-import { uiDark } from '../store/useLocalStorage';
+import { uiDark, codeFontFamily } from '../store/useLocalStorage';
 
 const props = defineProps<{
   code: string,
@@ -79,6 +79,6 @@ defineExpose({
 /* double class names to get higher specificity than CodeMirror's CSS */
 .CodeMirror.CodeMirror {
   font-size: 14px;
-  font-family: monospace !important;
+  font-family: v-bind(codeFontFamily) !important;
 }
 </style>

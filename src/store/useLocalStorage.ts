@@ -48,7 +48,11 @@ function isStringArray(value: unknown): value is string[] {
 export const guesses = ref<string[]>(getStored('guesses', [], isStringArray));
 watchAndStore(guesses, 'guesses');
 
-const targetCodeEncoded = ref<string>(getStored('targetCodeEncoded', '', (value): value is string => (typeof value === 'string')));
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
+}
+
+const targetCodeEncoded = ref<string>(getStored('targetCodeEncoded', '', isString));
 watchAndStore(targetCodeEncoded, 'targetCodeEncoded');
 async function getTargetCode(dialog: ReturnType<typeof useDialog>) {
   targetCodeEncoded.value = '';
@@ -67,7 +71,7 @@ export const targetCode = computed(() => {
   return decodeURIComponent(base64Decoded);
 });
 
-export const statementEncoded = ref<string>(getStored('statementEncoded', '', (value): value is string => (typeof value === 'string')));
+export const statementEncoded = ref<string>(getStored('statementEncoded', '', isString));
 watchAndStore(statementEncoded, 'statementEncoded');
 async function getStatement(dialog: ReturnType<typeof useDialog>) {
   statementEncoded.value = '';
@@ -139,3 +143,6 @@ watchAndStore(uiDark, 'uiDark');
 
 export const showGameRule = ref<boolean>(getStored('showGameRule', true, isBoolean));
 watchAndStore(showGameRule, 'showGameRule');
+
+export const codeFontFamily = ref<string>(getStored('codeFontFamily', 'monospace', isString));
+watchAndStore(codeFontFamily, 'codeFontFamily');
