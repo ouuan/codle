@@ -14,6 +14,7 @@
         subtitle="Wordle with AST nodes as letters"
       >
         <template #extra>
+          <plausible-dialog />
           <about-dialog />
           <game-rule-dialog />
           <statistics-dialog />
@@ -151,6 +152,7 @@ import CodeEditor from './CodeEditor.vue';
 import FinishedMessage from './FinishedMessage.vue';
 import GuessHistory from './GuessHistory.vue';
 import GameRuleDialog from './GameRuleDialog.vue';
+import PlausibleDialog from './PlausibleDialog.vue';
 import StatisticsDialog from './StatisticsDialog.vue';
 import SettingsDialog from './SettingsDialog.vue';
 
