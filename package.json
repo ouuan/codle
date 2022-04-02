@@ -28,6 +28,7 @@
     "codemirror-editor-vue3": "^2.0.6",
     "dompurify": "^2.3.6",
     "naive-ui": "^2.27.0",
+    "plausible-tracker": "^0.3.5",
     "ts-exhaustive-check": "^1.0.0",
     "vue": "^3.2.31",
     "web-tree-sitter": "^0.20.5"

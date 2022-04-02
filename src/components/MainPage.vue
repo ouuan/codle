@@ -169,6 +169,7 @@ import {
 } from '../store/useLocalStorage';
 import { standardizeCode } from '../store/useRootTreeOption';
 import parse from '../parse';
+import { enableAutoOutboundTracking, trackEvent } from '../plausible';
 
 const code = ref(`#include <iostream>
 #include <cstdio>
@@ -187,6 +188,7 @@ const editor = ref();
 const dialog = useDialog();
 
 onMounted(async () => {
+  enableAutoOutboundTracking();
   await updatePuzzle(dialog);
   if (targetCode.value === '') return;
   if (guesses.value.length) {
@@ -223,6 +225,11 @@ function giveUp() {
       negativeText: "I'll keep trying",
       onPositiveClick() {
         gaveUp.value = true;
+        trackEvent('Give Up', {
+          props: {
+            guessNum: guesses.value.length as any as string, // https://github.com/plausible/plausible-tracker/pull/27
+          },
+        });
       },
     });
   } else {

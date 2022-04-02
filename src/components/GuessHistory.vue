@@ -106,6 +106,7 @@ import {
   successCount,
 } from '../store/useLocalStorage';
 import { rootTreeOption } from '../store/useRootTreeOption';
+import { trackEvent } from '../plausible';
 
 const props = defineProps<{ correctRoot?: SyntaxNode }>();
 
@@ -162,6 +163,11 @@ watch(rootTreeOption, () => {
     maxStreak.value = Math.max(maxStreak.value, currentStreak.value);
     lastSuccess.value = puzzleNumber.value;
     guessSum.value += guesses.value.length;
+    trackEvent('Game Success', {
+      props: {
+        guessNum: guesses.value.length as any as string, // https://github.com/plausible/plausible-tracker/pull/27
+      },
+    });
   }
 });
 
