@@ -14,7 +14,7 @@
     </n-p>
     <n-p>
       Plausible Analytics is
-      <n-a href="https://plausible.io/privacy-focused-web-analytics">privacy focused</n-a>
+      <n-a href="https://plausible.io/privacy-focused-web-analytics">privacy-focused</n-a>
       and compliant with privacy regulations such as GDPR.
     </n-p>
     <n-p>
@@ -24,7 +24,7 @@
       sell your data to any third parties as your personal data is not collected.
     </n-p>
     <n-p>
-      However, you can still opt out the analytics here:
+      However, you can still opt out of the tracking here:
       <n-switch v-model:value="plausibleTracked">
         <template #checked>
           You are now tracked
