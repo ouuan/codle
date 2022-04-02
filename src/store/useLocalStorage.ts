@@ -7,6 +7,7 @@ import {
 import axios from 'axios';
 import { useDialog, useOsTheme } from 'naive-ui';
 import DOMPurify from 'dompurify';
+import { exhaustiveCheck } from 'ts-exhaustive-check';
 
 const api = axios.create({
   headers: {
@@ -138,8 +139,24 @@ export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
   }
 }
 
-export const uiDark = ref<boolean>(getStored('uiDark', useOsTheme().value === 'dark', isBoolean));
-watchAndStore(uiDark, 'uiDark');
+export const uiTheme = ref<'light' | 'dark' | 'auto'>(getStored(
+  'uiTheme',
+  'auto',
+  (value: any): value is 'light' | 'dark' | 'auto' => ['light', 'dark', 'auto'].includes(value),
+));
+watchAndStore(uiTheme, 'uiTheme');
+export const uiDark = computed(() => {
+  switch (uiTheme.value) {
+    case 'auto':
+      return useOsTheme().value === 'dark';
+    case 'dark':
+      return true;
+    case 'light':
+      return false;
+    default:
+      return exhaustiveCheck(uiTheme.value);
+  }
+});
 
 export const showGameRule = ref<boolean>(getStored('showGameRule', true, isBoolean));
 watchAndStore(showGameRule, 'showGameRule');

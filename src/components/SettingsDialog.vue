@@ -9,7 +9,10 @@
         label-width="auto"
       >
         <n-form-item label="Dark Theme">
-          <n-switch v-model:value="uiDark" />
+          <n-select
+            v-model:value="uiTheme"
+            :options="themeOptions"
+          />
         </n-form-item>
         <n-form-item label="Code Font Family">
           <n-input
@@ -27,12 +30,27 @@ import {
   NForm,
   NFormItem,
   NInput,
+  NSelect,
   NSpace,
-  NSwitch,
 } from 'naive-ui';
 import { SettingsSharp } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
 
-import { uiDark, codeFontFamily } from '../store/useLocalStorage';
+import { uiTheme, codeFontFamily } from '../store/useLocalStorage';
+
+const themeOptions = [
+  {
+    label: 'Follow Browser',
+    value: 'auto',
+  },
+  {
+    label: 'Dark Theme',
+    value: 'dark',
+  },
+  {
+    label: 'Light Theme',
+    value: 'light',
+  },
+];
 </script>
