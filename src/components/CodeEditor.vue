@@ -15,6 +15,7 @@ import {
   onMounted,
   ref,
 } from 'vue';
+import { useMessage } from 'naive-ui';
 import CodeMirror, { CmComponentRef } from 'codemirror-editor-vue3';
 import { Editor, EditorConfiguration } from 'codemirror';
 
@@ -49,6 +50,7 @@ function onCodeChange(val: string) {
 
 const editorRef = ref<CmComponentRef>(null);
 const cmInstance = ref<Editor>();
+const message = useMessage();
 onMounted(() => {
   cmInstance.value = editorRef.value?.cminstance;
   const { lengthLimit } = props;
@@ -57,6 +59,7 @@ onMounted(() => {
       const str = change.text.join('\n');
       const newLength = cm.getValue().length + change.text.join('\n').length - (cm.indexFromPos(change.to) - cm.indexFromPos(change.from));
       if (newLength > lengthLimit) {
+        message.error('Code length limit exceeded');
         const newChange = str.slice(0, str.length - (newLength - lengthLimit));
         if (change.update) {
           change.update(change.from, change.to, newChange.split('\n'));
