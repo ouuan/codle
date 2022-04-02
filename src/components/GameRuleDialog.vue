@@ -55,8 +55,8 @@
         and you'll roughly know what node types look like.
         You may also use this Playground as an assistant when solving the puzzle.
         To help you identify each node,
-        the range of the corresponding code snippet within your code is displayed beside each node,
-        and you can click on a node to see the corresponding code.
+        the range of the corresponding code snippet within your code is displayed beside each node.
+        You can also hover on or click a node to view the corresponding code.
       </n-p>
       <n-p>
         In order to provide more information to you,

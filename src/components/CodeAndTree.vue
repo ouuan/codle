@@ -7,7 +7,9 @@
   >
     <n-gi>
       <code-editor
+        ref="editor"
         :code="code"
+        style="max-height: 60vh;"
         read-only
       />
     </n-gi>
@@ -15,12 +17,15 @@
       <syntax-tree
         :code="code"
         :correct-root="correctRoot"
+        :mark-range="editor?.markRange"
+        style="max-height: 60vh;"
       />
     </n-gi>
   </n-grid>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { NGrid, NGi } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
 
@@ -31,4 +36,6 @@ defineProps<{
   correctRoot?: SyntaxNode,
   code: string,
 }>();
+
+const editor = ref<InstanceType<typeof CodeEditor>>();
 </script>

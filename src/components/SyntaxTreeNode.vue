@@ -3,6 +3,8 @@
     quaternary
     :type="labelType"
     @click="showCode = true"
+    @mouseover="markNode"
+    @mouseleave="clearMark"
   >
     {{ option.label }}
     [{{ option.node.startPosition.row + 1 }}, {{ option.node.startPosition.column + 1 }}]
@@ -68,12 +70,15 @@ import {
   NText,
 } from 'naive-ui';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
+import { Point } from 'web-tree-sitter';
+import { Position } from 'codemirror';
 
-import { TreeOptionEx } from '../types';
+import { MarkRange, TreeOptionEx } from '../types';
 import CodeEditor from './CodeEditor.vue';
 
 const props = defineProps<{
   option: TreeOptionEx,
+  markRange?: MarkRange,
 }>();
 
 const labelType = computed(() => {
@@ -105,4 +110,27 @@ const codeTitle = computed(() => {
 });
 
 const showCode = ref(false);
+
+function pointToPos({ row, column }: Point): Position {
+  return {
+    line: row,
+    ch: column,
+  };
+}
+function markNode() {
+  // mark twice to scroll to whole range instead of only one line
+  props.markRange?.(
+    pointToPos(props.option.node.startPosition),
+    pointToPos(props.option.node.endPosition),
+    true,
+  );
+  props.markRange?.(
+    pointToPos(props.option.node.endPosition),
+    pointToPos(props.option.node.startPosition),
+    true,
+  );
+}
+function clearMark() {
+  props.markRange?.({ line: 0, ch: 0 }, { line: 0, ch: 0 }, false);
+}
 </script>

@@ -26,12 +26,18 @@ import { SyntaxNode } from 'web-tree-sitter';
 import SyntaxTreeNode from './SyntaxTreeNode.vue';
 
 import parse from '../parse';
-import { CorrectStatus, isTreeOptionEx, TreeOptionEx } from '../types';
+import {
+  CorrectStatus,
+  MarkRange,
+  TreeOptionEx,
+  isTreeOptionEx,
+} from '../types';
 import { rootTreeOption } from '../store/useRootTreeOption';
 
 const props = defineProps<{
   code: string,
   correctRoot?: SyntaxNode,
+  markRange?: MarkRange,
 }>();
 
 const defaultExpandedKeys = ref<number[]>([]);
@@ -123,6 +129,7 @@ function renderLabel({ option }: {option: TreeOption}) {
   if (!isTreeOptionEx(option)) throw new Error('Non-ex TreeOption passed to renderLabel');
   return h(SyntaxTreeNode, {
     option,
+    markRange: props.markRange,
   });
 }
 </script>

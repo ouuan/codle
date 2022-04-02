@@ -2,6 +2,7 @@
   <code-mirror
     ref="editorRef"
     border
+    class="editor"
     :value="code"
     :options="cmOptions"
     :height="height"
@@ -17,7 +18,7 @@ import {
 } from 'vue';
 import { useMessage } from 'naive-ui';
 import CodeMirror, { CmComponentRef } from 'codemirror-editor-vue3';
-import { Editor, EditorConfiguration } from 'codemirror';
+import { Editor, EditorConfiguration, Position } from 'codemirror';
 
 import 'codemirror/mode/clike/clike.js';
 import 'codemirror/theme/gruvbox-dark.css';
@@ -73,11 +74,15 @@ onMounted(() => {
 });
 
 const codeFontFamilyFallback = computed(() => codeFontFamily.value || 'monospace');
+
+function markRange(from: Position, to: Position, scroll: boolean) {
+  cmInstance.value?.setSelection(from, to, { scroll });
+}
+defineExpose({ markRange });
 </script>
 
-<style>
-/* double class names to get higher specificity than CodeMirror's CSS */
-.CodeMirror.CodeMirror {
+<style scoped>
+.editor:deep(.CodeMirror) {
   font-size: 14px;
   font-family: v-bind(codeFontFamilyFallback), monospace !important;
 }
