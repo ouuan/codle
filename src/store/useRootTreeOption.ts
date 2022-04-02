@@ -11,13 +11,13 @@ export function standardizeCode() {
   const parts: string[] = [];
   let pos = 0;
   function addPart(start: number, end: number, text: string) {
-    parts.push(code.slice(pos - offset, start - offset));
+    parts.push(code.slice(pos, start));
     parts.push(text);
     pos = end;
   }
   function dfs(option: TreeOptionEx) {
     if (option.allCorrect && option.correctText) {
-      addPart(option.node.startIndex, option.node.endIndex, option.correctText);
+      addPart(option.node.startIndex - offset, option.node.endIndex - offset, option.correctText);
     } else {
       option.children.forEach((child) => dfs(child));
     }
