@@ -15,7 +15,7 @@ const api = axios.create({
   },
 });
 
-const KEY_PREFIX = 'codle_demo_';
+const KEY_PREFIX = 'codle_';
 
 function getStored<T>(key: string, defaultValue: T, check: (value: any) => value is T): T {
   try {
@@ -135,7 +135,6 @@ export const showStatement = ref<boolean>(getStored('showStatement', true, isBoo
 watchAndStore(showStatement, 'showStatement');
 
 export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
-  // always update when puzzleNumber is 0, which means it's a demo and is not officially released
   if (puzzleNumber.value !== correctPuzzleNumber || !targetCode.value || !statement.value) {
     await Promise.all([getTargetCode(dialog, true), getStatement(dialog, true)]);
     showStatement.value = true;
