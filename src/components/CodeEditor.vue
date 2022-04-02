@@ -26,8 +26,9 @@ import { uiDark, codeFontFamily } from '../store/useLocalStorage';
 const props = defineProps<{
   code: string,
   height?: number | string,
-  readOnly: boolean | 'nocursor',
+  readOnly: boolean,
   lengthLimit?: number,
+  firstLineNumber?: number,
 }>();
 
 const cmOptions = computed((): EditorConfiguration => ({
@@ -35,6 +36,8 @@ const cmOptions = computed((): EditorConfiguration => ({
   theme: uiDark.value ? 'gruvbox-dark' : 'default',
   indentUnit: 4,
   readOnly: props.readOnly,
+  ...(props.readOnly ? { cursorBlinkRate: -1 } : {}),
+  firstLineNumber: props.firstLineNumber ?? 1,
 }));
 
 const emit = defineEmits<{
@@ -64,14 +67,6 @@ onMounted(() => {
       return true;
     });
   }
-});
-
-function setSelection(pos1: CodeMirror.Position, pos2: CodeMirror.Position) {
-  cmInstance.value?.setSelection(pos1, pos2);
-}
-
-defineExpose({
-  setSelection,
 });
 
 const codeFontFamilyFallback = computed(() => codeFontFamily.value || 'monospace');

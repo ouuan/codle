@@ -92,7 +92,7 @@
         >
           <n-p>The target code is:</n-p>
           <code-editor
-            :read-only="true"
+            read-only
             :code="targetCode"
           />
         </n-card>

@@ -22,7 +22,6 @@ import {
   TreeOption,
 } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
-import { Position } from 'codemirror';
 
 import SyntaxTreeNode from './SyntaxTreeNode.vue';
 
@@ -33,7 +32,6 @@ import { rootTreeOption } from '../store/useRootTreeOption';
 const props = defineProps<{
   code: string,
   correctRoot?: SyntaxNode,
-  setSelection?: (pos1: Position, pos2: Position) => void,
 }>();
 
 const defaultExpandedKeys = ref<number[]>([]);
@@ -98,6 +96,8 @@ function generateTreeOption(
     correct,
     allCorrect,
     correctText: allCorrect ? correctNode.text : undefined,
+    correctStartRow: allCorrect ? correctNode.startPosition.row : undefined,
+    correctStartCol: allCorrect ? correctNode.startPosition.column : undefined,
     correctChildCount: correctNode?.namedChildCount ?? 0,
     node,
     children,
@@ -123,7 +123,6 @@ function renderLabel({ option }: {option: TreeOption}) {
   if (!isTreeOptionEx(option)) throw new Error('Non-ex TreeOption passed to renderLabel');
   return h(SyntaxTreeNode, {
     option,
-    setSelection: props.setSelection,
   });
 }
 </script>

@@ -8,6 +8,8 @@ export interface TreeOptionEx extends TreeOption {
   correctChildCount: number,
   correct: CorrectStatus,
   correctText?: string,
+  correctStartRow?: number,
+  correctStartCol?: number,
   allCorrect: boolean,
   children: TreeOptionEx[],
   depth: number,

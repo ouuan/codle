@@ -54,15 +54,18 @@
         (remember to set the language to C++ first)
         and you'll roughly know what node types look like.
         You may also use this Playground as an assistant when solving the puzzle.
-        To know which part of your code a node corresponds to, just hover on the node.
+        To help you identify each node,
+        the range of the corresponding code snippet within your code is displayed beside each node,
+        and you can click on a node to see the corresponding code.
       </n-p>
       <n-p>
         In order to provide more information to you,
         you'll also get the number of children of each green node.
         When you have found a whole subtree,
-        each node in this subtree will have a "✅" displayed.
-        If your code of a correct subtree is different from the corresponding target code,
-        you'll have a chance to view the target code of this subtree.
+        there will be a "✅" or "☑️"
+        (depending on whether your code is the same as the target code in this subtree)
+        displayed besides every node in this subtree,
+        and you can click the node to view the target code of this subtree.
       </n-p>
       <n-p>
         Initial guesses need some clue, so in each puzzle,
