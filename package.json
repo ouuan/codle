@@ -1,6 +1,6 @@
 {
-  "name": "codle",
-  "version": "0.1.0",
+  "name": "codle-game",
+  "version": "1.0.0",
   "description": "Guess code like Wordle with AST nodes as letters",
   "scripts": {
     "lint": "pnpm lint:nofix --fix",
