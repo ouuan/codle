@@ -169,7 +169,11 @@ import {
 } from '../store/useLocalStorage';
 import { standardizeCode } from '../store/useRootTreeOption';
 import parse from '../parse';
-import { enableAutoOutboundTracking, trackEvent } from '../plausible';
+import {
+  enableAutoOutboundTracking,
+  trackEvent,
+  trackPageview,
+} from '../plausible';
 
 const code = ref(`#include <iostream>
 #include <cstdio>
@@ -188,6 +192,7 @@ const editor = ref();
 const dialog = useDialog();
 
 onMounted(async () => {
+  trackPageview();
   enableAutoOutboundTracking();
   await updatePuzzle(dialog);
   if (targetCode.value === '') return;
