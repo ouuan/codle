@@ -31,6 +31,11 @@
       provided valuable suggestions at the early stage of this game.
     </n-p>
     <n-p>
+      If you have any suggestions, please open an
+      <n-a href="https://github.com/ouuan/codle/issues">issue</n-a>
+      on GitHub.
+    </n-p>
+    <n-p>
       If you enjoy this game, consider
       <n-a href="https://ouuan.github.io/about/#donate">buy me a cup of coffee :)</n-a>
       (currently only accepting WeChat and AliPay)
