@@ -234,7 +234,9 @@ function giveUp() {
         gaveUp.value = true;
         trackEvent('Give Up', {
           props: {
-            guessNum: guesses.value.length as any as string, // https://github.com/plausible/plausible-tracker/pull/27
+            // https://github.com/plausible/plausible-tracker/pull/27
+            guessCount: guesses.value.length as any as string,
+            puzzleId: puzzleNumber.value as any as string,
           },
         });
       },
