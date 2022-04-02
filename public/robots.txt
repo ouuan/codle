@@ -1,3 +1,7 @@
 User-agent: *
+Disallow: /assets
+Disallow: /statement
+Disallow: /targetCode
+Disallow: /*.wasm$
 Allow: /$
-Disallow: /
+Allow: /images
