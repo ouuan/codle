@@ -7,10 +7,11 @@ export const rootTreeOption = ref<TreeOptionEx>();
 export function standardizeCode() {
   if (!rootTreeOption.value) return '';
   const code = rootTreeOption.value.node.text;
+  const offset = rootTreeOption.value.node.startIndex;
   const parts: string[] = [];
   let pos = 0;
   function addPart(start: number, end: number, text: string) {
-    parts.push(code.slice(pos, start));
+    parts.push(code.slice(pos - offset, start - offset));
     parts.push(text);
     pos = end;
   }
