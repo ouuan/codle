@@ -45,7 +45,10 @@
               <n-switch v-model:value="showStatement" />
             </n-form-item>
             <n-collapse-transition :show="showStatement">
-              <div v-html="statement" />
+              <n-element
+                class="statement"
+                v-html="statement"
+              />
             </n-collapse-transition>
           </n-space>
         </n-card>
@@ -134,6 +137,7 @@ import {
   NCard,
   NCollapseTransition,
   NCountdown,
+  NElement,
   NFormItem,
   NGi,
   NGrid,
@@ -258,5 +262,13 @@ const remainingTime = computed(() => A_WEEK - ((new Date().valueOf() - new Date(
 .page-header {
   margin-top: 12px;
   margin-bottom: 10px;
+}
+
+.statement:deep(a) {
+  cursor: pointer;
+  transition: color .3s var(--cubic-bezier-ease-in-out),
+    text-decoration-color .3s var(--cubic-bezier-ease-in-out);
+  text-decoration-color: var(--primary-color);
+  color: var(--primary-color);
 }
 </style>

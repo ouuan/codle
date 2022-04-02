@@ -55,16 +55,20 @@ function isString(value: unknown): value is string {
 
 const targetCodeEncoded = ref<string>(getStored('targetCodeEncoded', '', isString));
 watchAndStore(targetCodeEncoded, 'targetCodeEncoded');
-async function getTargetCode(dialog: ReturnType<typeof useDialog>) {
-  targetCodeEncoded.value = '';
+async function getTargetCode(dialog: ReturnType<typeof useDialog>, newPuzzle: boolean) {
+  if (newPuzzle) {
+    targetCodeEncoded.value = '';
+  }
   try {
     const response = await api.get(`/targetCode/${correctPuzzleNumber}.txt`);
     targetCodeEncoded.value = response.data;
   } catch {
-    dialog.error({
-      title: 'Failed to load target code',
-      content: 'Failed to load the target code. You may refresh the page and try again.',
-    });
+    if (newPuzzle) {
+      dialog.error({
+        title: 'Failed to load target code',
+        content: 'Failed to load the target code. You may refresh the page and try again.',
+      });
+    }
   }
 }
 export const targetCode = computed(() => {
@@ -74,16 +78,20 @@ export const targetCode = computed(() => {
 
 export const statementEncoded = ref<string>(getStored('statementEncoded', '', isString));
 watchAndStore(statementEncoded, 'statementEncoded');
-async function getStatement(dialog: ReturnType<typeof useDialog>) {
-  statementEncoded.value = '';
+async function getStatement(dialog: ReturnType<typeof useDialog>, newPuzzle: boolean) {
+  if (newPuzzle) {
+    statementEncoded.value = '';
+  }
   try {
     const response = await api.get(`/statement/${correctPuzzleNumber}.txt`);
     statementEncoded.value = response.data;
   } catch {
-    dialog.warning({
-      title: 'Failed to load statement',
-      content: 'Failed to load the problem statement.\nYou may refresh the page and try again.',
-    });
+    if (newPuzzle) {
+      dialog.warning({
+        title: 'Failed to load statement',
+        content: 'Failed to load the problem statement.\nYou may refresh the page and try again.',
+      });
+    }
   }
 }
 export const statement = computed(() => {
@@ -129,13 +137,15 @@ watchAndStore(showStatement, 'showStatement');
 export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
   // always update when puzzleNumber is 0, which means it's a demo and is not officially released
   if (puzzleNumber.value !== correctPuzzleNumber || !targetCode.value || !statement.value) {
-    await Promise.all([getTargetCode(dialog), getStatement(dialog)]);
+    await Promise.all([getTargetCode(dialog, true), getStatement(dialog, true)]);
     showStatement.value = true;
     finished.value = false;
     gaveUp.value = false;
     depthFinishedAt.value = [];
     guesses.value = [];
     puzzleNumber.value = correctPuzzleNumber;
+  } else {
+    await Promise.all([getTargetCode(dialog, false), getStatement(dialog, false)]);
   }
 }
 
