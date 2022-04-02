@@ -9,7 +9,7 @@
       <code-editor
         ref="editor"
         :code="code"
-        style="max-height: 60vh;"
+        class="editor-tree-height"
         read-only
       />
     </n-gi>
@@ -18,7 +18,7 @@
         :code="code"
         :correct-root="correctRoot"
         :mark-range="editor?.markRange"
-        style="max-height: 60vh;"
+        class="editor-tree-height"
       />
     </n-gi>
   </n-grid>
@@ -39,3 +39,9 @@ defineProps<{
 
 const editor = ref<InstanceType<typeof CodeEditor>>();
 </script>
+
+<style scoped>
+.editor-tree-height {
+  max-height: 60vh;
+}
+</style>
