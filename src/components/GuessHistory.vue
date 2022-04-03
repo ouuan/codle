@@ -4,6 +4,7 @@
       <n-form-item
         label="Guess"
         label-placement="left"
+        :show-feedback="false"
       >
         <n-space>
           <n-input-number
@@ -48,7 +49,7 @@
     <n-form
       label-placement="left"
       label-width="auto"
-      size="small"
+      :show-feedback="false"
     >
       <n-form-item label="Correct Nodes">
         <n-progress
