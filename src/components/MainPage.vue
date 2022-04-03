@@ -112,15 +112,14 @@
       </n-space>
       <n-space
         v-else
-        vertical
+        justify="center"
         style="margin-top: 20vh;"
       >
-        <n-space justify="space-around">
-          <n-text>{{ loadPhase }}</n-text>
-        </n-space>
-        <n-space justify="space-around">
-          <n-spin size="large" />
-        </n-space>
+        <n-spin size="large">
+          <template #description>
+            {{ loadPhase }}
+          </template>
+        </n-spin>
       </n-space>
     </n-gi>
     <n-gi span="1 l:2" />
@@ -201,21 +200,49 @@ const dialog = useDialog();
 
 const loadPhase = ref<true | string>('Loading page...');
 
-onMounted(async () => {
-  trackPageview();
-  enableAutoOutboundTracking();
-  loadPhase.value = 'Loading puzzle...';
-  await updatePuzzle(dialog);
-  if (targetCode.value === '') return;
-  if (guesses.value.length) {
-    code.value = guesses.value[guesses.value.length - 1];
+const wasmSupported = (() => {
+  try {
+    if (typeof WebAssembly === 'object'
+            && typeof WebAssembly.instantiate === 'function') {
+      const module = new WebAssembly.Module(
+        Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00),
+      );
+      if (module instanceof WebAssembly.Module) {
+        return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
+      }
+    }
+  } catch {
+    return false;
   }
-  loadPhase.value = 'Loading TreeSitter...';
-  await initParser;
-  loadPhase.value = 'Constructing AST...';
-  const tree = await parse(targetCode.value);
-  correctRoot.value = tree.rootNode;
-  loadPhase.value = true;
+  return false;
+})();
+
+if (!wasmSupported) {
+  dialog.error({
+    title: 'WASM not supported',
+    content: "Your browser doesn't support Web Assembly or its support is disabled. Please try using a different browser.",
+  });
+}
+
+onMounted(async () => {
+  try {
+    trackPageview();
+    enableAutoOutboundTracking();
+    loadPhase.value = 'Loading puzzle...';
+    await updatePuzzle(dialog);
+    if (targetCode.value === '') return;
+    if (guesses.value.length) {
+      code.value = guesses.value[guesses.value.length - 1];
+    }
+    loadPhase.value = 'Loading TreeSitter...';
+    await initParser;
+    loadPhase.value = 'Constructing AST...';
+    const tree = await parse(targetCode.value);
+    correctRoot.value = tree.rootNode;
+    loadPhase.value = true;
+  } catch (e) {
+    loadPhase.value = `Error occurred: ${e}`;
+  }
 });
 
 const lengthLimit = computed(() => targetCode.value.length * 2);
