@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useDialog, useOsTheme } from 'naive-ui';
 import DOMPurify from 'dompurify';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
+import { Rating, isRating } from '../types';
 
 const api = axios.create({
   headers: {
@@ -134,6 +135,9 @@ watchAndStore(gaveUp, 'gaveUp');
 export const showStatement = ref<boolean>(getStored('showStatement', true, isBoolean));
 watchAndStore(showStatement, 'showStatement');
 
+export const puzzleRating = ref<Rating>(getStored('puzzleRating', 0, isRating));
+watchAndStore(puzzleRating, 'puzzleRating');
+
 export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
   if (puzzleNumber.value !== correctPuzzleNumber || !targetCode.value || !statement.value) {
     await Promise.all([getTargetCode(dialog, true), getStatement(dialog, true)]);
@@ -142,6 +146,7 @@ export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
     gaveUp.value = false;
     depthFinishedAt.value = [];
     guesses.value = [];
+    puzzleRating.value = 0;
     puzzleNumber.value = correctPuzzleNumber;
   } else {
     await Promise.all([getTargetCode(dialog, false), getStatement(dialog, false)]);

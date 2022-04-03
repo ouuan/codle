@@ -4,15 +4,18 @@
       type="success"
       :title="`You found it in ${finishedAt}!`"
     >
-      Congratulations!
-      <n-text
-        type="success"
-        class="share-button"
-        @click="share"
-      >
-        Share
-      </n-text>
-      and play again next week~
+      <n-p>
+        Congratulations!
+        <n-text
+          type="success"
+          class="share-button"
+          @click="share"
+        >
+          Share
+        </n-text>
+        and play again next week~
+      </n-p>
+      <rate-puzzle type="Success" />
     </n-alert>
     <n-alert
       v-if="copyFailed"
@@ -30,9 +33,12 @@ import { computed, ref } from 'vue';
 import {
   NAlert,
   NCard,
+  NP,
   NText,
   useMessage,
 } from 'naive-ui';
+
+import RatePuzzle from './RatePuzzle.vue';
 
 import { puzzleNumber, depthFinishedAt } from '../store/useLocalStorage';
 

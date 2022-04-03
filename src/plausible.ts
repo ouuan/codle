@@ -14,6 +14,9 @@ function checkHost<T extends(...args: never[]) => void>(fn: T) {
   return (...args: Parameters<T>) => {
     if (window.location.host === 'codle.ouuan.moe') {
       fn(...args);
+    } else {
+      // eslint-disable-next-line no-console
+      console.log(fn.name, args);
     }
   };
 }
