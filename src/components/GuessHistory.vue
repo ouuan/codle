@@ -148,8 +148,8 @@ watch(rootTreeOption, () => {
   if (!props.correctRoot) return;
   const root = rootTreeOption.value;
   if (!root) return;
-  while (root.minWrongDepth > depthFinishedAt.value.length
-         && depthFinishedAt.value.length < targetMaxDepth.value + 1) {
+  while (root.minWrongDepth >= depthFinishedAt.value.length
+         && depthFinishedAt.value.length <= targetMaxDepth.value + 1) {
     depthFinishedAt.value.push(guesses.value.length);
   }
   if (!finished.value && root.allCorrect) {

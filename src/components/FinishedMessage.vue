@@ -36,7 +36,7 @@ const finishedAt = computed(() => depthFinishedAt.value[depthFinishedAt.value.le
 
 const copyFailed = ref(false);
 
-const shareStr = computed(() => `I solved #Codle #${puzzleNumber.value} in ${finishedAt.value} guesses. I found all nodes within the depth of 1~${depthFinishedAt.value.length} at guess ${depthFinishedAt.value.join(', ')} respectively.
+const shareStr = computed(() => `I solved #Codle #${puzzleNumber.value} in ${finishedAt.value} guesses. I found all nodes within the depth of 1~${depthFinishedAt.value.length - 1} at guess ${depthFinishedAt.value.slice(1).join(', ')} respectively.
 https://codle.ouuan.moe`);
 
 const message = useMessage();
