@@ -5,9 +5,13 @@
       :title="`You found it in ${finishedAt}!`"
     >
       Congratulations!
-      <n-a @click="share">
+      <n-text
+        type="success"
+        class="share-button"
+        @click="share"
+      >
         Share
-      </n-a>
+      </n-text>
       and play again next week~
     </n-alert>
     <n-alert
@@ -24,9 +28,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import {
-  NA,
   NAlert,
   NCard,
+  NText,
   useMessage,
 } from 'naive-ui';
 
@@ -50,3 +54,9 @@ function share() {
   });
 }
 </script>
+
+<style scoped>
+.share-button {
+  cursor: pointer;
+}
+</style>
