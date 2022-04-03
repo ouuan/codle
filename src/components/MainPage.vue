@@ -98,7 +98,7 @@
             read-only
             :code="targetCode"
           />
-          <rate-puzzle type="Gave Up" />
+          <user-survey type="Gave Up" />
         </n-card>
         <n-card
           v-if="guesses.length"
@@ -158,7 +158,7 @@ import FinishedMessage from './FinishedMessage.vue';
 import GuessHistory from './GuessHistory.vue';
 import GameRuleDialog from './GameRuleDialog.vue';
 import PlausibleDialog from './PlausibleDialog.vue';
-import RatePuzzle from './RatePuzzle.vue';
+import UserSurvey from './UserSurvey.vue';
 import StatisticsDialog from './StatisticsDialog.vue';
 import SettingsDialog from './SettingsDialog.vue';
 

@@ -1,30 +1,31 @@
 <template>
   <n-card>
-    <n-alert
-      type="success"
-      :title="`You found it in ${finishedAt}!`"
-    >
-      <n-p>
-        Congratulations!
-        <n-text
-          type="success"
-          class="share-button"
-          @click="share"
-        >
-          Share
-        </n-text>
-        and play again next week~
-      </n-p>
-      <rate-puzzle type="Success" />
-    </n-alert>
-    <n-alert
-      v-if="copyFailed"
-      type="warning"
-    >
-      Copy failed 😢 But you can manually copy the message here:
-      <br>
-      {{ shareStr }}
-    </n-alert>
+    <n-space vertical>
+      <n-alert
+        type="success"
+        :title="`You found it in ${finishedAt}!`"
+      >
+        <n-p>
+          Congratulations!
+          <n-text
+            type="success"
+            class="share-button"
+            @click="share"
+          >
+            Share
+          </n-text>
+          and play again next week~
+        </n-p>
+      </n-alert>
+      <n-alert
+        v-if="copyFailed"
+        type="warning"
+      >
+        <n-p>Copy failed 😢 But you can manually copy the message here:</n-p>
+        <n-p>{{ shareStr }}</n-p>
+      </n-alert>
+      <user-survey type="Success" />
+    </n-space>
   </n-card>
 </template>
 
@@ -34,11 +35,12 @@ import {
   NAlert,
   NCard,
   NP,
+  NSpace,
   NText,
   useMessage,
 } from 'naive-ui';
 
-import RatePuzzle from './RatePuzzle.vue';
+import UserSurvey from './UserSurvey.vue';
 
 import { puzzleNumber, depthFinishedAt } from '../store/useLocalStorage';
 
