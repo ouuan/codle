@@ -25,7 +25,7 @@ import { SyntaxNode } from 'web-tree-sitter';
 
 import SyntaxTreeNode from './SyntaxTreeNode.vue';
 
-import parse from '../parse';
+import { parse } from '../parse';
 import {
   CorrectStatus,
   MarkRange,

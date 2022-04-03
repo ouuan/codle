@@ -22,7 +22,7 @@
         </template>
       </n-page-header>
       <n-space
-        v-if="correctRoot"
+        v-if="loadPhase === true"
         vertical
       >
         <n-card>
@@ -116,7 +116,7 @@
         style="margin-top: 20vh;"
       >
         <n-space justify="space-around">
-          <n-text>Loading...</n-text>
+          <n-text>{{ loadPhase }}</n-text>
         </n-space>
         <n-space justify="space-around">
           <n-spin size="large" />
@@ -176,7 +176,7 @@ import {
   updatePuzzle,
 } from '../store/useLocalStorage';
 import { standardizeCode } from '../store/useRootTreeOption';
-import parse from '../parse';
+import { initParser, parse } from '../parse';
 import {
   enableAutoOutboundTracking,
   trackEvent,
@@ -199,16 +199,23 @@ const editor = ref();
 
 const dialog = useDialog();
 
+const loadPhase = ref<true | string>('Loading page...');
+
 onMounted(async () => {
   trackPageview();
   enableAutoOutboundTracking();
+  loadPhase.value = 'Loading puzzle...';
   await updatePuzzle(dialog);
   if (targetCode.value === '') return;
   if (guesses.value.length) {
     code.value = guesses.value[guesses.value.length - 1];
   }
+  loadPhase.value = 'Loading TreeSitter...';
+  await initParser;
+  loadPhase.value = 'Constructing AST...';
   const tree = await parse(targetCode.value);
   correctRoot.value = tree.rootNode;
+  loadPhase.value = true;
 });
 
 const lengthLimit = computed(() => targetCode.value.length * 2);

@@ -1,7 +1,7 @@
 import Parser from 'web-tree-sitter';
 
 // load parser only once across all SyntaxTree instances
-const initParser = (async () => {
+export const initParser = (async () => {
   await Parser.init();
   const parser = new Parser();
   const Lang = await Parser.Language.load('/tree-sitter-cpp.wasm');
@@ -9,7 +9,7 @@ const initParser = (async () => {
   return parser;
 })();
 
-export default async function parse(code: string) {
+export async function parse(code: string) {
   const parser = await initParser;
   return parser.parse(code);
 }
