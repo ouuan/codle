@@ -19,9 +19,13 @@
     </n-p>
     <n-p>
       The data collected can help us improve players' experience.
+      For example, we may adjust the puzzle difficulty
+      according to the finish rate and the number of guesses.
+    </n-p>
+    <n-p>
       We will not and
       <strong>cannot</strong>
-      sell your data to any third parties as your personal data is not collected.
+      sell your data to any third parties as your personal data is <strong>not</strong> collected.
     </n-p>
     <n-p>
       However, you can still opt out of the tracking here:
