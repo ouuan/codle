@@ -37,7 +37,9 @@
         <n-form-item label="Time Used (minutes, approximately)">
           <n-input-number
             v-model:value="timeUsed"
-            :min="1"
+            clearable
+            placeholder="60"
+            :min="0"
             :max="10000"
             :step="15"
           />
@@ -97,8 +99,8 @@ const props = defineProps<{ type: string }>();
 
 const showModal = ref(false);
 
-const difficulty = ref(3);
-const timeUsed = ref(60);
+const difficulty = ref(0);
+const timeUsed = ref<number | null>(null);
 const rating = ref(0);
 const feedback = ref('');
 
@@ -125,9 +127,9 @@ function submit() {
   trackEvent(`Survey: ${props.type}`, {
     props: {
       // https://github.com/plausible/plausible-tracker/pull/27
-      difficulty: difficulty.value as any as string,
-      timeUsed: timeUsed.value as any as string,
-      ...(rating.value === 0 ? {} : { rating: rating.value as any as string }),
+      ...(difficulty.value ? { difficulty: difficulty.value as any as string } : {}),
+      ...(timeUsed.value ? { timeUsed: timeUsed.value as any as string } : {}),
+      ...(rating.value ? { rating: rating.value as any as string } : {}),
       ...(feedback.value ? { feedback: feedback.value } : {}),
       puzzleId: puzzleNumber.value as any as string,
       guessCount: guesses.value.length as any as string,
