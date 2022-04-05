@@ -4,7 +4,8 @@ dist/
 *.log
 *.wasm
 !tree-sitter.wasm
-public/targetCode/*
-public/statement/*
+public/targetCode/
+public/statement/
+public/*.xml
 puzzles/*
-!0.*
+!puzzles/0.*

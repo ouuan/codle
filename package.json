@@ -7,7 +7,7 @@
     "lint:nofix": "eslint . --ignore-path .gitignore --ext .ts,.vue,.js",
     "lint:types": "vue-tsc --noEmit",
     "serve": "vite",
-    "build": "pnpm lint && pnpm lint:types && ./encode-puzzles.sh && vite build",
+    "build": "pnpm lint && pnpm lint:types && vite build",
     "build-treesitter:cpp": "tree-sitter build-wasm node_modules/tree-sitter-cpp && mv tree-sitter-cpp.wasm public"
   },
   "repository": {
@@ -36,6 +36,8 @@
   "devDependencies": {
     "@types/codemirror": "^5.60.5",
     "@types/dompurify": "^2.3.3",
+    "@types/glob": "^7.2.0",
+    "@types/jsdom": "^16.2.14",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
     "@vitejs/plugin-vue": "^2.3.1",
@@ -44,6 +46,10 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-vue": "^8.5.0",
+    "feed": "^4.2.2",
+    "glob": "^7.2.0",
+    "glob-promise": "^4.2.2",
+    "jsdom": "^19.0.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "tree-sitter-cli": "^0.20.6",
     "tree-sitter-cpp": "^0.20.0",

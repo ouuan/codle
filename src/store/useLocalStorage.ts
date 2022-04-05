@@ -66,7 +66,7 @@ async function getTargetCode(dialog: ReturnType<typeof useDialog>, newPuzzle: bo
     if (newPuzzle) {
       dialog.error({
         title: 'Failed to load target code',
-        content: 'Failed to load the target code. You may refresh the page and try again.',
+        content: 'Failed to load the target code. You may wait a few minutes, refresh the page and try again.',
       });
     }
   }
@@ -76,29 +76,24 @@ export const targetCode = computed(() => {
   return decodeURIComponent(base64Decoded);
 });
 
-export const statementEncoded = ref<string>(getStored('statementEncoded', '', isString));
-watchAndStore(statementEncoded, 'statementEncoded');
+export const statement = ref<string>(getStored('statement', '', isString));
+watchAndStore(statement, 'statement');
 async function getStatement(dialog: ReturnType<typeof useDialog>, newPuzzle: boolean) {
   if (newPuzzle) {
-    statementEncoded.value = '';
+    statement.value = '';
   }
   try {
     const response = await api.get(`/statement/${correctPuzzleNumber}.txt`);
-    statementEncoded.value = response.data;
+    statement.value = DOMPurify.sanitize(response.data);
   } catch {
     if (newPuzzle) {
       dialog.warning({
         title: 'Failed to load statement',
-        content: 'Failed to load the problem statement.\nYou may refresh the page and try again.',
+        content: 'Failed to load the problem statement. You may wait a few minutes, refresh the page and try again.',
       });
     }
   }
 }
-export const statement = computed(() => {
-  const base64Decoded = window.atob(statementEncoded.value);
-  const uriDecoded = decodeURIComponent(base64Decoded);
-  return DOMPurify.sanitize(uriDecoded);
-});
 
 export const lastPlay = ref<number>(getStored('lastPlay', -1, isSafeInteger));
 watchAndStore(lastPlay, 'lastPlay');

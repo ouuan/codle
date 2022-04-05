@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    es2015: true,
+    es2016: true,
   },
   extends: [
     '@vue/typescript/recommended',

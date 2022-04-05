@@ -2,6 +2,7 @@
   <n-button
     circle
     quaternary
+    :title="title"
     @click="showModal = true"
   >
     <template #icon>

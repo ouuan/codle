@@ -15,6 +15,7 @@
       >
         <template #extra>
           <plausible-dialog />
+          <feed-dialog />
           <about-dialog />
           <game-rule-dialog />
           <statistics-dialog />
@@ -154,6 +155,7 @@ import { SyntaxNode } from 'web-tree-sitter';
 
 import AboutDialog from './AboutDialog.vue';
 import CodeEditor from './CodeEditor.vue';
+import FeedDialog from './FeedDialog.vue';
 import FinishedMessage from './FinishedMessage.vue';
 import GuessHistory from './GuessHistory.vue';
 import GameRuleDialog from './GameRuleDialog.vue';
