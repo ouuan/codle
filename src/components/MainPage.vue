@@ -109,6 +109,7 @@
             @standardize-code="code = standardizeCode()"
           />
         </n-card>
+        <node-type-list :correct-root="correctRoot" />
       </n-space>
       <n-space
         v-else
@@ -156,6 +157,7 @@ import CodeEditor from './CodeEditor.vue';
 import FinishedMessage from './FinishedMessage.vue';
 import GuessHistory from './GuessHistory.vue';
 import GameRuleDialog from './GameRuleDialog.vue';
+import NodeTypeList from './NodeTypeList.vue';
 import PlausibleDialog from './PlausibleDialog.vue';
 import UserSurvey from './UserSurvey.vue';
 import StatisticsDialog from './StatisticsDialog.vue';

@@ -66,6 +66,8 @@
         (depending on whether your code is the same as the target code in this subtree)
         displayed besides every node in this subtree,
         and you can click the node to view the target code of this subtree.
+        What's more, a list of node types and numbers of nodes of each type will be given.
+        However, only one type will be revealed after each guess.
       </n-p>
       <n-p>
         Initial guesses need some clue, so in each puzzle,
