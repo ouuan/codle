@@ -47,16 +47,23 @@
         <n-form-item label="Overall Experience">
           <n-rate v-model:value="rating" />
         </n-form-item>
-        <n-form-item label="Suggestion / Comments">
+        <n-form-item label="Suggestion / Comments (English or Chinese)">
           <template
-            v-if="feedback.length > 30"
+            v-if="feedback.length >= 60"
             #feedback
           >
             Please consider opening a
             <n-a href="https://github.com/ouuan/codle/discussions">Discussion</n-a>
             on GitHub
           </template>
-          <n-input v-model:value="feedback" />
+          <n-input
+            v-model:value="feedback"
+            type="textarea"
+            clearable
+            show-count
+            :status="feedback.length === 80 ? 'warning' : 'success'"
+            :maxlength="80"
+          />
         </n-form-item>
         <n-form-item>
           <n-button
