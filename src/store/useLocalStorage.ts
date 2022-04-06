@@ -1,11 +1,17 @@
 import {
+  h,
   ref,
   watch,
   Ref,
   computed,
 } from 'vue';
 import axios from 'axios';
-import { useDialog, useOsTheme } from 'naive-ui';
+import {
+  NA,
+  NP,
+  useDialog,
+  useOsTheme,
+} from 'naive-ui';
 import DOMPurify from 'dompurify';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
 
@@ -143,6 +149,21 @@ export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
     surveySubmitted.value = false;
     puzzleNumber.value = correctPuzzleNumber;
   } else {
+    if ((lastPlay.value === puzzleNumber.value && guesses.value.length === 0)
+      || (firstGame.value && successCount.value + (finished.value ? 0 : 1)
+          > puzzleNumber.value - firstGame.value + 1)) {
+      dialog.warning({
+        title: 'Inconsistent data',
+        content: () => h(NP, {}, [
+          'Inconsistent statistics data was detected. ',
+          "It's likely to be caused by a known bug. ",
+          'Please read ',
+          h(NA, { href: 'https://github.com/ouuan/codle/discussions/3' }, 'the announcement'),
+          ' for more information. ',
+          'If you think the announcement is irrelevant, please open an issue/discussion on GitHub.',
+        ]),
+      });
+    }
     await Promise.all([
       getTargetCode(dialog, !targetCode.value),
       getStatement(dialog, !statement.value),
