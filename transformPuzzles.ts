@@ -82,7 +82,7 @@ export default function transformPuzzles(): Plugin {
           rss: 'https://codle.ouuan.moe/index.xml',
         },
         author: {
-          name: 'Yufan You',
+          name: 'ouuan',
           link: 'https://github.com/ouuan',
         },
       });
