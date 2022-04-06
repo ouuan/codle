@@ -54,7 +54,7 @@ export const puzzleNumber = ref<number>(getStored('puzzleNumber', 0, isSafeInteg
 watchAndStore(puzzleNumber, 'puzzleNumber');
 
 // 2022-03-27 is a Sunday
-const correctPuzzleNumber = Math.floor((new Date().valueOf() - new Date('2022-03-27T00:00:00Z').valueOf()) / (1000 * 60 * 60 * 24 * 7));
+const correctPuzzleNumber = Math.floor((Date.now() - new Date('2022-03-27T00:00:00Z').valueOf()) / (1000 * 60 * 60 * 24 * 7));
 
 function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((item) => typeof item === 'string');

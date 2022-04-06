@@ -13,6 +13,11 @@
   <link href="/index.xml" rel="feed" type="application/rss+xml" title="Codle Puzzles">
   <link href="/atom.xml" rel="feed" type="application/atom+xml" title="Codle Puzzles">
 
+  <link rel="prefetch" href="/tree-sitter.wasm">
+  <link rel="prefetch" href="/tree-sitter-cpp.wasm">
+  <link rel="prefetch" href="/statement/<%- puzzleId %>.html">
+  <link rel="prefetch" href="/targetCode/<%- puzzleId %>.txt">
+
   <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
@@ -49,7 +54,6 @@
 
 <body>
   <div id="app"></div>
-  <script type="module" src="/src/main.ts"></script>
   <noscript>You need to enable JavaScript to play Codle.</noscript>
 </body>
 
