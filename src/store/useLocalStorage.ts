@@ -23,6 +23,13 @@ const api = axios.create({
 
 const KEY_PREFIX = 'codle_';
 
+for (let i = 0; i < localStorage.length; i += 1) {
+  const key = localStorage.key(i);
+  if (key?.startsWith('codle_demo_')) {
+    localStorage.removeItem(key);
+  }
+}
+
 function getStored<T>(key: string, defaultValue: T, check: (value: any) => value is T): T {
   try {
     const stored = localStorage.getItem(KEY_PREFIX + key);
