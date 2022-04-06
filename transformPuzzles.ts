@@ -53,7 +53,7 @@ async function transformStatements(items: FeedItem[]) {
     const base = basename(path, '.html');
     const date = dateForBase(base);
     if (!datePublished(date)) return;
-    await writeFile(`public/statement/${base}.txt`, content);
+    await writeFile(`public/statement/${base}.html`, content);
     items.push({
       title: `Codle #${base}`,
       id: `codle-${base}`,

@@ -96,7 +96,7 @@ async function getStatement(dialog: ReturnType<typeof useDialog>, newPuzzle: boo
     statement.value = '';
   }
   try {
-    const response = await api.get(`/statement/${correctPuzzleNumber}.txt`);
+    const response = await api.get(`/statement/${correctPuzzleNumber}.html`);
     statement.value = DOMPurify.sanitize(response.data);
   } catch {
     if (newPuzzle) {
