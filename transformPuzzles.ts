@@ -27,13 +27,17 @@ function dateForBase(base: string) {
   return new Date(new Date('2022-03-27T00:00:00Z').valueOf() + 1000 * 60 * 60 * 24 * 7 * parseInt(base, 10));
 }
 
+function datePublished(date: Date) {
+  return date.valueOf() - Date.now() < 60000;
+}
+
 async function transformCodes() {
   const matches = await glob('puzzles/*.cpp');
   return Promise.all(matches.map(async (path) => {
     const content = await readFile(path);
     const base = basename(path, '.cpp');
     const date = dateForBase(base);
-    if (date > new Date()) return;
+    if (!datePublished(date)) return;
     const urlEncoded = encodeURIComponent(content.toString());
     const base64Encoded = Buffer.from(urlEncoded).toString('base64');
     await writeFile(`public/targetCode/${base}.txt`, base64Encoded);
@@ -48,7 +52,7 @@ async function transformStatements(items: FeedItem[]) {
     const content = sanitize(buffer.toString());
     const base = basename(path, '.html');
     const date = dateForBase(base);
-    if (date > new Date()) return;
+    if (!datePublished(date)) return;
     await writeFile(`public/statement/${base}.txt`, content);
     items.push({
       title: `Codle #${base}`,
