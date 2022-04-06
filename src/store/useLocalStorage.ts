@@ -133,7 +133,7 @@ export const surveySubmitted = ref<boolean>(getStored('surveySubmitted', false, 
 watchAndStore(surveySubmitted, 'surveySubmitted');
 
 export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
-  if (puzzleNumber.value !== correctPuzzleNumber || !targetCode.value || !statement.value) {
+  if (puzzleNumber.value !== correctPuzzleNumber) {
     await Promise.all([getTargetCode(dialog, true), getStatement(dialog, true)]);
     showStatement.value = true;
     finished.value = false;
@@ -143,7 +143,10 @@ export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
     surveySubmitted.value = false;
     puzzleNumber.value = correctPuzzleNumber;
   } else {
-    await Promise.all([getTargetCode(dialog, false), getStatement(dialog, false)]);
+    await Promise.all([
+      getTargetCode(dialog, !targetCode.value),
+      getStatement(dialog, !statement.value),
+    ]);
   }
 }
 
