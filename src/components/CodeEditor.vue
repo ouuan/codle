@@ -13,9 +13,11 @@
 <script setup lang="ts">
 import {
   computed,
+  nextTick,
   onMounted,
   ref,
   toRef,
+  watch,
 } from 'vue';
 import { useMessage, useOsTheme, useThemeVars } from 'naive-ui';
 import CodeMirror, { CmComponentRef } from 'codemirror-editor-vue3';
@@ -83,6 +85,8 @@ function markRange(from: Position, to: Position, scroll: boolean) {
 defineExpose({ markRange });
 
 const themeFontSize = toRef(useThemeVars().value, 'fontSize');
+
+watch([codeFontFamilyFallback, themeFontSize], () => nextTick(() => cmInstance.value?.refresh()));
 </script>
 
 <style scoped>
