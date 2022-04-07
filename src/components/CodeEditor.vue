@@ -16,7 +16,7 @@ import {
   onMounted,
   ref,
 } from 'vue';
-import { useMessage } from 'naive-ui';
+import { useMessage, useOsTheme } from 'naive-ui';
 import CodeMirror, { CmComponentRef } from 'codemirror-editor-vue3';
 import { Editor, EditorConfiguration, Position } from 'codemirror';
 
@@ -33,9 +33,10 @@ const props = defineProps<{
   firstLineNumber?: number,
 }>();
 
+const osTheme = useOsTheme();
 const cmOptions = computed((): EditorConfiguration => ({
   mode: 'text/x-c++src',
-  theme: uiDark.value ? 'gruvbox-dark' : 'default',
+  theme: uiDark(osTheme) ? 'gruvbox-dark' : 'default',
   indentUnit: 4,
   readOnly: props.readOnly,
   ...(props.readOnly ? { cursorBlinkRate: -1 } : {}),

@@ -184,10 +184,10 @@ export const uiTheme = ref<'light' | 'dark' | 'auto'>(getStored(
   (value: any): value is 'light' | 'dark' | 'auto' => ['light', 'dark', 'auto'].includes(value),
 ));
 watchAndStore(uiTheme, 'uiTheme');
-export const uiDark = computed(() => {
+export function uiDark(osTheme: ReturnType<typeof useOsTheme>) {
   switch (uiTheme.value) {
     case 'auto':
-      return useOsTheme().value === 'dark';
+      return osTheme.value === 'dark';
     case 'dark':
       return true;
     case 'light':
@@ -195,7 +195,7 @@ export const uiDark = computed(() => {
     default:
       return exhaustiveCheck(uiTheme.value);
   }
-});
+}
 
 export const showGameRule = ref<boolean>(getStored('showGameRule', true, isBoolean));
 watchAndStore(showGameRule, 'showGameRule');

@@ -17,11 +17,13 @@ import {
   NGlobalStyle,
   NMessageProvider,
   darkTheme,
+  useOsTheme,
 } from 'naive-ui';
 
 import MainPage from './components/MainPage.vue';
 
 import { uiDark } from './store/useLocalStorage';
 
-const theme = computed(() => (uiDark.value ? darkTheme : null));
+const osTheme = useOsTheme();
+const theme = computed(() => (uiDark(osTheme) ? darkTheme : null));
 </script>
