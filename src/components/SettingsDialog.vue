@@ -20,6 +20,9 @@
             placeholder="monospace"
           />
         </n-form-item>
+        <n-form-item label="Code Line Wrap">
+          <n-switch v-model:value="codeLineWrap" />
+        </n-form-item>
       </n-form>
     </n-space>
   </dialog-with-icon-button>
@@ -32,12 +35,13 @@ import {
   NInput,
   NSelect,
   NSpace,
+  NSwitch,
 } from 'naive-ui';
 import { SettingsSharp } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
 
-import { uiTheme, codeFontFamily } from '../store/localStorage';
+import { uiTheme, codeFontFamily, codeLineWrap } from '../store/localStorage';
 
 const themeOptions = [
   {

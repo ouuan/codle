@@ -26,7 +26,7 @@ import { Editor, EditorConfiguration, Position } from 'codemirror';
 import 'codemirror/mode/clike/clike.js';
 import 'codemirror/theme/gruvbox-dark.css';
 
-import { uiDark, codeFontFamily } from '../store/localStorage';
+import { uiDark, codeFontFamily, codeLineWrap } from '../store/localStorage';
 
 const props = defineProps<{
   code: string,
@@ -41,6 +41,7 @@ const cmOptions = computed((): EditorConfiguration => ({
   mode: 'text/x-c++src',
   theme: uiDark(osTheme) ? 'gruvbox-dark' : 'default',
   indentUnit: 4,
+  lineWrapping: codeLineWrap.value,
   readOnly: props.readOnly,
   ...(props.readOnly ? { cursorBlinkRate: -1 } : {}),
   firstLineNumber: props.firstLineNumber ?? 1,

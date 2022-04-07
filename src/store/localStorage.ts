@@ -202,3 +202,6 @@ watchAndStore(showGameRule, 'showGameRule');
 
 export const codeFontFamily = ref<string>(getStored('codeFontFamily', 'monospace', isString));
 watchAndStore(codeFontFamily, 'codeFontFamily');
+
+export const codeLineWrap = ref<boolean>(getStored('codeLineWrap', true, isBoolean));
+watchAndStore(codeLineWrap, 'codeLineWrap');
