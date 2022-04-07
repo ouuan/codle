@@ -73,7 +73,7 @@ import {
   maxStreak,
   successCount,
   guessSum,
-} from '../store/useLocalStorage';
+} from '../store/localStorage';
 
 const winRate = computed(() => {
   if (playCount.value === 0) return 0;

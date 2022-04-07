@@ -26,8 +26,8 @@ import {
 } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
 
-import { guesses, finished } from '../store/useLocalStorage';
-import { rootTreeOption } from '../store/useRootTreeOption';
+import { guesses, finished } from '../store/localStorage';
+import { rootTreeOption } from '../store/rootTreeOption';
 
 const props = defineProps<{
   correctRoot?: SyntaxNode,

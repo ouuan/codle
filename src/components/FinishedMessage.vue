@@ -42,7 +42,7 @@ import {
 
 import UserSurvey from './UserSurvey.vue';
 
-import { puzzleNumber, depthFinishedAt } from '../store/useLocalStorage';
+import { puzzleNumber, depthFinishedAt } from '../store/localStorage';
 
 const finishedAt = computed(() => depthFinishedAt.value[depthFinishedAt.value.length - 1]);
 

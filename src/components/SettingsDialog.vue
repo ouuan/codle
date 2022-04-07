@@ -37,7 +37,7 @@ import { SettingsSharp } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
 
-import { uiTheme, codeFontFamily } from '../store/useLocalStorage';
+import { uiTheme, codeFontFamily } from '../store/localStorage';
 
 const themeOptions = [
   {

@@ -107,5 +107,5 @@ import { HelpCircle } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
 
-import { showGameRule } from '../store/useLocalStorage';
+import { showGameRule } from '../store/localStorage';
 </script>

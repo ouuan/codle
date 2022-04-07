@@ -32,7 +32,7 @@ import {
   TreeOptionEx,
   isTreeOptionEx,
 } from '../types';
-import { rootTreeOption } from '../store/useRootTreeOption';
+import { rootTreeOption } from '../store/rootTreeOption';
 
 const props = defineProps<{
   code: string,

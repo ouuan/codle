@@ -23,7 +23,7 @@ import { Editor, EditorConfiguration, Position } from 'codemirror';
 import 'codemirror/mode/clike/clike.js';
 import 'codemirror/theme/gruvbox-dark.css';
 
-import { uiDark, codeFontFamily } from '../store/useLocalStorage';
+import { uiDark, codeFontFamily } from '../store/localStorage';
 
 const props = defineProps<{
   code: string,

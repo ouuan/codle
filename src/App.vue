@@ -22,7 +22,7 @@ import {
 
 import MainPage from './components/MainPage.vue';
 
-import { uiDark } from './store/useLocalStorage';
+import { uiDark } from './store/localStorage';
 
 const osTheme = useOsTheme();
 const theme = computed(() => (uiDark(osTheme) ? darkTheme : null));

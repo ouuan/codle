@@ -177,8 +177,8 @@ import {
   statement,
   targetCode,
   updatePuzzle,
-} from '../store/useLocalStorage';
-import { standardizeCode } from '../store/useRootTreeOption';
+} from '../store/localStorage';
+import { standardizeCode } from '../store/rootTreeOption';
 import { initParser, parse } from '../parse';
 import {
   enableAutoOutboundTracking,

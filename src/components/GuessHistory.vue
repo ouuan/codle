@@ -105,8 +105,8 @@ import {
   maxStreak,
   puzzleNumber,
   successCount,
-} from '../store/useLocalStorage';
-import { rootTreeOption } from '../store/useRootTreeOption';
+} from '../store/localStorage';
+import { rootTreeOption } from '../store/rootTreeOption';
 import { trackEvent } from '../plausible';
 
 const props = defineProps<{ correctRoot?: SyntaxNode }>();

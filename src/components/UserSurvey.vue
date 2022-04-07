@@ -99,7 +99,7 @@ import {
   puzzleNumber,
   guesses,
   surveySubmitted,
-} from '../store/useLocalStorage';
+} from '../store/localStorage';
 import { plausibleTracked, trackEvent } from '../plausible';
 
 const props = defineProps<{ type: string }>();
