@@ -43,8 +43,11 @@ const cmOptions = computed((): EditorConfiguration => ({
   indentUnit: 4,
   lineWrapping: codeLineWrap.value,
   readOnly: props.readOnly,
-  ...(props.readOnly ? { cursorBlinkRate: -1 } : {}),
   firstLineNumber: props.firstLineNumber ?? 1,
+  ...(props.readOnly ? {
+    cursorBlinkRate: -1,
+    inputStyle: 'textarea', // fix cursor not hidden in readonly editors on mobile
+  } : {}),
 }));
 
 const emit = defineEmits<{
