@@ -15,8 +15,9 @@ import {
   computed,
   onMounted,
   ref,
+  toRef,
 } from 'vue';
-import { useMessage, useOsTheme } from 'naive-ui';
+import { useMessage, useOsTheme, useThemeVars } from 'naive-ui';
 import CodeMirror, { CmComponentRef } from 'codemirror-editor-vue3';
 import { Editor, EditorConfiguration, Position } from 'codemirror';
 
@@ -80,11 +81,13 @@ function markRange(from: Position, to: Position, scroll: boolean) {
   cmInstance.value?.setSelection(from, to, { scroll });
 }
 defineExpose({ markRange });
+
+const themeFontSize = toRef(useThemeVars().value, 'fontSize');
 </script>
 
 <style scoped>
 .editor:deep(.CodeMirror) {
-  font-size: 14px;
+  font-size: v-bind(themeFontSize);
   font-family: v-bind(codeFontFamilyFallback), monospace !important;
 }
 </style>
