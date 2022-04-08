@@ -107,7 +107,7 @@
         >
           <guess-history
             :correct-root="correctRoot"
-            @standardize-code="code = standardizeCode()"
+            @apply-target-code-and-modification="code = applyTargeCodeAndModification()"
           />
         </n-card>
         <node-type-list :correct-root="correctRoot" />
@@ -178,7 +178,7 @@ import {
   targetCode,
   updatePuzzle,
 } from '../store/localStorage';
-import { standardizeCode } from '../store/rootTreeOption';
+import { applyTargeCodeAndModification } from '../store/rootTreeOption';
 import { initParser, parse } from '../parse';
 import {
   enableAutoOutboundTracking,

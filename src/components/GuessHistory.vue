@@ -33,17 +33,21 @@
         </template>
         Jump to the last guess
       </n-tooltip>
-      <n-tooltip v-if="!finished && !gaveUp">
+      <n-tooltip
+        v-if="!finished && !gaveUp"
+        width="trigger"
+      >
         <template #trigger>
           <n-button
             secondary
             type="success"
-            @click="standardizeCode"
+            @click="applyTargetCodeAndModification"
           >
-            Standardize Code
+            Apply target code &amp; modification
           </n-button>
         </template>
-        Replace the codes of correct subtrees with target codes
+        Replace the codes of correct subtrees with target codes,
+        and replace incorrect nodes with modifications made in the dialog
       </n-tooltip>
     </n-space>
     <n-form
@@ -124,10 +128,10 @@ function jumpToLast() {
 watch(() => guesses.value.length, jumpToLast);
 
 const emit = defineEmits<{
-  (e: 'standardizeCode'): void
+  (e: 'applyTargetCodeAndModification'): void
 }>();
-function standardizeCode() {
-  emit('standardizeCode');
+function applyTargetCodeAndModification() {
+  emit('applyTargetCodeAndModification');
 }
 
 const targetMaxDepth = computed(() => {

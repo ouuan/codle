@@ -6,11 +6,7 @@
     @mouseover="markNode"
     @mouseleave="clearMark"
   >
-    {{ option.label }}
-    [{{ option.node.startPosition.row + 1 }}, {{ option.node.startPosition.column + 1 }}]
-    -
-    [{{ option.node.endPosition.row + 1 }}, {{ option.node.endPosition.column + 1 }}]
-    &nbsp;
+    {{ option.label }} {{ rangeText }} &nbsp;
     <template v-if="option.correct === 'correct'">
       <span v-if="correctButCodeDiff">
         ☑️
@@ -25,36 +21,65 @@
         ({{ option.node.namedChildCount }}/{{ option.correctChildCount }})
       </n-text>
     </template>
+    <span v-if="option.modification && option.modification !== option.node.text">
+      📝
+    </span>
   </n-button>
   <n-modal
     v-if="showCode"
     v-model:show="showCode"
     preset="card"
-    :title="codeTitle"
+    :title="`Subtree ${rangeText}`"
+    size="medium"
     style="max-width: calc(min(90vw, 800px));"
   >
     <n-grid
-      :cols="correctButCodeDiff ? '1 m:2' : '1'"
-      :x-gap="10"
-      :y-gap="10"
+      :cols="(correctButCodeDiff || !option.allCorrect) ? '1 m:2' : '1'"
       responsive="screen"
     >
       <n-gi>
-        <code-editor
-          read-only
-          height="40vh"
-          :first-line-number="option.node.startPosition.row + 1"
-          :code="Array(option.node.startPosition.column + 1).join(' ') + option.node.text"
-        />
+        <n-card
+          :bordered="false"
+          size="small"
+          :title="`Your code ${option.node.text === option.correctText ?
+            '(the same as target code)' : ''}`"
+        >
+          <code-editor
+            read-only
+            height="40vh"
+            :first-line-number="option.node.startPosition.row + 1"
+            :code="Array(option.node.startPosition.column + 1).join(' ') + option.node.text"
+          />
+        </n-card>
       </n-gi>
       <n-gi>
-        <code-editor
+        <n-card
           v-if="correctButCodeDiff"
-          read-only
-          height="40vh"
-          :first-line-number="(option.correctStartRow ?? 0) + 1"
-          :code="Array((option.correctStartCol ?? 0) + 1).join(' ') + (option.correctText ?? '')"
-        />
+          size="small"
+          :bordered="false"
+          title="Target code"
+        >
+          <code-editor
+            read-only
+            height="40vh"
+            :first-line-number="(option.correctStartRow ?? 0) + 1"
+            :code="Array((option.correctStartCol ?? 0) + 1).join(' ') + (option.correctText ?? '')"
+          />
+        </n-card>
+        <n-card
+          v-else-if="!option.allCorrect"
+          size="small"
+          :bordered="false"
+          title="Modification"
+        >
+          <code-editor
+            :read-only="false"
+            :code="option.modification"
+            height="40vh"
+            :first-line-number="option.node.startPosition.row + 1"
+            @update:code="onModified"
+          />
+        </n-card>
       </n-gi>
     </n-grid>
   </n-modal>
@@ -64,6 +89,7 @@
 import { computed, ref } from 'vue';
 import {
   NButton,
+  NCard,
   NGi,
   NGrid,
   NModal,
@@ -103,12 +129,6 @@ const countType = computed(() => {
 const correctButCodeDiff = computed(() => props.option.allCorrect
                                     && props.option.node.text !== props.option.correctText);
 
-const codeTitle = computed(() => {
-  if (!props.option.allCorrect) return 'Your code of this subtree';
-  if (correctButCodeDiff.value) return 'Your code & target code of this subtree';
-  return 'Your code (the same as target code) of this subtree';
-});
-
 const showCode = ref(false);
 
 function pointToPos({ row, column }: Point): Position {
@@ -132,5 +152,15 @@ function markNode() {
 }
 function clearMark() {
   props.markRange?.({ line: 0, ch: 0 }, { line: 0, ch: 0 }, false);
+}
+
+const rangeText = computed(() => `[${props.option.node.startPosition.row + 1}, ${props.option.node.startPosition.column + 1}]`
+                          + ` - [${props.option.node.endPosition.row + 1}, ${props.option.node.endPosition.column + 1}]`);
+
+const emit = defineEmits<{
+  (e: 'modified', modification: string): void
+}>();
+function onModified(code: string) {
+  emit('modified', code);
 }
 </script>

@@ -70,6 +70,13 @@
         However, only one type will be revealed after each guess.
       </n-p>
       <n-p>
+        It could be troublesome to edit a subtree of your code in the original code editor.
+        To make it easier, you can click an incorrect node to modify the code within that subtree.
+        When editing is done, you can click the "Apply target code &amp; modification" button,
+        and then all your modifications plus the target codes of "☑️" nodes will be applied.
+        Please note that modifications in parent nodes will override modifications in the children.
+      </n-p>
+      <n-p>
         Initial guesses need some clue, so in each puzzle,
         there will be an associated algorithm (coding) problem.
         The target code is guaranteed to be a valid solution to the problem,

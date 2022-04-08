@@ -102,6 +102,7 @@ function generateTreeOption(
     correct,
     allCorrect,
     correctText: allCorrect ? correctNode.text : undefined,
+    modification: allCorrect ? '' : node.text,
     correctStartRow: allCorrect ? correctNode.startPosition.row : undefined,
     correctStartCol: allCorrect ? correctNode.startPosition.column : undefined,
     correctChildCount: correctNode?.namedChildCount ?? 0,
@@ -130,6 +131,8 @@ function renderLabel({ option }: {option: TreeOption}) {
   return h(SyntaxTreeNode, {
     option,
     markRange: props.markRange,
+    // eslint-disable-next-line no-param-reassign
+    onModified: (modification) => { option.modification = modification; },
   });
 }
 </script>

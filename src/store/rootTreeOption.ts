@@ -4,7 +4,7 @@ import { TreeOptionEx } from '../types';
 
 export const rootTreeOption = ref<TreeOptionEx>();
 
-export function standardizeCode() {
+export function applyTargeCodeAndModification() {
   if (!rootTreeOption.value) return '';
   const code = rootTreeOption.value.node.text;
   const offset = rootTreeOption.value.node.startIndex;
@@ -18,6 +18,8 @@ export function standardizeCode() {
   function dfs(option: TreeOptionEx) {
     if (option.allCorrect && option.correctText) {
       addPart(option.node.startIndex - offset, option.node.endIndex - offset, option.correctText);
+    } else if (option.modification && option.modification !== option.node.text) {
+      addPart(option.node.startIndex - offset, option.node.endIndex - offset, option.modification);
     } else {
       option.children.forEach((child) => dfs(child));
     }
