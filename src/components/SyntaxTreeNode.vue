@@ -48,7 +48,8 @@
             read-only
             height="40vh"
             :first-line-number="option.node.startPosition.row + 1"
-            :code="Array(option.node.startPosition.column + 1).join(' ') + option.node.text"
+            :code="(option.modification === null ?
+              Array(option.node.startPosition.column + 1).join(' ') : '') + option.node.text"
           />
         </n-card>
       </n-gi>
