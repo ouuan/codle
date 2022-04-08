@@ -6,7 +6,8 @@
     :value="code"
     :options="cmOptions"
     :height="height"
-    @change="onCodeChange"
+    @change="updateCode"
+    @blur="updateCode"
   />
 </template>
 
@@ -50,13 +51,6 @@ const cmOptions = computed((): EditorConfiguration => ({
   } : {}),
 }));
 
-const emit = defineEmits<{
-  (e: 'update:code', value: string): void
-}>();
-function onCodeChange(val: string) {
-  emit('update:code', val);
-}
-
 const editorRef = ref<CmComponentRef>(null);
 const cmInstance = ref<Editor>();
 const message = useMessage();
@@ -80,6 +74,15 @@ onMounted(() => {
     });
   }
 });
+
+const emit = defineEmits<{
+  (e: 'update:code', value: string): void
+}>();
+function updateCode() {
+  if (cmInstance.value) {
+    emit('update:code', cmInstance.value.getValue());
+  }
+}
 
 const codeFontFamilyFallback = computed(() => codeFontFamily.value || 'monospace');
 
