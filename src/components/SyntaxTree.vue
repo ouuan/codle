@@ -102,7 +102,7 @@ function generateTreeOption(
     correct,
     allCorrect,
     correctText: allCorrect ? correctNode.text : undefined,
-    modification: allCorrect ? '' : node.text,
+    modification: allCorrect ? null : node.text,
     correctStartRow: allCorrect ? correctNode.startPosition.row : undefined,
     correctStartCol: allCorrect ? correctNode.startPosition.column : undefined,
     correctChildCount: correctNode?.namedChildCount ?? 0,

@@ -21,7 +21,7 @@
         ({{ option.node.namedChildCount }}/{{ option.correctChildCount }})
       </n-text>
     </template>
-    <span v-if="option.modification && option.modification !== option.node.text">
+    <span v-if="option.modification !== null && option.modification !== option.node.text">
       📝
     </span>
   </n-button>
@@ -67,7 +67,7 @@
           />
         </n-card>
         <n-card
-          v-else-if="!option.allCorrect"
+          v-else-if="option.modification !== null"
           size="small"
           :bordered="false"
           title="Modification"

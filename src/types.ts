@@ -9,7 +9,7 @@ export interface TreeOptionEx extends TreeOption {
   correctChildCount: number,
   correct: CorrectStatus,
   correctText?: string,
-  modification: string,
+  modification: string | null,
   correctStartRow?: number,
   correctStartCol?: number,
   allCorrect: boolean,
