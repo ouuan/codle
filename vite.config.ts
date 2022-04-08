@@ -3,11 +3,13 @@ import vue from '@vitejs/plugin-vue';
 import analyzer from 'rollup-plugin-analyzer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import transformPuzzles from './transformPuzzles';
+import generateSitemap from './generateSitemap';
 
 export default defineConfig({
   plugins: [
     vue(),
     transformPuzzles(),
+    generateSitemap(),
     splitVendorChunkPlugin(),
     createHtmlPlugin({
       minify: false,
