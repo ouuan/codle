@@ -14,6 +14,7 @@ import {
 } from 'naive-ui';
 import DOMPurify from 'dompurify';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
+import { beginTimestamp, puzzleInterval } from '../../config';
 
 const api = axios.create({
   headers: {
@@ -53,8 +54,7 @@ function isSafeInteger(value: unknown): value is number {
 export const puzzleNumber = ref<number>(getStored('puzzleNumber', 0, isSafeInteger));
 watchAndStore(puzzleNumber, 'puzzleNumber');
 
-// 2022-03-27 is a Sunday
-const correctPuzzleNumber = Math.floor((Date.now() - new Date('2022-03-27T00:00:00Z').valueOf()) / (1000 * 60 * 60 * 24 * 7));
+const correctPuzzleNumber = Math.floor((Date.now() - beginTimestamp) / puzzleInterval);
 
 function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((item) => typeof item === 'string');

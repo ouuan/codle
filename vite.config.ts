@@ -2,8 +2,9 @@ import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import analyzer from 'rollup-plugin-analyzer';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import transformPuzzles from './transformPuzzles';
-import generateSitemap from './generateSitemap';
+import { beginTimestamp, puzzleInterval, host } from './config';
+import transformPuzzles from './src/vite/transformPuzzles';
+import generateSitemap from './src/vite/generateSitemap';
 
 export default defineConfig({
   plugins: [
@@ -16,7 +17,8 @@ export default defineConfig({
       entry: '/src/main.ts',
       inject: {
         data: {
-          puzzleId: Math.floor((Date.now() - new Date('2022-03-27T00:00:00Z').valueOf() + 60000) / (1000 * 60 * 60 * 24 * 7)).toString(),
+          puzzleId: Math.floor((Date.now() - beginTimestamp + 60000) / puzzleInterval).toString(),
+          host,
         },
       },
     }),

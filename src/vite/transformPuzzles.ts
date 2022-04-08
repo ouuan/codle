@@ -12,6 +12,7 @@ import glob from 'glob-promise';
 import { Plugin } from 'vite';
 import { JSDOM } from 'jsdom';
 import createDOMPurify from 'dompurify';
+import { beginTimestamp, puzzleInterval, host } from '../../config';
 
 const { window } = new JSDOM('');
 const { sanitize } = createDOMPurify(window as any as Window);
@@ -24,7 +25,7 @@ async function clear() {
 }
 
 function dateForBase(base: string) {
-  return new Date(new Date('2022-03-27T00:00:00Z').valueOf() + 1000 * 60 * 60 * 24 * 7 * parseInt(base, 10));
+  return new Date(beginTimestamp + puzzleInterval * parseInt(base, 10));
 }
 
 function datePublished(date: Date) {
@@ -57,7 +58,7 @@ async function transformStatements(items: FeedItem[]) {
     items.push({
       title: `Codle #${base}`,
       id: `codle-${base}`,
-      link: 'https://codle.ouuan.moe',
+      link: `https://${host}`,
       content,
       date,
     });
@@ -72,14 +73,14 @@ export default function transformPuzzles(): Plugin {
       const feed = new Feed({
         title: 'Codle Puzzles',
         description: "A game to guess a target code's AST like Wordle with AST nodes as letters",
-        id: 'https://codle.ouuan.moe/',
-        link: 'https://codle.ouuan.moe/',
-        image: 'https://codle.ouuan.moe/images/og-image.png',
-        favicon: 'https://codle.ouuan.moe/favicon.ico',
+        id: `https://${host}`,
+        link: `https://${host}`,
+        image: `https://${host}/images/og-image.png`,
+        favicon: `https://${host}/favicon.ico`,
         copyright: 'Copyright (C) 2022  Yufan You',
         feedLinks: {
-          atom: 'https://codle.ouuan.moe/atom.xml',
-          rss: 'https://codle.ouuan.moe/index.xml',
+          atom: `https://${host}/atom.xml`,
+          rss: `https://${host}/index.xml`,
         },
         author: {
           name: 'ouuan',

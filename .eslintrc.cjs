@@ -28,6 +28,7 @@ module.exports = {
       {
         devDependencies: [
           './*.ts',
+          './src/vite/*.ts',
         ],
       },
     ],

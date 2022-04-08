@@ -7,16 +7,17 @@ import {
 import { Readable } from 'stream';
 import { writeFile } from 'fs/promises';
 import { Plugin } from 'vite';
+import { host } from '../../config';
 
 const links: SitemapItem[] = [
   {
-    url: 'https://codle.ouuan.moe',
+    url: `https://${host}`,
     changefreq: EnumChangefreq.WEEKLY,
     priority: 1,
     lastmod: new Date().toISOString(),
     img: [
-      { url: 'https://codle.ouuan.moe/images/og-image.png' },
-      { url: 'https://codle.ouuan.moe/images/android-icon-192x192.png' },
+      { url: `https://${host}/images/og-image.png` },
+      { url: `https://${host}/images/android-icon-192x192.png` },
     ],
     video: [],
     links: [],
@@ -28,7 +29,7 @@ export default function generateSitemap(): Plugin {
     name: 'generate sitemap',
     async buildStart() {
       const stream = new SitemapStream({
-        hostname: 'https://codle.ouuan.moe',
+        hostname: `https://${host}`,
         xmlns: {
           news: false,
           xhtml: false,

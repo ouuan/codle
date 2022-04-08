@@ -1,18 +1,19 @@
 import { ref, watch } from 'vue';
 import Plausible from 'plausible-tracker';
+import { host, plausibleHost } from '../config';
 
 const {
   trackEvent: event,
   trackPageview: pageView,
   enableAutoOutboundTracking: outBound,
 } = Plausible({
-  domain: 'codle.ouuan.moe',
-  apiHost: 'https://plausible.ouuan.moe',
+  domain: host,
+  apiHost: plausibleHost,
 });
 
 function checkHost<T extends(...args: never[]) => void>(fn: T) {
   return (...args: Parameters<T>) => {
-    if (window.location.host === 'codle.ouuan.moe') {
+    if (window.location.host === host) {
       fn(...args);
     } else {
       // eslint-disable-next-line no-console
