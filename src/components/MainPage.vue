@@ -107,7 +107,7 @@
         >
           <guess-history
             :correct-root="correctRoot"
-            @apply-target-code-and-modification="code = applyTargeCodeAndModification()"
+            @apply-target-code-and-modification="onApplyTargeCodeAndModification()"
           />
         </n-card>
         <node-type-list :correct-root="correctRoot" />
@@ -271,6 +271,22 @@ function submitGuess() {
         // https://github.com/plausible/plausible-tracker/pull/27
         guessCount: guesses.value.length as any as string,
         puzzleId: puzzleNumber.value as any as string,
+      },
+    });
+  }
+}
+
+function onApplyTargeCodeAndModification() {
+  if (code.value === guesses.value[guesses.value.length - 1]) {
+    code.value = applyTargeCodeAndModification();
+  } else {
+    dialog.warning({
+      title: 'Apply target code & modification',
+      content: 'Modifications were made in the main code editor. Override those modifications with target code & subtree modifications?',
+      positiveText: 'Override',
+      negativeText: 'Cancel',
+      onPositiveClick() {
+        code.value = applyTargeCodeAndModification();
       },
     });
   }
