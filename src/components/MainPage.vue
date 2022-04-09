@@ -262,7 +262,7 @@ onMounted(async () => {
 const lengthLimit = computed(() => targetCode.value.length * 2);
 const lengthHintType = computed(() => {
   if (code.value.length <= targetCode.value.length) return 'success';
-  if (code.value.length === lengthLimit.value) return 'error';
+  if (code.value.length >= lengthLimit.value) return 'error';
   return 'warning';
 });
 
@@ -270,6 +270,10 @@ const editorReadonly = computed(() => guesses.value.length > 0
                                       && readonlyEditorAfterFirstGuess.value);
 
 function submitGuess() {
+  if (code.value.length > lengthLimit.value) {
+    message.error('Code length limit exceeded');
+    return;
+  }
   const previousIndex = guesses.value.indexOf(code.value);
   if (previousIndex !== -1) {
     message.error(`Your code is exactly the same as guess #${previousIndex + 1}`);
