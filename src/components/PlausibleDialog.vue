@@ -8,7 +8,7 @@
     <n-p>
       Codle uses a self-hosted
       <n-a href="https://plausible.io">Plausible Analytics</n-a>
-      instance to track page views and game success / give up information
+      instance to track page views and game success / give up / guess count information
       <strong>without</strong>
       any personal data.
     </n-p>

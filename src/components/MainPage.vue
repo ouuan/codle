@@ -265,6 +265,15 @@ function submitGuess() {
     firstGame.value = puzzleNumber.value;
   }
   guesses.value.push(code.value);
+  if (guesses.value.length % 10 === 0) {
+    trackEvent('Guess', {
+      props: {
+        // https://github.com/plausible/plausible-tracker/pull/27
+        guessCount: guesses.value.length as any as string,
+        puzzleId: puzzleNumber.value as any as string,
+      },
+    });
+  }
 }
 
 function giveUp() {
