@@ -157,6 +157,7 @@ import {
   NText,
   NTooltip,
   useDialog,
+  useMessage,
 } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
 
@@ -209,6 +210,7 @@ const correctRoot = ref<SyntaxNode>();
 const editor = ref();
 
 const dialog = useDialog();
+const message = useMessage();
 
 const loadPhase = ref<true | string>('Loading page...');
 
@@ -268,6 +270,11 @@ const editorReadonly = computed(() => guesses.value.length > 0
                                       && readonlyEditorAfterFirstGuess.value);
 
 function submitGuess() {
+  const previousIndex = guesses.value.indexOf(code.value);
+  if (previousIndex !== -1) {
+    message.error(`Your code is exactly the same as guess #${previousIndex + 1}`);
+    return;
+  }
   if (lastPlay.value !== puzzleNumber.value) {
     lastPlay.value = puzzleNumber.value;
     playCount.value += 1;
