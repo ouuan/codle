@@ -23,6 +23,16 @@
         <n-form-item label="Code Line Wrap">
           <n-switch v-model:value="codeLineWrap" />
         </n-form-item>
+        <n-tooltip width="trigger">
+          <template #trigger>
+            <n-form-item label="Readonly editor after first guess">
+              <n-switch v-model:value="readonlyEditorAfterFirstGuess" />
+            </n-form-item>
+          </template>
+          Make the main code editor readonly after the first guess.
+          In this way, you can force yourself to use the subtree modification function,
+          and avoid messing up with these two somehow conflicting editing methods.
+        </n-tooltip>
       </n-form>
     </n-space>
   </dialog-with-icon-button>
@@ -36,12 +46,18 @@ import {
   NSelect,
   NSpace,
   NSwitch,
+  NTooltip,
 } from 'naive-ui';
 import { SettingsSharp } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
 
-import { uiTheme, codeFontFamily, codeLineWrap } from '../store/localStorage';
+import {
+  codeFontFamily,
+  codeLineWrap,
+  readonlyEditorAfterFirstGuess,
+  uiTheme,
+} from '../store/localStorage';
 
 const themeOptions = [
   {

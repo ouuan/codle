@@ -205,3 +205,6 @@ watchAndStore(codeFontFamily, 'codeFontFamily');
 
 export const codeLineWrap = ref<boolean>(getStored('codeLineWrap', true, isBoolean));
 watchAndStore(codeLineWrap, 'codeLineWrap');
+
+export const readonlyEditorAfterFirstGuess = ref<boolean>(getStored('readonlyEditorAfterFirstGuess', false, isBoolean));
+watchAndStore(readonlyEditorAfterFirstGuess, 'readonlyEditorAfterFirstGuess');

@@ -53,10 +53,16 @@
             </n-collapse-transition>
           </n-space>
         </n-card>
-        <n-card
-          v-if="!finished && !gaveUp"
-          title="Guess!"
-        >
+        <n-card v-if="!finished && !gaveUp">
+          <template #header>
+            Guess!
+            <n-tooltip v-if="editorReadonly">
+              <template #trigger>
+                (readonly)
+              </template>
+              See the setting "Readonly editor after first guess"
+            </n-tooltip>
+          </template>
           <template #header-extra>
             Length (max: 2 * length of target code):&nbsp;
             <n-text
@@ -70,7 +76,7 @@
             v-model:code="code"
             height="40vh"
             :length-limit="lengthLimit"
-            :read-only="false"
+            :read-only="editorReadonly"
           />
           <template #action>
             <n-space justify="space-between">
@@ -149,6 +155,7 @@ import {
   NSpin,
   NSwitch,
   NText,
+  NTooltip,
   useDialog,
 } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
@@ -173,6 +180,7 @@ import {
   lastPlay,
   playCount,
   puzzleNumber,
+  readonlyEditorAfterFirstGuess,
   showStatement,
   statement,
   targetCode,
@@ -256,6 +264,9 @@ const lengthHintType = computed(() => {
   return 'warning';
 });
 
+const editorReadonly = computed(() => guesses.value.length > 0
+                                      && readonlyEditorAfterFirstGuess.value);
+
 function submitGuess() {
   if (lastPlay.value !== puzzleNumber.value) {
     lastPlay.value = puzzleNumber.value;
@@ -277,7 +288,7 @@ function submitGuess() {
 }
 
 function onApplyTargeCodeAndModification() {
-  if (code.value === guesses.value[guesses.value.length - 1]) {
+  if (editorReadonly.value || code.value === guesses.value[guesses.value.length - 1]) {
     code.value = applyTargeCodeAndModification();
   } else {
     dialog.warning({

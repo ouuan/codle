@@ -1,6 +1,7 @@
 <template>
   <code-mirror
     ref="editorRef"
+    :key="forceUpdate"
     border
     class="editor"
     :value="code"
@@ -73,6 +74,15 @@ onMounted(() => {
       return true;
     });
   }
+});
+
+const forceUpdate = ref(0);
+watch(editorRef, () => {
+  cmInstance.value = editorRef.value?.cminstance;
+});
+watch(() => props.readOnly, () => {
+  forceUpdate.value += 1;
+  nextTick(() => cmInstance.value?.refresh());
 });
 
 const emit = defineEmits<{
