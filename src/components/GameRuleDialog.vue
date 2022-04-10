@@ -54,6 +54,10 @@
         (remember to set the language to C++ first)
         and you'll roughly know what node types look like.
         You may also use this Playground as an assistant when solving the puzzle.
+        If you'd like to, you can also refer to
+        <n-a href="https://github.com/tree-sitter/tree-sitter-cpp/blob/master/grammar.js">
+          <code>grammar.js</code> in <code>tree-sitter-cpp</code>
+        </n-a>, but it's not required.
         To help you identify each node,
         the range of the corresponding code snippet within your code is displayed beside each node.
         You can also hover on or click a node to view the corresponding code.
