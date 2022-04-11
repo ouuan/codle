@@ -8,6 +8,7 @@
       >
         <n-space>
           <n-input-number
+            :key="refreshInputNumber"
             v-model:value="id"
             :validator="validator"
             style="max-width: 15em;"
@@ -149,7 +150,10 @@ const targetNodeCount = computed(() => {
   return subtreeSize(props.correctRoot);
 });
 
+const refreshInputNumber = ref(0);
+
 watch(rootTreeOption, () => {
+  refreshInputNumber.value += 1;
   if (!props.correctRoot) return;
   const root = rootTreeOption.value;
   if (!root) return;
