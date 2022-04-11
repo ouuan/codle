@@ -16,7 +16,6 @@
 import {
   computed,
   nextTick,
-  onMounted,
   ref,
   toRef,
   watch,
@@ -55,7 +54,9 @@ const cmOptions = computed((): EditorConfiguration => ({
 const editorRef = ref<CmComponentRef>(null);
 const cmInstance = ref<Editor>();
 const message = useMessage();
-onMounted(() => {
+
+const forceUpdate = ref(0);
+watch(editorRef, () => {
   cmInstance.value = editorRef.value?.cminstance;
   const { lengthLimit } = props;
   if (lengthLimit) {
@@ -74,11 +75,6 @@ onMounted(() => {
       return true;
     });
   }
-});
-
-const forceUpdate = ref(0);
-watch(editorRef, () => {
-  cmInstance.value = editorRef.value?.cminstance;
 });
 watch(() => props.readOnly, () => {
   forceUpdate.value += 1;
