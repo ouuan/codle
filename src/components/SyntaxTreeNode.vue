@@ -30,10 +30,19 @@
     v-if="showCode"
     v-model:show="showCode"
     preset="card"
-    :title="`Subtree ${rangeText}`"
     size="medium"
     style="max-width: calc(min(90vw, 800px));"
   >
+    <template #header>
+      {{ option.node.type }} {{ rangeText }}
+      <grammar-rule-dialog
+        :name="option.node.type"
+        :symbols="symbolNames"
+        type="info"
+      >
+        View grammar
+      </grammar-rule-dialog>
+    </template>
     <n-grid
       :cols="(correctButCodeDiff || !option.allCorrect) ? '1 m:2' : '1'"
       responsive="screen"
@@ -101,8 +110,11 @@ import { exhaustiveCheck } from 'ts-exhaustive-check';
 import { Point } from 'web-tree-sitter';
 import { Position } from 'codemirror';
 
-import { MarkRange, TreeOptionEx } from '../types';
 import CodeEditor from './CodeEditor.vue';
+import GrammarRuleDialog from '../grammar/GrammarRuleDialog.vue';
+
+import { MarkRange, TreeOptionEx } from '../types';
+import { symbolChildren } from '../grammar/grammar';
 
 const props = defineProps<{
   option: TreeOptionEx,
@@ -165,4 +177,29 @@ const emit = defineEmits<{
 function onModified(code: string) {
   emit('modified', code);
 }
+
+const symbolNames = computed((): string[] => {
+  if (props.option.node.parent === null) {
+    return [props.option.node.type];
+  }
+  const path = [props.option.node.type];
+  for (let u = props.option.node; u.parent; u = u.parent) {
+    path.push(u.parent.type);
+  }
+  let names = new Set<string>([path[path.length - 1]]);
+  for (let i = path.length - 2; i >= 0; i -= 1) {
+    const newNames = new Set<string>();
+    names.forEach((name) => {
+      const map = symbolChildren.get(name);
+      if (map) {
+        const set = map.get(path[i]);
+        if (set) {
+          set.forEach((symbol) => newNames.add(symbol));
+        }
+      }
+    });
+    names = newNames;
+  }
+  return Array.from(names);
+});
 </script>

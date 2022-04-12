@@ -44,6 +44,7 @@ dependencies:
   dompurify: 2.3.6
   naive-ui: 2.27.0_vue@3.2.31
   plausible-tracker: 0.3.5
+  tree-sitter-cpp: 0.20.0
   ts-exhaustive-check: 1.0.0
   vue: 3.2.31
   web-tree-sitter: 0.20.5
@@ -68,7 +69,6 @@ devDependencies:
   rollup-plugin-analyzer: 4.0.0
   sitemap: 7.1.1
   tree-sitter-cli: 0.20.6
-  tree-sitter-cpp: 0.20.0
   typescript: 4.6.3
   vite: 2.9.1
   vite-plugin-html: 3.2.0_vite@2.9.1
@@ -2133,7 +2133,6 @@ packages:
 
   /nan/2.15.0:
     resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
-    dev: true
 
   /nanoid/3.3.2:
     resolution: {integrity: sha512-CuHBogktKwpm5g2sRgv83jEy2ijFzBwMoYA60orPDR7ynsLijJDqgsi4RDGj3OJpy3Ieb+LYwiRmIOGyytgITA==}
@@ -2639,7 +2638,7 @@ packages:
     requiresBuild: true
     dependencies:
       nan: 2.15.0
-    dev: true
+    dev: false
 
   /treemate/0.3.10:
     resolution: {integrity: sha512-uxN98H84/zXAkn02rEeip9SNnOR889QIBXfpZnwjaanp8JRElxjdmDaKmVULclrn54J8RcJVCqfeQZsdeMjwow==}

@@ -29,6 +29,7 @@
     "dompurify": "^2.3.6",
     "naive-ui": "^2.27.0",
     "plausible-tracker": "^0.3.5",
+    "tree-sitter-cpp": "^0.20.0",
     "ts-exhaustive-check": "^1.0.0",
     "vue": "^3.2.31",
     "web-tree-sitter": "^0.20.5"
@@ -53,7 +54,6 @@
     "rollup-plugin-analyzer": "^4.0.0",
     "sitemap": "^7.1.1",
     "tree-sitter-cli": "^0.20.6",
-    "tree-sitter-cpp": "^0.20.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.1",
     "vite-plugin-html": "^3.2.0",

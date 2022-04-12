@@ -54,10 +54,6 @@
         (remember to set the language to C++ first)
         and you'll roughly know what node types look like.
         You may also use this Playground as an assistant when solving the puzzle.
-        If you'd like to, you can also refer to
-        <n-a href="https://github.com/tree-sitter/tree-sitter-cpp/blob/master/grammar.js">
-          <code>grammar.js</code> in <code>tree-sitter-cpp</code>
-        </n-a>, but it's not required.
         To help you identify each node,
         the range of the corresponding code snippet within your code is displayed beside each node.
         You can also hover on or click a node to view the corresponding code.
@@ -70,8 +66,16 @@
         (depending on whether your code is the same as the target code in this subtree)
         displayed besides every node in this subtree,
         and you can click the node to view the target code of this subtree.
-        What's more, a list of node types and numbers of nodes of each type will be given.
+      </n-p>
+      <n-p>
+        In order to narrow down your options of node types, a list of all node types
+        in the target code and the number of nodes of each type will be given.
         However, only one type will be revealed after each guess.
+        What's more, you can click on a node, either in the node type list or in the AST,
+        to see the grammar structure of the corresponding node type.
+        In the grammar structure, green nodes are node types in the AST,
+        blue nodes are strings or regex patterns,
+        and yellow nodes are "node types" which are not displayed in the AST.
       </n-p>
       <n-p>
         It could be troublesome to edit a subtree of your code in the original code editor.

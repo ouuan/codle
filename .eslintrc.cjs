@@ -60,6 +60,9 @@ module.exports = {
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 2,
 
+    // no-undef is bad for TypeScript
+    'no-undef': 0,
+
     indent: 0,
     '@typescript-eslint/indent': [
       'error',

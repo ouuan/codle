@@ -5,9 +5,13 @@
         v-for="type of typeList"
         :key="type"
       >
-        <n-text :type="textType(type)">
+        <grammar-rule-dialog
+          :name="type"
+          :symbols="symbolNames(type)"
+          :type="textType(type)"
+        >
           {{ type }} ({{ actualTypeCount.get(type) ?? 0 }}/{{ correctTypeCount.get(type) ?? 0 }})
-        </n-text>
+        </grammar-rule-dialog>
       </n-li>
       <n-li v-if="incomplete">
         …… (guess one more time to unlock)
@@ -21,13 +25,15 @@ import { computed } from 'vue';
 import {
   NCard,
   NLi,
-  NText,
   NUl,
 } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
 
+import GrammarRuleDialog from '../grammar/GrammarRuleDialog.vue';
+
 import { guesses, finished } from '../store/localStorage';
 import { rootTreeOption } from '../store/rootTreeOption';
+import { aliases } from '../grammar/grammar';
 
 const props = defineProps<{
   correctRoot?: SyntaxNode,
@@ -62,5 +68,11 @@ function textType(type: string) {
   if (actual === 0) return 'default';
   if (actual === correct) return 'success';
   return 'warning';
+}
+
+function symbolNames(name: string) {
+  const set = aliases.get(name);
+  if (set) return Array.from(set);
+  return [];
 }
 </script>
