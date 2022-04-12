@@ -14,6 +14,7 @@
   >
     <template #header>
       <n-scrollbar
+        ref="scrollbar"
         x-scrollable
         style="max-width: calc(min(80vw, 700px) - 100px);"
       >
@@ -31,13 +32,18 @@
     </template>
     <grammar-rule-tree
       :names="current"
-      @goto-child="(name) => history.push(name)"
+      @goto-child="gotoChild"
     />
   </n-modal>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import {
+  computed,
+  nextTick,
+  ref,
+  watch,
+} from 'vue';
 import {
   NBreadcrumb,
   NBreadcrumbItem,
@@ -68,4 +74,11 @@ watch(showModal, (show) => {
     history.value = [props.name];
   }
 });
+
+const scrollbar = ref<InstanceType<typeof NScrollbar>>();
+
+function gotoChild(child: string) {
+  history.value.push(child);
+  nextTick(() => scrollbar.value?.scrollTo({ left: 99999 }));
+}
 </script>
