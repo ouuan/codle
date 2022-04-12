@@ -2,7 +2,6 @@
   <n-tree
     :data="[root]"
     :selectable="false"
-    :default-expanded-keys="[root.key??'']"
     block-line
     virtual-scroll
     class="tree"
