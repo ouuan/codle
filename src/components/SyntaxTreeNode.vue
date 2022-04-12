@@ -1,6 +1,7 @@
 <template>
   <n-button
     quaternary
+    size="small"
     :type="labelType"
     @click="showCode = true"
     @mouseover="markNode"
