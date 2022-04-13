@@ -51,6 +51,7 @@ import {
   NButton,
   NModal,
   NScrollbar,
+  useMessage,
 } from 'naive-ui';
 
 import GrammarRuleTree from './GrammarRuleTree.vue';
@@ -78,7 +79,13 @@ watch(showModal, (show) => {
 
 const scrollbar = ref<InstanceType<typeof NScrollbar>>();
 
+const message = useMessage();
+
 function gotoChild(child: string) {
+  if (current.value.length === 1 && child === current.value[0]) {
+    message.warning(`You are already viewing the type [${child}]`);
+    return;
+  }
   history.value.push(child);
   nextTick(() => scrollbar.value?.scrollTo({ left: 99999 }));
 }
