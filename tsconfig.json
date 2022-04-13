@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "es2016",
+    "target": "es2020",
+    "module": "es2020",
     "strict": true,
     "importHelpers": true,
     "moduleResolution": "node",
@@ -18,7 +18,7 @@
       "vite/client"
     ],
     "lib": [
-      "es2016",
+      "es2020",
       "dom",
       "dom.iterable"
     ]
