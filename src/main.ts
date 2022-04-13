@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import VueDiff from './VueDiff';
 
-createApp(App).mount('#app');
+createApp(App).use(VueDiff, { componentName: 'VueDiff' }).mount('#app');

@@ -80,12 +80,19 @@
           />
           <template #action>
             <n-space justify="space-between">
-              <n-button
-                type="success"
-                @click="submitGuess"
-              >
-                Guess!
-              </n-button>
+              <n-space>
+                <n-button
+                  type="success"
+                  @click="submitGuess"
+                >
+                  Guess!
+                </n-button>
+                <diff-dialog
+                  v-if="guesses.length"
+                  :prev="guesses[guesses.length - 1]"
+                  :current="code"
+                />
+              </n-space>
               <n-button
                 type="warning"
                 @click="giveUp"
@@ -163,6 +170,7 @@ import { SyntaxNode } from 'web-tree-sitter';
 
 import AboutDialog from './AboutDialog.vue';
 import CodeEditor from './CodeEditor.vue';
+import DiffDialog from './DiffDialog.vue';
 import FeedDialog from './FeedDialog.vue';
 import FinishedMessage from './FinishedMessage.vue';
 import GuessHistory from './GuessHistory.vue';
