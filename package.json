@@ -23,7 +23,6 @@
   "homepage": "https://github.com/ouuan/codle#readme",
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
-    "axios": "^0.26.1",
     "codemirror": "^5.65.2",
     "codemirror-editor-vue3": "^2.0.6",
     "dompurify": "^2.3.6",

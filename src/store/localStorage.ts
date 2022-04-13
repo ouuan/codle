@@ -5,7 +5,6 @@ import {
   Ref,
   computed,
 } from 'vue';
-import axios from 'axios';
 import {
   NA,
   NP,
@@ -15,12 +14,6 @@ import {
 import DOMPurify from 'dompurify';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
 import { beginTimestamp, puzzleInterval } from '../../config';
-
-const api = axios.create({
-  headers: {
-    Accept: 'text/plain',
-  },
-});
 
 const KEY_PREFIX = 'codle_';
 
@@ -73,8 +66,11 @@ async function getTargetCode(dialog: ReturnType<typeof useDialog>, newPuzzle: bo
     targetCodeEncoded.value = '';
   }
   try {
-    const response = await api.get(`/targetCode/${correctPuzzleNumber}.txt`);
-    targetCodeEncoded.value = response.data;
+    const response = await fetch(`/targetCode/${correctPuzzleNumber}.txt`);
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    targetCodeEncoded.value = await response.text();
   } catch {
     if (newPuzzle) {
       dialog.error({
@@ -96,8 +92,11 @@ async function getStatement(dialog: ReturnType<typeof useDialog>, newPuzzle: boo
     statement.value = '';
   }
   try {
-    const response = await api.get(`/statement/${correctPuzzleNumber}.html`);
-    statement.value = DOMPurify.sanitize(response.data);
+    const response = await fetch(`/statement/${correctPuzzleNumber}.html`);
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    statement.value = DOMPurify.sanitize(await response.text());
   } catch {
     if (newPuzzle) {
       dialog.warning({
@@ -161,14 +160,13 @@ export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
           > puzzleNumber.value - firstGame.value + 1)) {
       dialog.warning({
         title: 'Inconsistent data',
-        content: () => h(NP, {}, [
-          'Inconsistent statistics data was detected. ',
-          "It's likely to be caused by a known bug. ",
-          'Please read ',
-          h(NA, { href: 'https://github.com/ouuan/codle/discussions/3' }, 'the announcement'),
-          ' for more information. ',
-          'If you think the announcement is irrelevant, please open an issue/discussion on GitHub.',
-        ]),
+        content: () => h(NP, {}, {
+          default: () => [
+            "Inconsistent statistics data was detected. It's likely to be caused by a known bug. Please read ",
+            h(NA, { href: 'https://github.com/ouuan/codle/discussions/3' }, () => 'the announcement'),
+            ' for more information. If you think the announcement is irrelevant, please open an issue/discussion on GitHub.',
+          ],
+        }),
       });
     }
     await Promise.all([
