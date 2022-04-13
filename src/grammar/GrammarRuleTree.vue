@@ -21,6 +21,7 @@ import { GRAMMAR } from './grammar';
 
 const props = defineProps<{
   names: string[],
+  index: number,
 }>();
 
 const emit = defineEmits<{
@@ -114,18 +115,19 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
 }
 
 const root = computed(() => {
+  const key = `${props.index}-${props.names.join('-')}`;
   if (props.names.length === 0) {
-    return grammarTreeOption(undefined, 'not found', false);
+    return grammarTreeOption(undefined, key, false);
   }
   if (props.names.length === 1) {
-    return grammarTreeOption(GRAMMAR.rules[props.names[0]], props.names[0], false);
+    return grammarTreeOption(GRAMMAR.rules[props.names[0]], key, false);
   }
   return {
     key: props.names.join('-'),
     label: 'May be an alias of',
     children: props.names.map((name, index) => grammarTreeOption(
       { type: 'SYMBOL', name },
-      `${props.names.join('-')}-${index}`,
+      `${key}-${index}`,
       false,
     )),
   };

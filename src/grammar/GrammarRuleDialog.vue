@@ -32,6 +32,7 @@
     </template>
     <grammar-rule-tree
       :names="current"
+      :index="history.length"
       @goto-child="gotoChild"
     />
   </n-modal>
