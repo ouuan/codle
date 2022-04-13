@@ -167,6 +167,7 @@ import {
   useMessage,
 } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
+import { useBreakpoints } from 'vooks';
 
 import AboutDialog from './AboutDialog.vue';
 import CodeEditor from './CodeEditor.vue';
@@ -219,6 +220,7 @@ const editor = ref();
 
 const dialog = useDialog();
 const message = useMessage();
+const breakpoints = useBreakpoints();
 
 const loadPhase = ref<true | string>('Loading page...');
 
@@ -262,6 +264,11 @@ onMounted(async () => {
     const tree = await parse(targetCode.value);
     correctRoot.value = tree.rootNode;
     loadPhase.value = true;
+    if (!breakpoints.value.includes('m')) {
+      message.warning("It's recommended to play Codle on a larger screen.", {
+        duration: 8000,
+      });
+    }
   } catch (e) {
     loadPhase.value = `Error occurred: ${e}`;
   }
