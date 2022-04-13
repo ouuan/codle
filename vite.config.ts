@@ -31,7 +31,7 @@ export default defineConfig({
     generateSitemap(),
     viteCompression({
       algorithm: 'brotliCompress',
-      filter: /\.(js|map|json|css|html|wasm|txt)$/i,
+      filter: /\.(js|map|json|css|html|wasm|txt|xml)$/i,
     }),
     createHtmlPlugin({
       minify: false,
