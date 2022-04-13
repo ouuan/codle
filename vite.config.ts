@@ -1,4 +1,5 @@
-import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { defineConfig, splitVendorChunk } from 'vite';
+import { GetManualChunk } from 'rollup';
 import vue from '@vitejs/plugin-vue';
 import analyzer from 'rollup-plugin-analyzer';
 import { createHtmlPlugin } from 'vite-plugin-html';
@@ -6,12 +7,26 @@ import { beginTimestamp, puzzleInterval, host } from './config';
 import transformPuzzles from './src/vite/transformPuzzles';
 import generateSitemap from './src/vite/generateSitemap';
 
+const splitVendor = splitVendorChunk();
+
+const splitAlone = [
+  'codemirror',
+  'naive-ui',
+  'tree-sitter-cpp',
+  'vue-diff',
+] as const;
+
+const manualChunks: GetManualChunk = (id, api) => {
+  const alone = splitAlone.find((item) => id.includes(`/${item}@`));
+  if (alone) return alone;
+  return splitVendor(id, api);
+};
+
 export default defineConfig({
   plugins: [
     vue(),
     transformPuzzles(),
     generateSitemap(),
-    splitVendorChunkPlugin(),
     createHtmlPlugin({
       minify: false,
       entry: '/src/main.ts',
@@ -30,8 +45,10 @@ export default defineConfig({
   base: '',
   build: {
     target: 'es2016',
-    chunkSizeWarningLimit: 1000,
     sourcemap: true,
     minify: 'terser',
+    rollupOptions: {
+      manualChunks,
+    },
   },
 });
