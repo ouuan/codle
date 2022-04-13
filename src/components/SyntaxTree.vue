@@ -5,6 +5,7 @@
     :data="rootTreeOption ? [rootTreeOption] : []"
     :default-expanded-keys="defaultExpandedKeys"
     :render-label="renderLabel"
+    :render-switcher-icon="renderSwitcherIcon"
     :selectable="false"
     virtual-scroll
   />
@@ -33,6 +34,7 @@ import {
   isTreeOptionEx,
 } from '../types';
 import { rootTreeOption } from '../store/rootTreeOption';
+import renderSwitcherIcon from '../utils/renderSwitcherIcon';
 
 const props = defineProps<{
   code: string,

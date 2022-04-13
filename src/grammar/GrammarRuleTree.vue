@@ -2,6 +2,7 @@
   <n-tree
     :data="[root]"
     :selectable="false"
+    :render-switcher-icon="renderSwitcherIcon"
     block-line
     virtual-scroll
     class="tree"
@@ -18,6 +19,7 @@ import {
 } from 'naive-ui';
 
 import { GRAMMAR } from './grammar';
+import renderSwitcherIcon from '../utils/renderSwitcherIcon';
 
 const props = defineProps<{
   names: string[],
