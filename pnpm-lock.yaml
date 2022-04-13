@@ -34,6 +34,7 @@ specifiers:
   ts-exhaustive-check: ^1.0.0
   typescript: ^4.6.3
   vite: ^2.9.1
+  vite-plugin-compression: ^0.5.1
   vite-plugin-html: ^3.2.0
   vooks: ^0.2.12
   vue: ^3.2.31
@@ -81,6 +82,7 @@ devDependencies:
   tree-sitter-cli: 0.20.6
   typescript: 4.6.3
   vite: 2.9.1_sass@1.50.0
+  vite-plugin-compression: 0.5.1_vite@2.9.1
   vite-plugin-html: 3.2.0_vite@2.9.1
   vue-tsc: 0.33.9_typescript@4.6.3
 
@@ -2837,6 +2839,19 @@ packages:
   /vfonts/0.0.3:
     resolution: {integrity: sha512-nguyw8L6Un8eelg1vQ31vIU2ESxqid7EYmy8V+MDeMaHBqaRSkg3dTBToC1PR00D89UzS/SLkfYPnx0Wf23IQQ==}
     dev: false
+
+  /vite-plugin-compression/0.5.1_vite@2.9.1:
+    resolution: {integrity: sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==}
+    peerDependencies:
+      vite: '>=2.0.0'
+    dependencies:
+      chalk: 4.1.2
+      debug: 4.3.4
+      fs-extra: 10.0.1
+      vite: 2.9.1_sass@1.50.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /vite-plugin-html/3.2.0_vite@2.9.1:
     resolution: {integrity: sha512-2VLCeDiHmV/BqqNn5h2V+4280KRgQzCFN47cst3WiNK848klESPQnzuC3okH5XHtgwHH/6s1Ho/YV6yIO0pgoQ==}

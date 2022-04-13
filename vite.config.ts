@@ -3,6 +3,8 @@ import { GetManualChunk } from 'rollup';
 import vue from '@vitejs/plugin-vue';
 import analyzer from 'rollup-plugin-analyzer';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import viteCompression from 'vite-plugin-compression';
+
 import { beginTimestamp, puzzleInterval, host } from './config';
 import transformPuzzles from './src/vite/transformPuzzles';
 import generateSitemap from './src/vite/generateSitemap';
@@ -27,6 +29,10 @@ export default defineConfig({
     vue(),
     transformPuzzles(),
     generateSitemap(),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      filter: /\.(js|map|json|css|html|wasm|txt)$/i,
+    }),
     createHtmlPlugin({
       minify: false,
       entry: '/src/main.ts',
