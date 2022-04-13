@@ -114,7 +114,7 @@ import CodeEditor from './CodeEditor.vue';
 import GrammarRuleDialog from '../grammar/GrammarRuleDialog.vue';
 
 import { MarkRange, TreeOptionEx } from '../types';
-import { symbolChildren } from '../grammar/grammar';
+import { GRAMMAR, symbolChildren } from '../grammar/grammar';
 
 const props = defineProps<{
   option: TreeOptionEx,
@@ -179,11 +179,15 @@ function onModified(code: string) {
 }
 
 const symbolNames = computed((): string[] => {
-  if (props.option.node.parent === null) {
-    return [props.option.node.type];
+  const { node } = props.option;
+  if (GRAMMAR.extras?.find((extra) => extra.type === 'SYMBOL' && extra.name === props.option.node.type)) {
+    return [node.type];
   }
-  const path = [props.option.node.type];
-  for (let u = props.option.node; u.parent; u = u.parent) {
+  if (node.parent === null) {
+    return [node.type];
+  }
+  const path = [node.type];
+  for (let u = node; u.parent; u = u.parent) {
     path.push(u.parent.type);
   }
   let names = new Set<string>([path[path.length - 1]]);
