@@ -44,8 +44,8 @@
         </n-ul>
       </n-p>
       <syntax-tree-demo
-        target="int a, b;"
-        guess="double a = 0, b, c, d;"
+        target="int a, b = 0;"
+        guess="int x = 0, y = 0, z, w;"
       />
       <n-p>
         Since AST is a tree, the "correct position" needs more explanation.
