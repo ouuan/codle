@@ -75,7 +75,7 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
     case 'PATTERN':
       return {
         key,
-        prefix: () => h(NText, { type: 'info' }, () => RegExp(rule.value).toString()),
+        prefix: () => h(NText, { code: true }, () => RegExp(rule.value).toString()),
       };
     case 'REPEAT':
       return {
@@ -106,7 +106,11 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
     case 'STRING':
       return {
         key,
-        prefix: () => h(NText, { type: 'info' }, () => rule.value),
+        prefix: () => h(NText, { code: true }, () => {
+          const { value } = rule;
+          if (!value.includes('"') || value.includes("'")) return JSON.stringify(value);
+          return `'${JSON.stringify(value.replace(/"/g, "'")).replace(/'/g, '"').slice(1, -1)}'`;
+        }),
       };
     case 'SYMBOL':
       if (GRAMMAR.inline?.includes(rule.name)) {

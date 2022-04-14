@@ -74,8 +74,9 @@
         What's more, you can click on a node, either in the node type list or in the AST,
         to see the grammar structure of the corresponding node type.
         In the grammar structure, green nodes are node types in the AST,
-        blue nodes are strings or regex patterns,
-        and yellow nodes are "node types" which are not displayed in the AST.
+        yellow nodes are "node types" which are not displayed in the AST.
+        Strings are shown as <n-text code>"string"</n-text> or <n-text code>'string'</n-text>,
+        and regex patterns are shown as <n-text code>/pattern/</n-text>.
       </n-p>
       <n-p>
         It could be troublesome to edit a subtree of your code in the original code editor.
@@ -117,6 +118,7 @@ import {
   NUl,
   NP,
   NScrollbar,
+  NText,
 } from 'naive-ui';
 import { HelpCircle } from '@vicons/ionicons5';
 
