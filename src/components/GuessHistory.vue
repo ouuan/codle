@@ -114,7 +114,7 @@ import {
 import { rootTreeOption } from '../store/rootTreeOption';
 import { trackEvent } from '../plausible';
 
-const props = defineProps<{ correctRoot?: SyntaxNode }>();
+const props = defineProps<{ correctRoot: SyntaxNode | null }>();
 
 const id = ref(guesses.value.length);
 const code = computed(() => guesses.value[id.value - 1] ?? '');

@@ -36,10 +36,10 @@ import { rootTreeOption } from '../store/rootTreeOption';
 import { aliases } from '../grammar/grammar';
 
 const props = defineProps<{
-  correctRoot?: SyntaxNode,
+  correctRoot: SyntaxNode | null,
 }>();
 
-function calcTypeCount(root?: SyntaxNode) {
+function calcTypeCount(root?: SyntaxNode | null) {
   const count = new Map<string, number>();
   if (!root) return count;
   function dfs(node: SyntaxNode): void {

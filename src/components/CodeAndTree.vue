@@ -15,7 +15,8 @@
     </n-gi>
     <n-gi>
       <syntax-tree
-        :code="code"
+        global-root-tree-option
+        :guess-root="guessRoot"
         :correct-root="correctRoot"
         :mark-range="editor?.markRange"
         class="editor-tree-height"
@@ -28,16 +29,24 @@
 import { ref } from 'vue';
 import { NGrid, NGi } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
+import { computedAsync } from '@vueuse/core';
 
 import CodeEditor from './CodeEditor.vue';
 import SyntaxTree from './SyntaxTree.vue';
 
-defineProps<{
-  correctRoot?: SyntaxNode,
+import { parse } from '../parse';
+
+const props = defineProps<{
+  correctRoot: SyntaxNode | null,
   code: string,
 }>();
 
 const editor = ref<InstanceType<typeof CodeEditor>>();
+
+const guessRoot = computedAsync(async () => {
+  const tree = await parse(props.code);
+  return tree.rootNode;
+}, null);
 </script>
 
 <style scoped>

@@ -18,14 +18,14 @@
         This game is based on the idea of another famous game
         <n-a href="https://www.nytimes.com/games/wordle/index.html">Wordle</n-a>,
         so the rule will be easier to understand if you are already familiar with Wordle.
-        This game would also require some basic knowledge of
-        <n-a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</n-a>
-        which is the basic building block of this game.
+        This game would also require some basic knowledge about the C++ programming language and its
+        <n-a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</n-a>,
+        but it's not required to master them very well.
       </n-p>
       <n-p>
-        In this game, you need to guess the AST of the <strong>target code</strong>
-        which is written in C++.
-        You only need to guess the <strong>type</strong> of each node in the AST,
+        In this game,
+        you need to guess the AST of a piece of C++ code called the <i>target code</i>.
+        You only need to find out the <i>type</i> of each node in the AST,
         so the actual content of the code does <strong>not</strong> matter.
         In each guess, you need to provide a piece of code,
         and you'll get the difference between your code's AST and the target code's AST as a hint.
@@ -33,71 +33,111 @@
       <n-p>
         The hint will be in a format similar to Wordle's hint:
         <n-ul>
-          <n-li>Green node means both node type and position are correct.</n-li>
-          <n-li>Yellow node means node type is correct but the position is incorrect.</n-li>
+          <n-li>
+            <n-text type="success">Green node</n-text>
+            means both node type and position are correct.
+          </n-li>
+          <n-li>
+            <n-text type="warning">Yellow node</n-text>
+            means node type is correct but the position is incorrect.
+          </n-li>
         </n-ul>
       </n-p>
+      <syntax-tree-demo
+        target="int a, b;"
+        guess="double a = 0, b, c, d;"
+      />
       <n-p>
         Since AST is a tree, the "correct position" needs more explanation.
-        In short, a node is neither green nor yellow if its parent is not green,
-        otherwise, the "correct position" means the correct position within its siblings.
-        Particularly, the root node is always green.
-        When a green node has more than one misplaced type-correct child with the same type,
-        and the number of such children is greater than the correct one,
-        only the first correct number of such children will be yellow.
-      </n-p>
-      <n-p>
-        So what is the <i>type</i> of an AST node?
-        The answer is complicated, but you don't have to know it.
-        Just enter some random codes in the
-        <n-a href="https://tree-sitter.github.io/tree-sitter/playground">Syntax Tree Playground</n-a>
-        (remember to set the language to C++ first)
-        and you'll roughly know what node types look like.
-        You may also use this Playground as an assistant when solving the puzzle.
-        To help you identify each node,
-        the range of the corresponding code snippet within your code is displayed beside each node.
-        You can also hover on or click a node to view the corresponding code.
+        In short, a necessary condition for a node to be
+        <n-text
+          v-for="(c, index) of 'colored'"
+          :key="index"
+          :type="index % 2 ? 'warning' : 'success'"
+        >
+          {{ c }}
+        </n-text>
+        is to have a
+        <n-text type="success">green parent</n-text>,
+        except the root, which is always <n-text type="success">green</n-text>.
+        When this condition is satisfied,
+        "correct position" means the correct index within its siblings.
+        When a <n-text type="success">green node</n-text>
+        has more than one misplaced child with the same type,
+        only the first few of them will be <n-text type="warning">yellow</n-text>,
+        so that the number of
+        <n-text
+          v-for="(c, index) of 'colored'"
+          :key="index"
+          :type="index % 2 ? 'warning' : 'success'"
+        >
+          {{ c }}
+        </n-text>
+        children of a certain type doesn't exceed
+        the correct number of children of that type.
       </n-p>
       <n-p>
         In order to provide more information to you,
-        you'll also get the number of children of each green node.
+        you'll get the number of children
+        (e.g. <n-text type="success">(1/1)</n-text>, <n-text type="warning">(5/3)</n-text>)
+        of each <n-text type="success">green node</n-text>.
         When you have found a whole subtree,
-        there will be a "✅" or "☑️"
-        (depending on whether your code is the same as the target code in this subtree)
-        displayed besides every node in this subtree,
-        and you can click the node to view the target code of this subtree.
+        there will be a "✅" or "☑️",
+        depending on whether your code is exactly the same as the target code in this subtree,
+        displayed beside every node in this subtree,
+        and you can click a "☑️" node to view the corresponding target code.
+        In order to narrow down your options of node types, a list of all node types appeared
+        at least once in the target code and the number of occurrences of each type will be given.
+        However, only one type will be revealed after every single guess, by design.
       </n-p>
       <n-p>
-        In order to narrow down your options of node types, a list of all node types
-        in the target code and the number of nodes of each type will be given.
-        However, only one type will be revealed after each guess.
-        What's more, you can click on a node, either in the node type list or in the AST,
+        So what is the <i>type</i> of an AST node?
+        The answer is complicated, but you don't have to know every single node type.
+        Just try a few guesses and you'll roughly know what they look like.
+        You can hover on (in the real game, not in the demo above)
+        or click a node to view the corresponding code.
+        What's more, you can click on a
+        <grammar-rule-dialog
+          name="translation_unit"
+          :symbols="['translation_unit']"
+          type="info"
+        >
+          node
+        </grammar-rule-dialog>
+        , either in the node type list or in the AST,
         to see the grammar structure of the corresponding node type.
-        In the grammar structure, green nodes are node types in the AST,
-        yellow nodes are "node types" which are not displayed in the AST.
+        In the grammar structure, <n-text type="success">green nodes</n-text>
+        are node types displayed in the AST,
+        <n-text type="warning">yellow nodes</n-text>
+        are "node types" that are not displayed in the AST.
         Strings are shown as <n-text code>"string"</n-text> or <n-text code>'string'</n-text>,
         and regex patterns are shown as <n-text code>/pattern/</n-text>.
+        You may also utilize the
+        <n-a href="https://tree-sitter.github.io/tree-sitter/playground">Tree-sitter Playground</n-a>
+        which can show you the AST of a piece of code.
       </n-p>
       <n-p>
-        It could be troublesome to edit a subtree of your code in the original code editor.
+        It could be troublesome to focus on editing a subtree of your code in the main code editor.
         To make it easier, you can click an incorrect node to modify the code within that subtree.
         When editing is done, you can click the "Apply target code &amp; modification" button,
         and then all your modifications plus the target codes of "☑️" nodes will be applied.
-        Please note that modifications in parent nodes will override modifications in the children.
+        Please note that modifications in parent nodes will override modifications in the children,
+        and applying subtree modifications will override modifications in the main code editor.
       </n-p>
       <n-p>
         Initial guesses need some clue, so in each puzzle,
-        there will be an associated algorithm (coding) problem.
+        there will be an associated algorithm or coding problem.
         The target code is guaranteed to be a valid solution to the problem,
         but your code doesn't need to solve the problem — it even doesn't need to compile,
         as the only thing that matters is the AST.
-        The problem will not be hard, since the goal is not to solve it.
+        The problem won't be hard, since the goal is not to solve it.
       </n-p>
       <n-p>
         A piece of code is much more complicated than a single word,
         so Codle is designed to be a weekly game instead of a daily game.
         That's to say, there will be only one puzzle each week,
-        which will get refreshed at UTC 0:00 every Sunday.
+        which will get refreshed at <strong>UTC 0:00</strong> every <strong>Sunday</strong>.
+        Remember to come back and solve new puzzles!
       </n-p>
       <n-p>
         You may not have fully understood the rules yet, but you can start playing now.
@@ -123,6 +163,8 @@ import {
 import { HelpCircle } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
+import GrammarRuleDialog from '../grammar/GrammarRuleDialog.vue';
+import SyntaxTreeDemo from './SyntaxTreeDemo.vue';
 
 import { showGameRule } from '../store/localStorage';
 </script>

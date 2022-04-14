@@ -214,7 +214,7 @@ int main()
     return 0;
 }`);
 
-const correctRoot = ref<SyntaxNode>();
+const correctRoot = ref<SyntaxNode | null>(null);
 
 const editor = ref();
 

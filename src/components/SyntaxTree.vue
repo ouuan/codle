@@ -26,21 +26,23 @@ import { SyntaxNode } from 'web-tree-sitter';
 
 import SyntaxTreeNode from './SyntaxTreeNode.vue';
 
-import { parse } from '../parse';
 import {
   CorrectStatus,
   MarkRange,
   TreeOptionEx,
   isTreeOptionEx,
 } from '../types';
-import { rootTreeOption } from '../store/rootTreeOption';
+import { rootTreeOption as globalRootTreeOption } from '../store/rootTreeOption';
 import renderSwitcherIcon from '../utils/renderSwitcherIcon';
 
 const props = defineProps<{
-  code: string,
-  correctRoot?: SyntaxNode,
+  guessRoot: SyntaxNode | null,
+  correctRoot: SyntaxNode | null,
   markRange?: MarkRange,
+  globalRootTreeOption: boolean,
 }>();
+
+const rootTreeOption = props.globalRootTreeOption ? globalRootTreeOption : ref<TreeOptionEx>();
 
 const defaultExpandedKeys = ref<number[]>([]);
 
@@ -119,10 +121,9 @@ function generateTreeOption(
 
 const renderCount = ref(0);
 async function update() {
-  if (!props.correctRoot) return;
+  if (!props.correctRoot || !props.guessRoot) return;
   defaultExpandedKeys.value = [];
-  const tree = await parse(props.code);
-  rootTreeOption.value = generateTreeOption(tree.rootNode, 'correct', props.correctRoot, 0);
+  rootTreeOption.value = generateTreeOption(props.guessRoot, 'correct', props.correctRoot, 0);
   renderCount.value += 1;
 }
 onMounted(update);
