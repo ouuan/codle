@@ -34,7 +34,7 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
   if (rule === undefined) {
     return {
       key,
-      prefix: () => h(NText, { type: 'error' }, () => ['Error: Symbol not found']),
+      prefix: () => h(NText, { type: 'error' }, () => 'Error: Symbol not found'),
     };
   }
   switch (rule.type) {
@@ -43,7 +43,7 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
         key,
         prefix: () => h(NText, {
           type: !aliased && rule.named ? 'success' : 'warning',
-        }, () => [rule.value]),
+        }, () => rule.value),
         children: [grammarTreeOption(rule.content, `${key}-0`, true)],
       };
     case 'BLANK':
@@ -75,7 +75,7 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
     case 'PATTERN':
       return {
         key,
-        prefix: () => h(NText, { type: 'info' }, () => [RegExp(rule.value).toString()]),
+        prefix: () => h(NText, { type: 'info' }, () => RegExp(rule.value).toString()),
       };
     case 'REPEAT':
       return {
@@ -106,7 +106,7 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
     case 'STRING':
       return {
         key,
-        prefix: () => h(NText, { type: 'info' }, () => [rule.value]),
+        prefix: () => h(NText, { type: 'info' }, () => rule.value),
       };
     case 'SYMBOL':
       if (GRAMMAR.inline?.includes(rule.name)) {
@@ -115,7 +115,7 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
       if (GRAMMAR.externals?.find((external) => external.type === 'SYMBOL' && external.name === rule.name)) {
         return {
           key,
-          prefix: () => h(NText, { type: aliased ? 'warning' : 'success' }, () => [rule.name]),
+          prefix: () => h(NText, { type: aliased ? 'warning' : 'success' }, () => rule.name),
         };
       }
       return {
@@ -125,7 +125,7 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
           type: aliased || rule.name[0] === '_' ? 'warning' : 'success',
           secondary: true,
           onClick: () => emit('goto-child', rule.name),
-        }, () => [rule.name]),
+        }, () => rule.name),
       };
     default:
       return grammarTreeOption(rule.content, `${key}-0`, aliased);
