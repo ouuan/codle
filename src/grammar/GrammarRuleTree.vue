@@ -56,7 +56,15 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
       return {
         key,
         label: 'One of',
-        children: rule.members.map((child, index) => grammarTreeOption(child, `${key}-${index}`, aliased)),
+        children: rule.members.reduce((children: TreeOption[], child, index) => {
+          const childOption = grammarTreeOption(child, `${key}-${index}`, aliased);
+          if (childOption.label === 'One of') {
+            children.push(...(childOption.children ?? []));
+          } else {
+            children.push(childOption);
+          }
+          return children;
+        }, []),
       };
     case 'FIELD':
       return {
@@ -85,7 +93,15 @@ function grammarTreeOption(rule: Rule | undefined, key: string, aliased: boolean
       return {
         key,
         label: 'All of',
-        children: rule.members.map((child, index) => grammarTreeOption(child, `${key}-${index}`, aliased)),
+        children: rule.members.reduce((children: TreeOption[], child, index) => {
+          const childOption = grammarTreeOption(child, `${key}-${index}`, aliased);
+          if (childOption.label === 'All of') {
+            children.push(...(childOption.children ?? []));
+          } else {
+            children.push(childOption);
+          }
+          return children;
+        }, []),
       };
     case 'STRING':
       return {
