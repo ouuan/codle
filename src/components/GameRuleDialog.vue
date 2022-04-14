@@ -4,13 +4,13 @@
   <dialog-with-icon-button
     title="Game Rule"
     :default-show="showGameRule"
-    dialog-style="max-width: calc(min(90vw, 700px));"
+    dialog-style="max-width: calc(min(90vw, 750px));"
     @close="showGameRule = false"
   >
     <template #icon>
       <help-circle />
     </template>
-    <n-scrollbar style="max-height: 70vh;">
+    <n-scrollbar style="max-height: 80vh;">
       <n-p>
         Welcome to Codle!
       </n-p>
