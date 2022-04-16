@@ -23,7 +23,7 @@
   "homepage": "https://github.com/ouuan/codle#readme",
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
-    "@vueuse/core": "^8.2.5",
+    "@vueuse/core": "^8.2.6",
     "codemirror": "^5.65.2",
     "codemirror-editor-vue3": "^2.0.6",
     "dompurify": "^2.3.6",
@@ -33,7 +33,7 @@
     "tree-sitter-cpp": "^0.20.0",
     "ts-exhaustive-check": "^1.0.0",
     "vooks": "^0.2.12",
-    "vue": "^3.2.32",
+    "vue": "^3.2.33",
     "vue-diff": "^1.1.4",
     "web-tree-sitter": "^0.20.5"
   },
@@ -54,15 +54,15 @@
     "glob": "^8.0.1",
     "glob-promise": "^4.2.2",
     "jsdom": "^19.0.0",
-    "rollup": "^2.70.1",
+    "rollup": "^2.70.2",
     "rollup-plugin-analyzer": "^4.0.0",
     "sass": "^1.50.0",
     "sitemap": "^7.1.1",
     "tree-sitter-cli": "^0.20.6",
     "typescript": "^4.6.3",
-    "vite": "^2.9.2",
+    "vite": "^2.9.5",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.0",
-    "vue-tsc": "^0.34.6"
+    "vue-tsc": "^0.34.7"
   }
 }
