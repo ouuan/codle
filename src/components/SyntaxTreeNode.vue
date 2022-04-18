@@ -36,6 +36,7 @@
     <template #header>
       {{ option.node.type }} {{ rangeText }}
       <grammar-rule-dialog
+        v-if="option.node.type !== 'ERROR'"
         :name="option.node.type"
         :symbols="symbolNames"
         type="info"
