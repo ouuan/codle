@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "sourceMap": true,
+    "jsx": "preserve",
     "baseUrl": ".",
     "types": [
       "node",

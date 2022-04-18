@@ -144,6 +144,7 @@
 <script setup lang="ts">
 import {
   computed,
+  h,
   onMounted,
   ref,
 } from 'vue';
@@ -170,6 +171,7 @@ import { SyntaxNode } from 'web-tree-sitter';
 import { useBreakpoints } from 'vooks';
 
 import AboutDialog from './AboutDialog.vue';
+import ApplyModificationConfirmation from './ApplyModificationConfirmation.vue';
 import CodeEditor from './CodeEditor.vue';
 import DiffDialog from './DiffDialog.vue';
 import FeedDialog from './FeedDialog.vue';
@@ -314,19 +316,30 @@ function submitGuess() {
 }
 
 function onApplyTargeCodeAndModification() {
-  if (editorReadonly.value || code.value === guesses.value[guesses.value.length - 1]) {
-    code.value = applyTargeCodeAndModification();
-  } else {
-    dialog.warning({
-      title: 'Apply target code & modification',
-      content: 'Modifications were made in the main code editor. Override those modifications with target code & subtree modifications?',
-      positiveText: 'Override',
-      negativeText: 'Cancel',
-      onPositiveClick() {
-        code.value = applyTargeCodeAndModification();
-      },
-    });
+  const applied = applyTargeCodeAndModification();
+  if (code.value === applied) {
+    message.info('No change was made');
+    return;
   }
+  const safeToApply = editorReadonly.value
+    || code.value === guesses.value[guesses.value.length - 1];
+  dialog[safeToApply ? 'info' : 'warning']({
+    title: 'Apply target code & modification',
+    content: () => h(ApplyModificationConfirmation, {
+      lastGuess: guesses.value[guesses.value.length - 1],
+      current: code.value,
+      applied,
+      safeToApply,
+    }),
+    positiveText: safeToApply ? 'Apply' : 'Override',
+    negativeText: 'Cancel',
+    onPositiveClick() {
+      code.value = applied;
+    },
+    style: {
+      width: 'calc(min(80vw, 800px))',
+    },
+  });
 }
 
 function giveUp() {

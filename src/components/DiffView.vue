@@ -1,5 +1,8 @@
 <template>
-  <span v-if="prev === current">No change was made</span>
+  <n-empty
+    v-if="prev === current"
+    description="No difference"
+  />
   <n-scrollbar
     v-else
     class="diff-view-scrollbar"
@@ -17,6 +20,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import {
+  NEmpty,
   NScrollbar,
   useOsTheme,
 } from 'naive-ui';
@@ -38,7 +42,7 @@ const diffMode = computed(() => (breakPoints.value.includes('m') ? 'split' : 'un
 
 <style>
 .diff-view-scrollbar {
-  max-height: 70vh;
+  max-height: 60vh;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
