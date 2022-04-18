@@ -20,7 +20,7 @@
         so the rule will be easier to understand if you are already familiar with Wordle.
         This game would also require some basic knowledge about the C++ programming language and its
         <n-a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</n-a>,
-        but it's not required to master them very well.
+        but you don't need to master them very well.
       </n-p>
       <n-p>
         In this game,
