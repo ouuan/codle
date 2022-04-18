@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/singleline-html-element-content-newline -->
-
 <template>
   <dialog-with-icon-button title="About">
     <template #icon>
@@ -7,23 +5,47 @@
     </template>
     <n-p>
       Codle is a game developed by
-      <n-a href="https://github.com/ouuan">ouuan</n-a>.
+      <external-link
+        href="https://github.com/ouuan"
+        title="ouuan"
+      />.
       In this game, you need to guess the Abstract Syntax Tree (AST)
       of a piece of code called "target code".
       It's like
-      <n-a href="https://www.nytimes.com/games/wordle/index.html">Wordle</n-a>
+      <external-link
+        href="https://www.nytimes.com/games/wordle/index.html"
+        title="Wordle"
+      />
       with AST nodes as "letters".
     </n-p>
     <n-p>
       It's open-sourced at
-      <n-a href="https://github.com/ouuan/codle">GitHub</n-a>
+      <external-link
+        href="https://github.com/ouuan/codle"
+        title="GitHub"
+      />
       under the
-      <n-a href="/LICENSE">AGPL-3.0</n-a>
+      <external-link
+        href="/LICENSE"
+        title="AGPL-3.0"
+      />
       license. It makes use of
-      <n-a href="https://tree-sitter.github.io/tree-sitter/">Tree-sitter</n-a>,
-      <n-a href="https://v3.vuejs.org/">Vue 3</n-a>,
-      <n-a href="https://www.naiveui.com/">Naive UI</n-a>,
-      <n-a href="https://codemirror.net/">CodeMirror</n-a>
+      <external-link
+        href="https://tree-sitter.github.io/tree-sitter/"
+        title="Tree-sitter"
+      />,
+      <external-link
+        href="https://v3.vuejs.org/"
+        title="Vue 3"
+      />,
+      <external-link
+        href="https://www.naiveui.com/"
+        title="Naive UI"
+      />,
+      <external-link
+        href="https://codemirror.net/"
+        title="CodeMirror"
+      />
       and many other dependencies which can be found in the source code.
     </n-p>
     <n-p>
@@ -32,20 +54,27 @@
     </n-p>
     <n-p>
       If you have any suggestions, please open an
-      <n-a href="https://github.com/ouuan/codle/issues">issue</n-a>
+      <external-link
+        href="https://github.com/ouuan/codle/issues"
+        title="issue"
+      />
       on GitHub.
     </n-p>
     <n-p>
       If you enjoy this game, consider
-      <n-a href="https://ouuan.github.io/about/#donate">buy me a cup of coffee :)</n-a>
+      <external-link
+        href="https://ouuan.github.io/about/#donate"
+        title="buy me a cup of coffee :)"
+      />
       (currently only accepting WeChat and AliPay)
     </n-p>
   </dialog-with-icon-button>
 </template>
 
 <script setup lang="ts">
-import { NA, NP } from 'naive-ui';
+import { NP } from 'naive-ui';
 import { InformationCircle } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
+import ExternalLink from './ExternalLink.vue';
 </script>

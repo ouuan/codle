@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/singleline-html-element-content-newline -->
-
 <template>
   <dialog-with-icon-button title="Plausible Analytics">
     <template #icon>
@@ -7,14 +5,20 @@
     </template>
     <n-p>
       Codle uses a self-hosted
-      <n-a href="https://plausible.io">Plausible Analytics</n-a>
+      <external-link
+        href="https://plausible.io"
+        title="Plausible Analytics"
+      />
       instance to track page views and game success / give up / guess count information
       <strong>without</strong>
       any personal data.
     </n-p>
     <n-p>
       Plausible Analytics is
-      <n-a href="https://plausible.io/privacy-focused-web-analytics">privacy-focused</n-a>
+      <external-link
+        href="https://plausible.io/privacy-focused-web-analytics"
+        title="privacy-focused"
+      />
       and compliant with privacy regulations such as GDPR.
     </n-p>
     <n-p>
@@ -42,10 +46,11 @@
 </template>
 
 <script setup lang="ts">
-import { NA, NP, NSwitch } from 'naive-ui';
+import { NP, NSwitch } from 'naive-ui';
 import { Analytics as AnalyticsIcon } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
+import ExternalLink from './ExternalLink.vue';
 
 import { plausibleTracked } from '../plausible';
 </script>

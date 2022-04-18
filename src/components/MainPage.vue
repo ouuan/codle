@@ -201,7 +201,6 @@ import {
 import { applyTargeCodeAndModification } from '../store/rootTreeOption';
 import { initParser, parse } from '../parse';
 import {
-  enableAutoOutboundTracking,
   trackEvent,
   trackPageview,
 } from '../plausible';
@@ -253,7 +252,6 @@ if (!wasmSupported) {
 onMounted(async () => {
   try {
     trackPageview();
-    enableAutoOutboundTracking();
     loadPhase.value = 'Loading puzzle...';
     await updatePuzzle(dialog);
     if (targetCode.value === '') return;

@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/singleline-html-element-content-newline -->
-
 <template>
   <dialog-with-icon-button
     title="Game Rule"
@@ -16,10 +14,16 @@
       </n-p>
       <n-p>
         This game is based on the idea of another famous game
-        <n-a href="https://www.nytimes.com/games/wordle/index.html">Wordle</n-a>,
+        <external-link
+          href="https://www.nytimes.com/games/wordle/index.html"
+          title="Wordle"
+        />,
         so the rule will be easier to understand if you are already familiar with Wordle.
         This game would also require some basic knowledge about the C++ programming language and its
-        <n-a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</n-a>,
+        <external-link
+          href="https://en.wikipedia.org/wiki/Abstract_syntax_tree"
+          title="Abstract Syntax Tree (AST)"
+        />,
         but you don't need to master them very well.
       </n-p>
       <n-p>
@@ -34,11 +38,15 @@
         The hint will be in a format similar to Wordle's hint:
         <n-ul>
           <n-li>
-            <n-text type="success">Green node</n-text>
+            <n-text type="success">
+              Green node
+            </n-text>
             means both node type and position are correct.
           </n-li>
           <n-li>
-            <n-text type="warning">Yellow node</n-text>
+            <n-text type="warning">
+              Yellow node
+            </n-text>
             means node type is correct but the position is incorrect.
           </n-li>
         </n-ul>
@@ -58,13 +66,24 @@
           {{ c }}
         </n-text>
         is to have a
-        <n-text type="success">green parent</n-text>,
-        except the root, which is always <n-text type="success">green</n-text>.
+        <n-text type="success">
+          green parent
+        </n-text>,
+        except the root, which is always
+        <n-text type="success">
+          green
+        </n-text>.
         When this condition is satisfied,
         "correct position" means the correct index within its siblings.
-        When a <n-text type="success">green node</n-text>
+        When a
+        <n-text type="success">
+          green node
+        </n-text>
         has more than one misplaced child with the same type,
-        only the first few of them will be <n-text type="warning">yellow</n-text>,
+        only the first few of them will be
+        <n-text type="warning">
+          yellow
+        </n-text>,
         so that the number of
         <n-text
           v-for="(c, index) of 'colored'"
@@ -79,8 +98,17 @@
       <n-p>
         In order to provide more information to you,
         you'll get the number of children
-        (e.g. <n-text type="success">(1/1)</n-text>, <n-text type="warning">(5/3)</n-text>)
-        of each <n-text type="success">green node</n-text>.
+        (e.g.
+        <n-text type="success">
+          (1/1)
+        </n-text>,
+        <n-text type="warning">
+          (5/3)
+        </n-text>)
+        of each
+        <n-text type="success">
+          green node
+        </n-text>.
         When you have found a whole subtree,
         there will be a "✅" or "☑️",
         depending on whether your code is exactly the same as the target code in this subtree,
@@ -106,14 +134,32 @@
         </grammar-rule-dialog>
         , either in the node type list or in the AST,
         to see the grammar structure of the corresponding node type.
-        In the grammar structure, <n-text type="success">green nodes</n-text>
+        In the grammar structure,
+        <n-text type="success">
+          green nodes
+        </n-text>
         are node types displayed in the AST,
-        <n-text type="warning">yellow nodes</n-text>
+        <n-text type="warning">
+          yellow nodes
+        </n-text>
         are "node types" that are not displayed in the AST.
-        Strings are shown as <n-text code>"string"</n-text> or <n-text code>'string'</n-text>,
-        and regex patterns are shown as <n-text code>/pattern/</n-text>.
+        Strings are shown as
+        <n-text code>
+          "string"
+        </n-text>
+        or
+        <n-text code>
+          'string'
+        </n-text>,
+        and regex patterns are shown as
+        <n-text code>
+          /pattern/
+        </n-text>.
         You may also utilize the
-        <n-a href="https://tree-sitter.github.io/tree-sitter/playground">Tree-sitter Playground</n-a>
+        <external-link
+          href="https://tree-sitter.github.io/tree-sitter/playground"
+          title="Tree-sitter Playground"
+        />
         which can show you the AST of a piece of code.
       </n-p>
       <n-p>
@@ -153,7 +199,6 @@
 
 <script setup lang="ts">
 import {
-  NA,
   NLi,
   NUl,
   NP,
@@ -163,6 +208,7 @@ import {
 import { HelpCircle } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
+import ExternalLink from './ExternalLink.vue';
 import GrammarRuleDialog from '../grammar/GrammarRuleDialog.vue';
 import SyntaxTreeDemo from './SyntaxTreeDemo.vue';
 

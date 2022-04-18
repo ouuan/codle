@@ -8,30 +8,25 @@
     </n-p>
     <n-ul>
       <n-li>
-        <n-a
-          href="index.xml"
-          type="application/rss+xml"
-        >
-          RSS 2.0
-        </n-a>
+        <external-link
+          href="/index.xml"
+          title="RSS"
+        />
       </n-li>
       <n-li>
-        <n-a
-          href="atom.xml"
-          type="application/atom+xml"
-        >
-          Atom
-        </n-a>
+        <external-link
+          href="/atom.xml"
+          title="Atom"
+        />
       </n-li>
     </n-ul>
   </dialog-with-icon-button>
 </template>
 
 <script setup lang="ts">
-import {
-  NA, NLi, NP, NUl,
-} from 'naive-ui';
+import { NLi, NP, NUl } from 'naive-ui';
 import { LogoRss } from '@vicons/ionicons5';
 
 import DialogWithIconButton from './DialogWithIconButton.vue';
+import ExternalLink from './ExternalLink.vue';
 </script>

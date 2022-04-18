@@ -5,7 +5,6 @@ import { host, plausibleHost } from '../config';
 const {
   trackEvent: event,
   trackPageview: pageView,
-  enableAutoOutboundTracking: outBound,
 } = Plausible({
   domain: host,
   apiHost: plausibleHost,
@@ -24,7 +23,6 @@ function checkHost<T extends(...args: never[]) => void>(fn: T) {
 
 export const trackEvent = checkHost(event);
 export const trackPageview = checkHost(pageView);
-export const enableAutoOutboundTracking = checkHost(outBound);
 
 export const plausibleTracked = ref<boolean>(localStorage.getItem('plausible_ignore') !== 'true');
 watch(plausibleTracked, (tracked) => {

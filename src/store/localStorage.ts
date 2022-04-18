@@ -6,13 +6,13 @@ import {
   computed,
 } from 'vue';
 import {
-  NA,
   NP,
   useDialog,
   useOsTheme,
 } from 'naive-ui';
 import DOMPurify from 'dompurify';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
+import ExternalLink from '../components/ExternalLink.vue';
 import { beginTimestamp, puzzleInterval } from '../../config';
 
 const KEY_PREFIX = 'codle_';
@@ -163,7 +163,10 @@ export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
         content: () => h(NP, {}, {
           default: () => [
             "Inconsistent statistics data was detected. It's likely to be caused by a known bug. Please read ",
-            h(NA, { href: 'https://github.com/ouuan/codle/discussions/3' }, () => 'the announcement'),
+            h(ExternalLink, {
+              href: 'https://github.com/ouuan/codle/discussions/3',
+              title: 'the announcement',
+            }),
             ' for more information. If you think the announcement is irrelevant, please open an issue/discussion on GitHub.',
           ],
         }),

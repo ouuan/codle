@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/singleline-html-element-content-newline -->
-
 <template>
   <n-alert
     v-if="plausibleTracked && !surveySubmitted"
@@ -53,7 +51,10 @@
             #feedback
           >
             Please consider opening a
-            <n-a href="https://github.com/ouuan/codle/discussions">Discussion</n-a>
+            <external-link
+              href="https://github.com/ouuan/codle/discussions"
+              title="Discussion"
+            />
             on GitHub
           </template>
           <n-input
@@ -81,7 +82,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import {
-  NA,
   NAlert,
   NButton,
   NForm,
@@ -94,6 +94,8 @@ import {
   NSlider,
   useMessage,
 } from 'naive-ui';
+
+import ExternalLink from './ExternalLink.vue';
 
 import {
   puzzleNumber,
