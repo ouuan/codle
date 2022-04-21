@@ -42,7 +42,10 @@
               type="error"
               title="Error loading puzzle"
             >
-              {{ error }}
+              <n-p>{{ error }}</n-p>
+              <n-button @click="loadPuzzle">
+                Try again
+              </n-button>
             </n-alert>
             <n-space
               v-else-if="loading"
@@ -88,7 +91,9 @@ import {
 } from 'vue';
 import {
   NAlert,
+  NButton,
   NCard,
+  NP,
   NPagination,
   NScrollbar,
   NSpin,
