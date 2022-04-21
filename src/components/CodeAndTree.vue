@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<{
   globalRootTreeOption: boolean,
   correctRoot: SyntaxNode | null,
   code: string,
-  maxHeight: string,
+  maxHeight?: string,
 }>(), {
   maxHeight: '60vh',
 });

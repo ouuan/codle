@@ -16,6 +16,7 @@
 import {
   computed,
   nextTick,
+  reactive,
   ref,
   toRef,
   watch,
@@ -23,6 +24,7 @@ import {
 import { useMessage, useOsTheme, useThemeVars } from 'naive-ui';
 import CodeMirror, { CmComponentRef } from 'codemirror-editor-vue3';
 import { Editor, EditorConfiguration, Position } from 'codemirror';
+import { useElementSize, watchThrottled } from '@vueuse/core';
 
 import 'codemirror/mode/clike/clike.js';
 import 'codemirror/theme/gruvbox-dark.css';
@@ -76,9 +78,14 @@ watch(editorRef, () => {
     });
   }
 });
+
+function refreshEditor() {
+  nextTick(() => cmInstance.value?.refresh());
+}
+
 watch(() => props.readOnly, () => {
   forceUpdate.value += 1;
-  nextTick(() => cmInstance.value?.refresh());
+  refreshEditor();
 });
 
 const emit = defineEmits<{
@@ -99,7 +106,10 @@ defineExpose({ markRange });
 
 const themeFontSize = toRef(useThemeVars().value, 'fontSize');
 
-watch([codeFontFamilyFallback, themeFontSize], () => nextTick(() => cmInstance.value?.refresh()));
+watch([codeFontFamilyFallback, themeFontSize], refreshEditor);
+
+const size = reactive(useElementSize(editorRef as any));
+watchThrottled(size, refreshEditor, { throttle: 300 });
 </script>
 
 <style scoped>

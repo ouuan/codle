@@ -2,7 +2,6 @@
   <dialog-with-icon-button
     title="Previous Puzzles"
     dialog-style="width: calc(min(90vw, 840px)); height: calc(50vh + 260px);"
-    @open="onOpen"
   >
     <template #icon>
       <calendar-clear />
@@ -64,14 +63,14 @@
                   <problem-statement :statement="statement" />
                 </n-scrollbar>
               </div>
-              <code-and-tree
-                v-if="codeShowed"
-                v-show="tab === 'code'"
-                :global-root-tree-option="false"
-                :code="targetCode"
-                :correct-root="treeRoot"
-                :max-height="codeAndTreeHeight"
-              />
+              <div v-show="tab === 'code'">
+                <code-and-tree
+                  :global-root-tree-option="false"
+                  :code="targetCode"
+                  :correct-root="treeRoot"
+                  :max-height="codeAndTreeHeight"
+                />
+              </div>
             </div>
           </div>
         </n-space>
@@ -142,17 +141,6 @@ async function loadPuzzle() {
 onMounted(loadPuzzle);
 watch(id, loadPuzzle);
 
-// to fix CodeMirror layout problem
-const codeShowed = ref(false);
-watch(tab, (t) => {
-  if (t === 'code') {
-    codeShowed.value = true;
-  }
-});
-watch(id, () => {
-  codeShowed.value = tab.value === 'code';
-});
-
 const breakpoints = useBreakpoints();
 const timeType = computed(() => (breakpoints.value.includes('m') ? 'datetime' : 'date'));
 const codeAndTreeHeight = computed(() => `calc(${breakpoints.value.includes('m') ? '50vh' : '25vh'} - 3px)`);
@@ -164,11 +152,6 @@ const treeRoot = computedAsync(async () => {
   const tree = await parse(targetCode.value);
   return tree.rootNode;
 }, null);
-
-function onOpen() {
-  tab.value = 'statement';
-  codeShowed.value = false;
-}
 </script>
 
 <style scoped>
