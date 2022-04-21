@@ -12,10 +12,12 @@ import glob from 'glob-promise';
 import { Plugin } from 'vite';
 import { JSDOM } from 'jsdom';
 import createDOMPurify from 'dompurify';
+import MarkdownIt from 'markdown-it';
 import { beginTimestamp, puzzleInterval, host } from '../../config';
 
 const { window } = new JSDOM('');
 const { sanitize } = createDOMPurify(window as any as Window);
+const md = new MarkdownIt('commonmark');
 
 async function clear() {
   await Promise.all(['statement', 'targetCode'].map(async (dir) => {
@@ -47,11 +49,12 @@ async function transformCodes() {
 }
 
 async function transformStatements(items: FeedItem[]) {
-  const matches = await glob('puzzles/*.html');
+  const matches = await glob('puzzles/*.md');
   return Promise.all(matches.map(async (path) => {
     const buffer = await readFile(path);
-    const content = sanitize(buffer.toString());
-    const base = basename(path, '.html');
+    const html = md.render(buffer.toString());
+    const content = sanitize(html);
+    const base = basename(path, '.md');
     const date = dateForBase(base);
     if (!datePublished(date)) return;
     await writeFile(`public/statement/${base}.html`, content);
