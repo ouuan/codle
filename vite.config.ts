@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import analyzer from 'rollup-plugin-analyzer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import viteCompression from 'vite-plugin-compression';
+import viteRestart from 'vite-plugin-restart';
 
 import { beginTimestamp, puzzleInterval, host } from './config';
 import transformPuzzles from './src/vite/transformPuzzles';
@@ -29,6 +30,11 @@ export default defineConfig({
     vue(),
     transformPuzzles(),
     generateSitemap(),
+    viteRestart({
+      restart: [
+        'puzzles/*',
+      ],
+    }),
     viteCompression({
       algorithm: 'brotliCompress',
       filter: /\.(js|map|json|css|html|wasm|txt|xml)$/i,

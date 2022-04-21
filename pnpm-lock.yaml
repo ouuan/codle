@@ -38,6 +38,7 @@ specifiers:
   vite: ^2.9.5
   vite-plugin-compression: ^0.5.1
   vite-plugin-html: ^3.2.0
+  vite-plugin-restart: ^0.1.1
   vooks: ^0.2.12
   vue: ^3.2.33
   vue-diff: ^1.1.4
@@ -88,6 +89,7 @@ devDependencies:
   vite: 2.9.5_sass@1.50.0
   vite-plugin-compression: 0.5.1_vite@2.9.5
   vite-plugin-html: 3.2.0_vite@2.9.5
+  vite-plugin-restart: 0.1.1_vite@2.9.5
   vue-tsc: 0.34.7_typescript@4.6.3
 
 packages:
@@ -2948,6 +2950,15 @@ packages:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.3.3
       pathe: 0.2.0
+      vite: 2.9.5_sass@1.50.0
+    dev: true
+
+  /vite-plugin-restart/0.1.1_vite@2.9.5:
+    resolution: {integrity: sha512-kBxOqRrdbjVmC0PiT2KNXZogpgqA2epMkny//VjWnOS2k9NV/vXA7PYgf8/1lmBCZsC+iMj1C1ODuAR/9Sig4A==}
+    peerDependencies:
+      vite: ^2.0.0
+    dependencies:
+      micromatch: 4.0.5
       vite: 2.9.5_sass@1.50.0
     dev: true
 
