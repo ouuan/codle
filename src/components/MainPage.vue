@@ -19,6 +19,7 @@
           <about-dialog />
           <game-rule-dialog />
           <statistics-dialog />
+          <puzzle-history />
           <settings-dialog />
         </template>
       </n-page-header>
@@ -46,10 +47,7 @@
               <n-switch v-model:value="showStatement" />
             </n-form-item>
             <n-collapse-transition :show="showStatement">
-              <n-element
-                class="statement"
-                v-html="statement"
-              />
+              <problem-statement :statement="statement" />
             </n-collapse-transition>
           </n-space>
         </n-card>
@@ -153,7 +151,6 @@ import {
   NCard,
   NCollapseTransition,
   NCountdown,
-  NElement,
   NFormItem,
   NGi,
   NGrid,
@@ -180,6 +177,8 @@ import GuessHistory from './GuessHistory.vue';
 import GameRuleDialog from './GameRuleDialog.vue';
 import NodeTypeList from './NodeTypeList.vue';
 import PlausibleDialog from './PlausibleDialog.vue';
+import ProblemStatement from './ProblemStatement.vue';
+import PuzzleHistory from './PuzzleHistory.vue';
 import UserSurvey from './UserSurvey.vue';
 import StatisticsDialog from './StatisticsDialog.vue';
 import SettingsDialog from './SettingsDialog.vue';
@@ -375,13 +374,5 @@ const remainingTime = computed(() => A_WEEK - ((new Date().valueOf() - new Date(
 .page-header {
   margin-top: 12px;
   margin-bottom: 10px;
-}
-
-.statement:deep(a) {
-  cursor: pointer;
-  transition: color .3s var(--cubic-bezier-ease-in-out),
-    text-decoration-color .3s var(--cubic-bezier-ease-in-out);
-  text-decoration-color: var(--primary-color);
-  color: var(--primary-color);
 }
 </style>

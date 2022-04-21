@@ -10,9 +10,11 @@ import {
   useDialog,
   useOsTheme,
 } from 'naive-ui';
-import DOMPurify from 'dompurify';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
+
 import ExternalLink from '../components/ExternalLink.vue';
+
+import { fetchStatement, fetchTargetCodeEncoded, decodeTargetCode } from '../utils/getPuzzle';
 import { beginTimestamp, puzzleInterval } from '../../config';
 
 const KEY_PREFIX = 'codle_';
@@ -61,16 +63,12 @@ function isString(value: unknown): value is string {
 
 const targetCodeEncoded = ref<string>(getStored('targetCodeEncoded', '', isString));
 watchAndStore(targetCodeEncoded, 'targetCodeEncoded');
-async function getTargetCode(dialog: ReturnType<typeof useDialog>, newPuzzle: boolean) {
+async function getTargetCodeEncoded(dialog: ReturnType<typeof useDialog>, newPuzzle: boolean) {
   if (newPuzzle) {
     targetCodeEncoded.value = '';
   }
   try {
-    const response = await fetch(`/targetCode/${correctPuzzleNumber}.txt`);
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    targetCodeEncoded.value = await response.text();
+    targetCodeEncoded.value = await fetchTargetCodeEncoded(correctPuzzleNumber);
   } catch {
     if (newPuzzle) {
       dialog.error({
@@ -80,10 +78,7 @@ async function getTargetCode(dialog: ReturnType<typeof useDialog>, newPuzzle: bo
     }
   }
 }
-export const targetCode = computed(() => {
-  const base64Decoded = window.atob(targetCodeEncoded.value);
-  return decodeURIComponent(base64Decoded);
-});
+export const targetCode = computed(() => decodeTargetCode(targetCodeEncoded.value));
 
 export const statement = ref<string>(getStored('statement', '', isString));
 watchAndStore(statement, 'statement');
@@ -92,11 +87,7 @@ async function getStatement(dialog: ReturnType<typeof useDialog>, newPuzzle: boo
     statement.value = '';
   }
   try {
-    const response = await fetch(`/statement/${correctPuzzleNumber}.html`);
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    statement.value = DOMPurify.sanitize(await response.text());
+    statement.value = await fetchStatement(correctPuzzleNumber);
   } catch {
     if (newPuzzle) {
       dialog.warning({
@@ -146,7 +137,7 @@ watchAndStore(surveySubmitted, 'surveySubmitted');
 
 export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
   if (puzzleNumber.value !== correctPuzzleNumber) {
-    await Promise.all([getTargetCode(dialog, true), getStatement(dialog, true)]);
+    await Promise.all([getTargetCodeEncoded(dialog, true), getStatement(dialog, true)]);
     showStatement.value = true;
     finished.value = false;
     gaveUp.value = false;
@@ -173,7 +164,7 @@ export async function updatePuzzle(dialog: ReturnType<typeof useDialog>) {
       });
     }
     await Promise.all([
-      getTargetCode(dialog, !targetCode.value),
+      getTargetCodeEncoded(dialog, !targetCode.value),
       getStatement(dialog, !statement.value),
     ]);
   }

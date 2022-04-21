@@ -41,8 +41,12 @@ const props = withDefaults(defineProps<{
 
 const showModal = ref(props.defaultShow);
 
-const emit = defineEmits<{ (e: 'close'): void }>();
+const emit = defineEmits<{
+  (e: 'close'): void,
+  (e: 'open'): void,
+}>();
 watch(showModal, (show) => {
-  if (!show) emit('close');
+  if (show) emit('open');
+  else emit('close');
 });
 </script>

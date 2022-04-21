@@ -74,6 +74,7 @@
       </n-form-item>
     </n-form>
     <code-and-tree
+      global-root-tree-option
       :code="code"
       :correct-root="correctRoot"
     />

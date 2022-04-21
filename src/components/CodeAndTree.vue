@@ -15,7 +15,7 @@
     </n-gi>
     <n-gi>
       <syntax-tree
-        global-root-tree-option
+        :global-root-tree-option="globalRootTreeOption"
         :guess-root="guessRoot"
         :correct-root="correctRoot"
         :mark-range="editor?.markRange"
@@ -36,10 +36,14 @@ import SyntaxTree from './SyntaxTree.vue';
 
 import { parse } from '../parse';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
+  globalRootTreeOption: boolean,
   correctRoot: SyntaxNode | null,
   code: string,
-}>();
+  maxHeight: string,
+}>(), {
+  maxHeight: '60vh',
+});
 
 const editor = ref<InstanceType<typeof CodeEditor>>();
 
@@ -51,6 +55,6 @@ const guessRoot = computedAsync(async () => {
 
 <style scoped>
 .editor-tree-height {
-  max-height: 60vh;
+  max-height: v-bind(maxHeight);
 }
 </style>
