@@ -109,9 +109,9 @@ import {
   guesses,
   lastSuccess,
   maxStreak,
-  puzzleNumber,
   successCount,
 } from '../store/localStorage';
+import { correctPuzzleNumber } from '../../config';
 import { rootTreeOption } from '../store/rootTreeOption';
 import { trackEvent } from '../plausible';
 
@@ -165,19 +165,19 @@ watch(rootTreeOption, () => {
   if (!finished.value && root.allCorrect) {
     finished.value = true;
     successCount.value += 1;
-    if (puzzleNumber.value === lastSuccess.value + 1) {
+    if (correctPuzzleNumber === lastSuccess.value + 1) {
       currentStreak.value += 1;
-    } else if (lastSuccess.value < puzzleNumber.value - 1) {
+    } else if (lastSuccess.value < correctPuzzleNumber - 1) {
       currentStreak.value = 1;
     }
     maxStreak.value = Math.max(maxStreak.value, currentStreak.value);
-    lastSuccess.value = puzzleNumber.value;
+    lastSuccess.value = correctPuzzleNumber;
     guessSum.value += guesses.value.length;
     trackEvent('Game Success', {
       props: {
         // https://github.com/plausible/plausible-tracker/pull/27
         guessCount: guesses.value.length as any as string,
-        puzzleId: puzzleNumber.value as any as string,
+        puzzleId: correctPuzzleNumber as any as string,
       },
     });
   }

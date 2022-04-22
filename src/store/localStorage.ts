@@ -15,7 +15,7 @@ import { exhaustiveCheck } from 'ts-exhaustive-check';
 import ExternalLink from '../components/ExternalLink.vue';
 
 import { fetchStatement, fetchTargetCodeEncoded, decodeTargetCode } from '../utils/getPuzzle';
-import { beginTimestamp, puzzleInterval } from '../../config';
+import { correctPuzzleNumber } from '../../config';
 
 const KEY_PREFIX = 'codle_';
 
@@ -46,10 +46,8 @@ function isSafeInteger(value: unknown): value is number {
   return Number.isSafeInteger(value);
 }
 
-export const puzzleNumber = ref<number>(getStored('puzzleNumber', 0, isSafeInteger));
+const puzzleNumber = ref<number>(getStored('puzzleNumber', 0, isSafeInteger));
 watchAndStore(puzzleNumber, 'puzzleNumber');
-
-const correctPuzzleNumber = Math.floor((Date.now() - beginTimestamp) / puzzleInterval);
 
 function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((item) => typeof item === 'string');

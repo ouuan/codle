@@ -42,14 +42,14 @@ import {
 
 import UserSurvey from './UserSurvey.vue';
 
-import { puzzleNumber, depthFinishedAt } from '../store/localStorage';
-import { host } from '../../config';
+import { depthFinishedAt } from '../store/localStorage';
+import { correctPuzzleNumber, host } from '../../config';
 
 const finishedAt = computed(() => depthFinishedAt.value[depthFinishedAt.value.length - 1]);
 
 const copyFailed = ref(false);
 
-const shareStr = computed(() => `I solved #Codle #${puzzleNumber.value} in ${finishedAt.value} guesses. I found all nodes within the depth of 1~${depthFinishedAt.value.length - 1} at guess ${depthFinishedAt.value.slice(1).join(', ')} respectively.
+const shareStr = computed(() => `I solved #Codle #${correctPuzzleNumber} in ${finishedAt.value} guesses. I found all nodes within the depth of 1~${depthFinishedAt.value.length - 1} at guess ${depthFinishedAt.value.slice(1).join(', ')} respectively.
 https://${host}`);
 
 const message = useMessage();

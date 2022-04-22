@@ -29,7 +29,7 @@
       >
         <n-card>
           <n-p>
-            This week is puzzle #<strong>{{ puzzleNumber }}</strong>.
+            This week is puzzle #<strong>{{ correctPuzzleNumber }}</strong>.
             You have
             <n-countdown
               active
@@ -190,13 +190,13 @@ import {
   guesses,
   lastPlay,
   playCount,
-  puzzleNumber,
   readonlyEditorAfterFirstGuess,
   showStatement,
   statement,
   targetCode,
   updatePuzzle,
 } from '../store/localStorage';
+import { correctPuzzleNumber } from '../../config';
 import { applyTargeCodeAndModification } from '../store/rootTreeOption';
 import { initParser, parse } from '../parse';
 import {
@@ -293,12 +293,12 @@ function submitGuess() {
     message.error(`Your code is exactly the same as guess #${previousIndex + 1}`);
     return;
   }
-  if (lastPlay.value !== puzzleNumber.value) {
-    lastPlay.value = puzzleNumber.value;
+  if (lastPlay.value !== correctPuzzleNumber) {
+    lastPlay.value = correctPuzzleNumber;
     playCount.value += 1;
   }
   if (firstGame.value === 0) {
-    firstGame.value = puzzleNumber.value;
+    firstGame.value = correctPuzzleNumber;
   }
   guesses.value.push(code.value);
   if (guesses.value.length % 10 === 0) {
@@ -306,7 +306,7 @@ function submitGuess() {
       props: {
         // https://github.com/plausible/plausible-tracker/pull/27
         guessCount: guesses.value.length as any as string,
-        puzzleId: puzzleNumber.value as any as string,
+        puzzleId: correctPuzzleNumber as any as string,
       },
     });
   }
@@ -352,7 +352,7 @@ function giveUp() {
           props: {
             // https://github.com/plausible/plausible-tracker/pull/27
             guessCount: guesses.value.length as any as string,
-            puzzleId: puzzleNumber.value as any as string,
+            puzzleId: correctPuzzleNumber as any as string,
           },
         });
       },

@@ -98,10 +98,10 @@ import {
 import ExternalLink from './ExternalLink.vue';
 
 import {
-  puzzleNumber,
   guesses,
   surveySubmitted,
 } from '../store/localStorage';
+import { correctPuzzleNumber } from '../../config';
 import { plausibleTracked, trackEvent } from '../plausible';
 
 const props = defineProps<{ type: string }>();
@@ -140,7 +140,7 @@ function submit() {
       ...(timeUsed.value ? { timeUsed: timeUsed.value as any as string } : {}),
       ...(rating.value ? { rating: rating.value as any as string } : {}),
       ...(feedback.value ? { feedback: feedback.value } : {}),
-      puzzleId: puzzleNumber.value as any as string,
+      puzzleId: correctPuzzleNumber as any as string,
       guessCount: guesses.value.length as any as string,
     },
   });

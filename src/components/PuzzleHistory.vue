@@ -9,7 +9,7 @@
     <n-space vertical>
       <n-pagination
         v-model:page="id"
-        :page-count="puzzleNumber - 1"
+        :page-count="correctPuzzleNumber - 1"
         :disabled="loading"
       />
       <n-card :title="`Puzzle #${id}`">
@@ -110,12 +110,11 @@ import CodeAndTree from './CodeAndTree.vue';
 import DialogWithIconButton from './DialogWithIconButton.vue';
 import ProblemStatement from './ProblemStatement.vue';
 
-import { puzzleNumber } from '../store/localStorage';
-import { beginTimestamp, puzzleInterval } from '../../config';
+import { correctPuzzleNumber, beginTimestamp, puzzleInterval } from '../../config';
 import { fetchStatement, fetchTargetCode } from '../utils/getPuzzle';
 import { parse } from '../parse';
 
-const id = ref(puzzleNumber.value - 1);
+const id = ref(correctPuzzleNumber - 1);
 const loading = ref(true);
 const error = ref('');
 const statement = ref('');
