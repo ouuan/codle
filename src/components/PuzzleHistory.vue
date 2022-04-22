@@ -2,6 +2,7 @@
   <dialog-with-icon-button
     title="Previous Puzzles"
     dialog-style="width: calc(min(90vw, 840px)); height: calc(50vh + 260px);"
+    @open="loadPuzzle"
   >
     <template #icon>
       <calendar-clear />
@@ -123,6 +124,21 @@ const tab = ref('statement');
 
 const time = computed(() => beginTimestamp + puzzleInterval * id.value);
 
+const fetched = new Set<number>();
+function addPrefetch(prefetchId: number) {
+  if (prefetchId <= 0 || prefetchId >= correctPuzzleNumber) return;
+  if (fetched.has(prefetchId)) return;
+  fetched.add(prefetchId);
+  const statementEl = document.createElement('link');
+  const codeEl = document.createElement('link');
+  statementEl.rel = 'prefetch';
+  codeEl.rel = 'prefetch';
+  statementEl.href = `/statement/${prefetchId}.html`;
+  codeEl.href = `/targetCode/${prefetchId}.txt`;
+  document.head.appendChild(statementEl);
+  document.head.appendChild(codeEl);
+}
+
 async function loadPuzzle() {
   loading.value = true;
   error.value = '';
@@ -134,15 +150,21 @@ async function loadPuzzle() {
       fetchStatement(id.value),
       fetchTargetCode(id.value),
     ]);
+    fetched.add(id.value);
   } catch (e) {
     if (e instanceof Error) error.value = e.toString();
     else error.value = 'Unknown Error';
   } finally {
     loading.value = false;
+    addPrefetch(id.value - 1);
+    addPrefetch(id.value + 1);
   }
 }
 
-onMounted(loadPuzzle);
+onMounted(() => {
+  addPrefetch(id.value);
+  addPrefetch(1);
+});
 watch(id, loadPuzzle);
 
 const breakpoints = useBreakpoints();
