@@ -1,5 +1,9 @@
 {
- "name": "App",
+ "name": "Codle | Wordle with AST nodes as letters",
+ "short_name": "Codle",
+ "start_url": "/",
+ "display": "standalone",
+ "orientation": "portrait",
  "icons": [
   {
    "src": "\/images\/android-icon-36x36.png",
