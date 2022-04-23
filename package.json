@@ -55,7 +55,7 @@
     "glob": "^8.0.1",
     "glob-promise": "^4.2.2",
     "jsdom": "^19.0.0",
-    "markdown-it": "^12.3.2",
+    "markdown-it": "^13.0.0",
     "rollup": "^2.70.2",
     "rollup-plugin-analyzer": "^4.0.0",
     "sass": "^1.50.1",
