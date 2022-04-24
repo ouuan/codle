@@ -6,7 +6,12 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import viteCompression from 'vite-plugin-compression';
 import viteRestart from 'vite-plugin-restart';
 
-import { beginTimestamp, puzzleInterval, host } from './config';
+import {
+  beginTimestamp,
+  host,
+  puzzleInterval,
+  timeToBuildEarlier,
+} from './config';
 import transformPuzzles from './src/vite/transformPuzzles';
 import generateSitemap from './src/vite/generateSitemap';
 
@@ -44,7 +49,7 @@ export default defineConfig({
       entry: '/src/main.ts',
       inject: {
         data: {
-          puzzleId: Math.floor((Date.now() - beginTimestamp + 60000) / puzzleInterval).toString(),
+          puzzleId: Math.floor((Date.now() - beginTimestamp + timeToBuildEarlier) / puzzleInterval),
           host,
         },
       },

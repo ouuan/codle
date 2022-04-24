@@ -13,7 +13,12 @@ import { Plugin } from 'vite';
 import { JSDOM } from 'jsdom';
 import createDOMPurify from 'dompurify';
 import MarkdownIt from 'markdown-it';
-import { beginTimestamp, puzzleInterval, host } from '../../config';
+import {
+  beginTimestamp,
+  host,
+  puzzleInterval,
+  timeToBuildEarlier,
+} from '../../config';
 
 const { window } = new JSDOM('');
 const { sanitize } = createDOMPurify(window as any as Window);
@@ -31,7 +36,7 @@ function dateForBase(base: string) {
 }
 
 function datePublished(date: Date) {
-  return date.valueOf() - Date.now() < 60000;
+  return date.valueOf() - Date.now() < timeToBuildEarlier;
 }
 
 async function transformCodes() {
