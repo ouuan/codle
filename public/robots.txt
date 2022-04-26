@@ -1,4 +1,5 @@
 User-agent: *
+Sitemap: https://codle.ouuan.moe/sitemap.xml
 Disallow: /assets
 Disallow: /statement
 Disallow: /targetCode
