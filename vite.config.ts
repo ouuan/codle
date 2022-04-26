@@ -14,6 +14,7 @@ import {
 } from './config';
 import transformPuzzles from './src/vite/transformPuzzles';
 import generateSitemap from './src/vite/generateSitemap';
+import humansTxt from './src/vite/humansTxt';
 
 const splitVendor = splitVendorChunk();
 
@@ -35,6 +36,7 @@ export default defineConfig({
     vue(),
     transformPuzzles(),
     generateSitemap(),
+    humansTxt(),
     viteRestart({
       restart: [
         'puzzles/*',

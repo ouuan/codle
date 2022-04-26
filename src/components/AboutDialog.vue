@@ -68,6 +68,13 @@
       />
       (currently only accepting WeChat and AliPay)
     </n-p>
+    <n-p>
+      Further information can be found at
+      <external-link
+        href="/humans.txt"
+        title="humans.txt"
+      />.
+    </n-p>
   </dialog-with-icon-button>
 </template>
 

@@ -7,5 +7,6 @@ dist/
 public/targetCode/
 public/statement/
 public/*.xml
+public/humans.txt
 puzzles/*
 !puzzles/0.*
