@@ -1,5 +1,6 @@
 import { writeFile } from 'fs/promises';
 import { Plugin } from 'vite';
+import gitCommitInfo from 'git-commit-info';
 
 import { dependencies, devDependencies } from '../../package.json';
 
@@ -7,6 +8,8 @@ export default function humansTxt(): Plugin {
   return {
     name: 'generate humans.txt',
     async buildStart() {
+      const gitInfo = gitCommitInfo();
+
       const content = `/* TEAM */
 
     Chef: Yufan You
@@ -34,8 +37,12 @@ export default function humansTxt(): Plugin {
 
 /* SITE */
 
-    Last update: ${new Date().toISOString().slice(0, 10)}
     Language: English
+
+    Build:
+        Last build date: ${new Date().toISOString().slice(0, 10)}
+        Last commit date: ${new Date(gitInfo.date ?? '').toISOString().slice(0, 10)}
+        Last commit hash: ${gitInfo.shortHash}
 
     Source code:
         Repository: https://github.com/ouuan/codle

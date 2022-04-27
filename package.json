@@ -52,6 +52,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-vue": "^8.7.1",
     "feed": "^4.2.2",
+    "git-commit-info": "^2.0.1",
     "glob": "^8.0.1",
     "glob-promise": "^4.2.2",
     "jsdom": "^19.0.0",
