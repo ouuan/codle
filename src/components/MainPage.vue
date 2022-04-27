@@ -92,6 +92,7 @@
                 />
               </n-space>
               <n-button
+                v-if="guesses.length"
                 type="warning"
                 @click="giveUp"
               >
@@ -340,7 +341,24 @@ function onApplyTargeCodeAndModification() {
 }
 
 function giveUp() {
-  if (new Date().getUTCDay() === 6) {
+  const guessCount = guesses.value.length;
+  if (guessCount <= 5) {
+    let times: string;
+    if (guessCount === 1) times = 'once';
+    else if (guessCount === 2) times = 'twice';
+    else times = `${guessCount} times`;
+    dialog.error({
+      title: 'Too early to give up!',
+      content: `You have guessed only ${times}! Don't give up unless you have tried enough times.`,
+      negativeText: "I'll keep trying",
+    });
+  } else if (new Date().getUTCDay() !== 6) {
+    dialog.error({
+      title: 'Too early to give up!',
+      content: 'You can give up only on UTC Saturday (i.e. the last 24 hours of a weekly puzzle). Come here tomorrow if you are tired today.',
+      negativeText: "I'll keep trying",
+    });
+  } else {
     dialog.warning({
       title: 'Give Up?',
       content: "Don't you want to try once more?",
@@ -356,12 +374,6 @@ function giveUp() {
           },
         });
       },
-    });
-  } else {
-    dialog.error({
-      title: 'Too early to give up!',
-      content: 'You can give up only on UTC Saturday (i.e. the last 24 hours of a weekly puzzle). Come here tomorrow if you are tired today.',
-      negativeText: "I'll keep trying",
     });
   }
 }
