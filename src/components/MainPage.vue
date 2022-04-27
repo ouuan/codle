@@ -359,7 +359,7 @@ function giveUp() {
     });
   } else {
     dialog.error({
-      title: "Don't give up!",
+      title: 'Too early to give up!',
       content: 'You can give up only on UTC Saturday (i.e. the last 24 hours of a weekly puzzle). Come here tomorrow if you are tired today.',
       negativeText: "I'll keep trying",
     });
