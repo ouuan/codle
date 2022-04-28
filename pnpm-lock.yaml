@@ -42,7 +42,7 @@ specifiers:
   vite-plugin-restart: ^0.1.1
   vooks: ^0.2.12
   vue: ^3.2.33
-  vue-diff: ^1.2.0
+  vue-diff: ^1.2.2
   vue-tsc: ^0.34.10
   web-tree-sitter: ^0.20.5
 
@@ -59,7 +59,7 @@ dependencies:
   ts-exhaustive-check: 1.0.0
   vooks: 0.2.12_vue@3.2.33
   vue: 3.2.33
-  vue-diff: 1.2.0_vue@3.2.33
+  vue-diff: 1.2.2_vue@3.2.33
   web-tree-sitter: 0.20.5
 
 devDependencies:
@@ -3121,8 +3121,8 @@ packages:
       vue: 3.2.33
     dev: false
 
-  /vue-diff/1.2.0_vue@3.2.33:
-    resolution: {integrity: sha512-zDl4UzAxurzqZ+oOnSoen5IaAXpDwXBltWLi85P9/3QvpJnXsl9f5a+n1QDY1Ztd2IQeKdQs2faCl1tHVVVGkw==}
+  /vue-diff/1.2.2_vue@3.2.33:
+    resolution: {integrity: sha512-zzXi666ZfxEPQhZ/AEEIvFlvmbBnWOM6pbg8hCmfl55MP00UQ0kfb6Y1uUSMmROxEP/zE5KzZ8ms+0T/V8Suzw==}
     dependencies:
       '@vueuse/core': 8.3.1_vue@3.2.33
       diff-match-patch: 1.0.5

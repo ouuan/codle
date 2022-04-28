@@ -34,7 +34,7 @@
     "ts-exhaustive-check": "^1.0.0",
     "vooks": "^0.2.12",
     "vue": "^3.2.33",
-    "vue-diff": "^1.2.0",
+    "vue-diff": "^1.2.2",
     "web-tree-sitter": "^0.20.5"
   },
   "devDependencies": {
