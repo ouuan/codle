@@ -9,6 +9,7 @@
         :global-root-tree-option="false"
         :guess-root="guessRoot"
         :correct-root="targetRoot"
+        max-height="60vh"
       />
     </n-space>
   </n-card>
