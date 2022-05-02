@@ -15,7 +15,6 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "types": [
-      "node",
       "vite/client"
     ],
     "lib": [
