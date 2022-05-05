@@ -33,7 +33,7 @@ export default function humansTxt(): Plugin {
 
     Semantle Creator: David Turner
     GitHub: @novalis
-    Semantle: https://semantle.novalis.org/
+    Semantle: https://semantle.com
 
 /* SITE */
 
