@@ -3,6 +3,7 @@
     ref="editorRef"
     :key="forceUpdate"
     border
+    original-style
     class="editor"
     :value="code"
     :options="cmOptions"
@@ -115,6 +116,6 @@ watchThrottled(size, refreshEditor, { throttle: 300 });
 <style scoped>
 .editor:deep(.CodeMirror) {
   font-size: v-bind(themeFontSize);
-  font-family: v-bind(codeFontFamilyFallback), monospace !important;
+  font-family: v-bind(codeFontFamilyFallback), monospace;
 }
 </style>
