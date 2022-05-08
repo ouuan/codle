@@ -11,6 +11,7 @@
             :key="refreshInputNumber"
             v-model:value="id"
             :validator="validator"
+            :placeholder="`${guesses.length}`"
             style="max-width: 15em;"
           >
             <template #prefix>
