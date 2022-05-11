@@ -9,7 +9,7 @@
       <code-editor
         ref="editor"
         :code="code"
-        class="editor-height"
+        class="editor-tree-height"
         read-only
       />
     </n-gi>
@@ -19,7 +19,7 @@
         :guess-root="guessRoot"
         :correct-root="correctRoot"
         :mark-range="editor?.markRange"
-        :max-height="maxHeight"
+        class="editor-tree-height"
       />
     </n-gi>
   </n-grid>
@@ -54,7 +54,7 @@ const guessRoot = computedAsync(async () => {
 </script>
 
 <style scoped>
-.editor-height {
+.editor-tree-height {
   max-height: v-bind(maxHeight);
 }
 </style>

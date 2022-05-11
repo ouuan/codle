@@ -1,43 +1,28 @@
 <template>
-  <div ref="rootRef">
-    <n-scrollbar
-      x-scrollable
-      @scroll="onScroll"
-    >
-      <div class="tree-outer-wrapper">
-        <div class="tree-inner-wrapper">
-          <n-tree
-            :key="renderCount"
-            block-line
-            :data="rootTreeOption ? [rootTreeOption] : []"
-            :default-expanded-keys="defaultExpandedKeys"
-            :render-label="renderLabel"
-            :render-switcher-icon="renderSwitcherIcon"
-            :selectable="false"
-            virtual-scroll
-            class="syntax-tree"
-          />
-        </div>
-      </div>
-    </n-scrollbar>
-  </div>
+  <n-tree
+    :key="renderCount"
+    block-line
+    :data="rootTreeOption ? [rootTreeOption] : []"
+    :default-expanded-keys="defaultExpandedKeys"
+    :render-label="renderLabel"
+    :render-switcher-icon="renderSwitcherIcon"
+    :selectable="false"
+    virtual-scroll
+  />
 </template>
 
 <script setup lang="ts">
 import {
-  computed,
   h,
   onMounted,
   ref,
   watch,
 } from 'vue';
 import {
-  NScrollbar,
   NTree,
   TreeOption,
 } from 'naive-ui';
 import { SyntaxNode } from 'web-tree-sitter';
-import { useElementSize } from '@vueuse/core';
 
 import SyntaxTreeNode from './SyntaxTreeNode.vue';
 
@@ -55,7 +40,6 @@ const props = defineProps<{
   correctRoot: SyntaxNode | null,
   markRange?: MarkRange,
   globalRootTreeOption: boolean,
-  maxHeight: string,
 }>();
 
 const rootTreeOption = props.globalRootTreeOption ? globalRootTreeOption : ref<TreeOptionEx>();
@@ -135,10 +119,18 @@ function generateTreeOption(
   };
 }
 
-const maxRenderedDepth = ref(0);
+const renderCount = ref(0);
+async function update() {
+  if (!props.correctRoot || !props.guessRoot) return;
+  defaultExpandedKeys.value = [];
+  rootTreeOption.value = generateTreeOption(props.guessRoot, 'correct', props.correctRoot, 0);
+  renderCount.value += 1;
+}
+onMounted(update);
+watch(props, update);
+
 function renderLabel({ option }: {option: TreeOption}) {
   if (!isTreeOptionEx(option)) throw new Error('Non-ex TreeOption passed to renderLabel');
-  maxRenderedDepth.value = Math.max(maxRenderedDepth.value, option.depth);
   return h(SyntaxTreeNode, {
     option,
     markRange: props.markRange,
@@ -146,56 +138,4 @@ function renderLabel({ option }: {option: TreeOption}) {
     onModified: (modification) => { option.modification = modification; },
   });
 }
-
-const rootRef = ref<HTMLDivElement>();
-
-const outerWrapperWidth = computed(() => {
-  if (!rootRef.value) return '500px';
-  const nodes = rootRef.value.getElementsByClassName('syntax-tree-node-button');
-  let maxWidth = 0;
-  for (const node of nodes) {
-    maxWidth = Math.max(maxWidth, node.getBoundingClientRect().width);
-  }
-  return `${Math.ceil(maxRenderedDepth.value * 16 + maxWidth + 30)}px`;
-});
-
-// to keep the vertical scrollbar visible
-const rootWidth = useElementSize(rootRef, { width: 500, height: 1000 }).width;
-const scrollbarPos = ref(0);
-function onScroll({ target }: Event) {
-  if (target instanceof HTMLElement) {
-    scrollbarPos.value = target.scrollLeft;
-  }
-}
-const innerWrapperWidth = computed(() => {
-  const width = rootWidth.value + scrollbarPos.value;
-  return `${width}px`;
-});
-
-const renderCount = ref(0);
-async function update() {
-  if (!props.correctRoot || !props.guessRoot) return;
-  maxRenderedDepth.value = 0;
-  scrollbarPos.value = 0;
-  defaultExpandedKeys.value = [];
-  rootTreeOption.value = generateTreeOption(props.guessRoot, 'correct', props.correctRoot, 0);
-  renderCount.value += 1;
-}
-onMounted(update);
-watch(props, update);
 </script>
-
-<style scoped>
-.tree-outer-wrapper {
-  min-width: v-bind(outerWrapperWidth);
-}
-
-.tree-inner-wrapper {
-  max-width: v-bind(innerWrapperWidth);
-}
-
-.syntax-tree {
-  max-height: v-bind(maxHeight);
-  margin-bottom: 8px;
-}
-</style>

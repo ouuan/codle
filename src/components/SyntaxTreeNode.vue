@@ -3,7 +3,6 @@
     quaternary
     size="small"
     :type="labelType"
-    class="syntax-tree-node-button"
     @click="showCode = true"
     @mouseover="markNode"
     @mouseleave="clearMark"
