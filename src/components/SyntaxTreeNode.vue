@@ -27,7 +27,6 @@
     </span>
   </n-button>
   <n-modal
-    v-if="showCode"
     v-model:show="showCode"
     preset="card"
     size="medium"
