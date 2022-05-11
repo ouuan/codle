@@ -1,14 +1,18 @@
 <template>
-  <n-tree
-    :key="renderCount"
-    block-line
-    :data="rootTreeOption ? [rootTreeOption] : []"
-    :default-expanded-keys="defaultExpandedKeys"
-    :render-label="renderLabel"
-    :render-switcher-icon="renderSwitcherIcon"
-    :selectable="false"
-    virtual-scroll
-  />
+  <n-scrollbar
+    x-scrollable
+    :style="{ maxHeight }"
+  >
+    <n-tree
+      :key="renderCount"
+      block-line
+      :data="rootTreeOption ? [rootTreeOption] : []"
+      :default-expanded-keys="defaultExpandedKeys"
+      :render-label="renderLabel"
+      :render-switcher-icon="renderSwitcherIcon"
+      :selectable="false"
+    />
+  </n-scrollbar>
 </template>
 
 <script setup lang="ts">
@@ -19,6 +23,7 @@ import {
   watch,
 } from 'vue';
 import {
+  NScrollbar,
   NTree,
   TreeOption,
 } from 'naive-ui';
@@ -40,6 +45,7 @@ const props = defineProps<{
   correctRoot: SyntaxNode | null,
   markRange?: MarkRange,
   globalRootTreeOption: boolean,
+  maxHeight: string,
 }>();
 
 const rootTreeOption = props.globalRootTreeOption ? globalRootTreeOption : ref<TreeOptionEx>();
