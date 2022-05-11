@@ -30,7 +30,7 @@ import { useElementSize, watchThrottled } from '@vueuse/core';
 import 'codemirror/mode/clike/clike.js';
 import 'codemirror/theme/gruvbox-dark.css';
 
-import { uiDark, codeFontFamily, codeLineWrap } from '../store/localStorage';
+import { uiDark, codeFontFamilyCss, codeLineWrap } from '../store/localStorage';
 
 const props = defineProps<{
   code: string,
@@ -98,8 +98,6 @@ function updateCode() {
   }
 }
 
-const codeFontFamilyFallback = computed(() => codeFontFamily.value || 'monospace');
-
 function markRange(from: Position, to: Position, scroll: boolean) {
   cmInstance.value?.setSelection(from, to, { scroll });
 }
@@ -107,7 +105,7 @@ defineExpose({ markRange });
 
 const themeFontSize = toRef(useThemeVars().value, 'fontSize');
 
-watch([codeFontFamilyFallback, themeFontSize], refreshEditor);
+watch([codeFontFamilyCss, themeFontSize], refreshEditor);
 
 const size = reactive(useElementSize(editorRef as any));
 watchThrottled(size, refreshEditor, { throttle: 300 });
@@ -116,6 +114,6 @@ watchThrottled(size, refreshEditor, { throttle: 300 });
 <style scoped>
 .editor:deep(.CodeMirror) {
   font-size: v-bind(themeFontSize);
-  font-family: v-bind(codeFontFamilyFallback), monospace;
+  font-family: v-bind(codeFontFamilyCss);
 }
 </style>

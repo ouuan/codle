@@ -17,7 +17,9 @@
         <n-form-item label="Code Font Family">
           <n-input
             v-model:value="codeFontFamily"
+            clearable
             placeholder="monospace"
+            :style="{ fontFamily: codeFontFamilyCss }"
           />
         </n-form-item>
         <n-form-item label="Code Line Wrap">
@@ -54,6 +56,7 @@ import DialogWithIconButton from './DialogWithIconButton.vue';
 
 import {
   codeFontFamily,
+  codeFontFamilyCss,
   codeLineWrap,
   readonlyEditorAfterFirstGuess,
   uiTheme,

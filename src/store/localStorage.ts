@@ -190,8 +190,9 @@ export function uiDark(osTheme: ReturnType<typeof useOsTheme>) {
 export const showGameRule = ref<boolean>(getStored('showGameRule', true, isBoolean));
 watchAndStore(showGameRule, 'showGameRule');
 
-export const codeFontFamily = ref<string>(getStored('codeFontFamily', 'monospace', isString));
+export const codeFontFamily = ref<string>(getStored('codeFontFamily', '', isString));
 watchAndStore(codeFontFamily, 'codeFontFamily');
+export const codeFontFamilyCss = computed(() => (codeFontFamily.value.trim() ? `${codeFontFamily.value}, monospace` : 'monospace'));
 
 export const codeLineWrap = ref<boolean>(getStored('codeLineWrap', true, isBoolean));
 watchAndStore(codeLineWrap, 'codeLineWrap');
