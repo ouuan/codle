@@ -135,7 +135,7 @@
           <p>
             That's how Codle works :)
             <br>
-            AST is the only thing that matters, your code doesn't even need to compile.
+            AST is the only thing that matters, and your code doesn't even need to compile.
           </p>
         </n-li>
       </n-ul>
