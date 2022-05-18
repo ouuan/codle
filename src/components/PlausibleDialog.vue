@@ -9,9 +9,8 @@
         href="https://plausible.io"
         title="Plausible Analytics"
       />
-      instance to track page views and game success / give up / guess count information
-      <strong>without</strong>
-      any personal data.
+      instance to track page views and game success / give up / guess count information.
+      Personal data and the content of each guess are <strong>not</strong> collected.
     </n-p>
     <n-p>
       Plausible Analytics is
