@@ -21,7 +21,7 @@ specifiers:
   eslint-plugin-vue: ^8.7.1
   feed: ^4.2.2
   git-commit-info: ^2.0.1
-  glob: ^7.1.6
+  glob: ^7.2.3
   glob-promise: ^4.2.2
   highlight.js: ^11.5.1
   jsdom: ^19.0.0
@@ -78,8 +78,8 @@ devDependencies:
   eslint-plugin-vue: 8.7.1_eslint@8.16.0
   feed: 4.2.2
   git-commit-info: 2.0.1
-  glob: 7.2.0
-  glob-promise: 4.2.2_glob@7.2.0
+  glob: 7.2.3
+  glob-promise: 4.2.2_glob@7.2.3
   jsdom: 19.0.0
   markdown-it: 13.0.1
   rollup: 2.74.1
@@ -1894,18 +1894,18 @@ packages:
       is-glob: 4.0.3
     dev: true
 
-  /glob-promise/4.2.2_glob@7.2.0:
+  /glob-promise/4.2.2_glob@7.2.3:
     resolution: {integrity: sha512-xcUzJ8NWN5bktoTIX7eOclO1Npxd/dyVqUJxlLIDasT4C7KZyqlPIwkdJ0Ypiy3p2ZKahTjK4M9uC3sNSfNMzw==}
     engines: {node: '>=12'}
     peerDependencies:
       glob: ^7.1.6
     dependencies:
       '@types/glob': 7.2.0
-      glob: 7.2.0
+      glob: 7.2.3
     dev: true
 
-  /glob/7.2.0:
-    resolution: {integrity: sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==}
+  /glob/7.2.3:
+    resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
@@ -2813,7 +2813,7 @@ packages:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
     dev: true
 
   /rollup-plugin-analyzer/4.0.0:
