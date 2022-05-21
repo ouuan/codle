@@ -80,8 +80,9 @@ watch(editorRef, () => {
   }
 });
 
-function refreshEditor() {
+function refreshEditor(count = 3) {
   nextTick(() => cmInstance.value?.refresh());
+  if (count > 0) setTimeout(() => refreshEditor(count - 1), 100);
 }
 
 watch(() => props.readOnly, () => {
@@ -105,10 +106,10 @@ defineExpose({ markRange });
 
 const themeFontSize = toRef(useThemeVars().value, 'fontSize');
 
-watch([codeFontFamilyCss, themeFontSize], refreshEditor);
+watch([codeFontFamilyCss, themeFontSize], () => refreshEditor());
 
 const size = reactive(useElementSize(editorRef as any));
-watchThrottled(size, refreshEditor, { throttle: 300 });
+watchThrottled(size, () => refreshEditor(), { throttle: 100 });
 </script>
 
 <style scoped>
