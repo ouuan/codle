@@ -2,7 +2,7 @@
   <n-button
     circle
     quaternary
-    :title="title"
+    v-bind="{ title }"
     @click="showModal = true"
   >
     <template #icon>

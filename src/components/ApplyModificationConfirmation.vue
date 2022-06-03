@@ -51,7 +51,7 @@ const diffCurrent = {
   'last-applied': props.applied,
 } as const;
 
-const diffMode = ref('current-applied');
+const diffMode = ref<keyof typeof diffPrev>('current-applied');
 
 const diffOptions = [
   {

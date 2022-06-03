@@ -1,6 +1,6 @@
 <template>
   <n-a
-    :href="href"
+    v-bind="{ href }"
     @click="onClick"
   >
     {{ title }}

@@ -17,7 +17,7 @@
       v-model:show="showModal"
       title="User Survey"
       preset="card"
-      show-directive="show"
+      display-directive="show"
       :auto-focus="false"
       :trap-focus="false"
       style="max-width: calc(min(80vw, 500px));"
