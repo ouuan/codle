@@ -62,7 +62,7 @@
             </n-tooltip>
           </template>
           <template #header-extra>
-            Length (max: 2 * length of target code):&nbsp;
+            Length{{ breakpoints.includes('s') ? ' (max: 2 * length of target code)' : '' }}:&nbsp;
             <n-text
               :type="lengthHintType"
             >
