@@ -12,7 +12,7 @@
       :mode="diffMode"
       :prev="prev"
       :current="current"
-      :theme="theme"
+      :theme="theme as 'custom'"
     />
   </n-scrollbar>
 </template>
@@ -24,6 +24,7 @@ import {
   NScrollbar,
   useOsTheme,
 } from 'naive-ui';
+import { Diff as VueDiff } from 'vue-diff';
 import { useBreakpoints } from 'vooks';
 
 import { uiDark } from '../store/localStorage';

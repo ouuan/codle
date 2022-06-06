@@ -1,5 +1,11 @@
 import { createApp } from 'vue';
-import App from './App.vue';
-import VueDiff from './VueDiff';
 
-createApp(App).use(VueDiff, { componentName: 'VueDiff' }).mount('#app');
+import VueDiff from 'vue-diff';
+import cpp from 'highlight.js/lib/languages/cpp';
+import 'vue-diff/dist/index.css';
+
+import App from './App.vue';
+
+VueDiff.hljs.registerLanguage('cpp', cpp);
+
+createApp(App).mount('#app');
