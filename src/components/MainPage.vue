@@ -305,9 +305,8 @@ function submitGuess() {
   if (guesses.value.length % 10 === 0) {
     trackEvent('Guess', {
       props: {
-        // https://github.com/plausible/plausible-tracker/pull/27
-        guessCount: guesses.value.length as any as string,
-        puzzleId: correctPuzzleNumber as any as string,
+        guessCount: guesses.value.length,
+        puzzleId: correctPuzzleNumber,
       },
     });
   }
@@ -368,9 +367,8 @@ function giveUp() {
         gaveUp.value = true;
         trackEvent('Give Up', {
           props: {
-            // https://github.com/plausible/plausible-tracker/pull/27
-            guessCount: guesses.value.length as any as string,
-            puzzleId: correctPuzzleNumber as any as string,
+            guessCount: guesses.value.length,
+            puzzleId: correctPuzzleNumber,
           },
         });
       },

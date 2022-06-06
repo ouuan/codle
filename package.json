@@ -29,11 +29,11 @@
     "dompurify": "^2.3.8",
     "highlight.js": "^11.5.1",
     "naive-ui": "^2.30.0",
-    "plausible-tracker": "0.3.5",
+    "plausible-tracker": "0.3.7",
     "tree-sitter-cpp": "^0.20.0",
     "ts-exhaustive-check": "^1.0.0",
     "vooks": "^0.2.12",
-    "vue": "^3.2.36",
+    "vue": "^3.2.37",
     "vue-diff": "^1.2.3",
     "web-tree-sitter": "^0.20.5"
   },
@@ -67,6 +67,6 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-restart": "^0.1.1",
-    "vue-tsc": "^0.36.1"
+    "vue-tsc": "^0.37.0"
   }
 }

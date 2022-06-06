@@ -135,13 +135,12 @@ const message = useMessage();
 function submit() {
   trackEvent(`Survey: ${props.type}`, {
     props: {
-      // https://github.com/plausible/plausible-tracker/pull/27
-      ...(difficulty.value ? { difficulty: difficulty.value as any as string } : {}),
-      ...(timeUsed.value ? { timeUsed: timeUsed.value as any as string } : {}),
-      ...(rating.value ? { rating: rating.value as any as string } : {}),
+      ...(difficulty.value ? { difficulty: difficulty.value } : {}),
+      ...(timeUsed.value ? { timeUsed: timeUsed.value } : {}),
+      ...(rating.value ? { rating: rating.value } : {}),
       ...(feedback.value ? { feedback: feedback.value } : {}),
-      puzzleId: correctPuzzleNumber as any as string,
-      guessCount: guesses.value.length as any as string,
+      puzzleId: correctPuzzleNumber,
+      guessCount: guesses.value.length,
     },
   });
   surveySubmitted.value = true;

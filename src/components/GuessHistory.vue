@@ -176,9 +176,8 @@ watch(rootTreeOption, () => {
     guessSum.value += guesses.value.length;
     trackEvent('Game Success', {
       props: {
-        // https://github.com/plausible/plausible-tracker/pull/27
-        guessCount: guesses.value.length as any as string,
-        puzzleId: correctPuzzleNumber as any as string,
+        guessCount: guesses.value.length,
+        puzzleId: correctPuzzleNumber,
       },
     });
   }
