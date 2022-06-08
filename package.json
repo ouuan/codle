@@ -28,13 +28,13 @@
     "codemirror-editor-vue3": "2.1.7",
     "dompurify": "^2.3.8",
     "highlight.js": "^11.5.1",
-    "naive-ui": "^2.30.0",
-    "plausible-tracker": "0.3.7",
+    "naive-ui": "^2.30.2",
+    "plausible-tracker": "0.3.8",
     "tree-sitter-cpp": "^0.20.0",
     "ts-exhaustive-check": "^1.0.0",
     "vooks": "^0.2.12",
     "vue": "^3.2.37",
-    "vue-diff": "^1.2.3",
+    "vue-diff": "^1.2.4",
     "web-tree-sitter": "^0.20.5"
   },
   "devDependencies": {
@@ -43,8 +43,8 @@
     "@types/glob": "^7.2.0",
     "@types/jsdom": "^16.2.14",
     "@types/markdown-it": "^12.2.3",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/eslint-config-typescript": "^10.0.0",
     "eslint": "^8.17.0",
@@ -57,16 +57,16 @@
     "glob-promise": "^4.2.2",
     "jsdom": "^19.0.0",
     "markdown-it": "^13.0.1",
-    "rollup": "^2.75.5",
+    "rollup": "^2.75.6",
     "rollup-plugin-analyzer": "^4.0.0",
     "sass": "^1.52.2",
     "sitemap": "^7.1.1",
     "tree-sitter-cli": "^0.20.6",
     "typescript": "^4.7.3",
-    "vite": "^2.9.9",
+    "vite": "^2.9.10",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-restart": "^0.1.1",
-    "vue-tsc": "^0.37.0"
+    "vue-tsc": "^0.37.3"
   }
 }

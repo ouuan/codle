@@ -12,7 +12,7 @@
       :mode="diffMode"
       :prev="prev"
       :current="current"
-      :theme="theme as 'custom'"
+      :theme="theme"
     />
   </n-scrollbar>
 </template>
@@ -35,7 +35,7 @@ defineProps<{
 }>();
 
 const osTheme = useOsTheme();
-const theme = computed(() => (uiDark(osTheme) ? 'dark-custom' : 'light-custom'));
+const theme = computed(() => (uiDark(osTheme) ? 'custom-dark' : 'custom-light'));
 
 const breakPoints = useBreakpoints();
 const diffMode = computed(() => (breakPoints.value.includes('m') ? 'split' : 'unified'));
@@ -50,7 +50,7 @@ const diffMode = computed(() => (breakPoints.value.includes('m') ? 'split' : 'un
 </style>
 
 <style scoped lang="scss">
-.vue-diff-theme-dark-custom:deep() {
+.vue-diff-theme-custom-dark:deep() {
   background: #282828;
   color: #ebdbb2;
 
@@ -99,7 +99,7 @@ const diffMode = computed(() => (breakPoints.value.includes('m') ? 'split' : 'un
   }
 }
 
-.vue-diff-theme-light-custom:deep() {
+.vue-diff-theme-custom-light:deep() {
   background: white;
   color: black;
 
