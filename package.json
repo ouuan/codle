@@ -27,6 +27,7 @@
     "codemirror": "^5.65.5",
     "codemirror-editor-vue3": "2.1.7",
     "dompurify": "^2.3.8",
+    "fastest-levenshtein": "^1.0.12",
     "highlight.js": "^11.5.1",
     "naive-ui": "^2.30.2",
     "plausible-tracker": "0.3.8",

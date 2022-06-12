@@ -19,6 +19,7 @@ specifiers:
   eslint-config-airbnb-base: ^15.0.0
   eslint-plugin-import: ^2.26.0
   eslint-plugin-vue: ^8.7.1
+  fastest-levenshtein: ^1.0.12
   feed: ^4.2.2
   git-commit-info: ^2.0.1
   glob: ^7.2.3
@@ -52,6 +53,7 @@ dependencies:
   codemirror: 5.65.5
   codemirror-editor-vue3: 2.1.7
   dompurify: 2.3.8
+  fastest-levenshtein: 1.0.12
   highlight.js: 11.5.1
   naive-ui: 2.30.2_vue@3.2.37
   plausible-tracker: 0.3.8
@@ -1691,6 +1693,10 @@ packages:
   /fast-levenshtein/2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
     dev: true
+
+  /fastest-levenshtein/1.0.12:
+    resolution: {integrity: sha512-On2N+BpYJ15xIC974QNVuYGMOlEVt4s0EOI3wwMqOmK1fdDY+FN/zltPV8vosq4ad4c/gJ1KHScUn/6AWIgiow==}
+    dev: false
 
   /fastq/1.13.0:
     resolution: {integrity: sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==}

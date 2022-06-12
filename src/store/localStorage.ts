@@ -11,6 +11,7 @@ import {
   useOsTheme,
 } from 'naive-ui';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
+import { distance } from 'fastest-levenshtein';
 
 import ExternalLink from '../components/ExternalLink.vue';
 
@@ -66,7 +67,20 @@ async function getTargetCodeEncoded(dialog: ReturnType<typeof useDialog>, newPuz
     targetCodeEncoded.value = '';
   }
   try {
-    targetCodeEncoded.value = await fetchTargetCodeEncoded(correctPuzzleNumber);
+    const fetched = await fetchTargetCodeEncoded(correctPuzzleNumber);
+    if (targetCodeEncoded.value && fetched !== targetCodeEncoded.value) {
+      const oldDecoded = decodeTargetCode(targetCodeEncoded.value);
+      const newDecoded = decodeTargetCode(fetched);
+      const dis = distance(oldDecoded, newDecoded);
+      dialog.warning({
+        title: 'Target code changed',
+        content: `Due to an error in the previous target code, the target code has changed a little bit
+                  (the Levenshtein distance, also known as "edit distance", is ${dis}).
+                  If you are in the middle of guessing, please note the changes in the feedback history.
+                  Sorry for the inconvenience.`,
+      });
+    }
+    targetCodeEncoded.value = fetched;
   } catch {
     if (newPuzzle) {
       dialog.error({
