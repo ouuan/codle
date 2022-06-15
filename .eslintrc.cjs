@@ -89,7 +89,7 @@ module.exports = {
 
     'vue/no-template-target-blank': 2,
 
-    'vue/no-unregistered-components': 2,
+    'vue/no-undef-components': 2,
 
     'vue/no-unused-refs': 2,
 

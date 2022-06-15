@@ -1,4 +1,4 @@
-<!-- eslint-disable vue/no-v-html -->
+<!-- eslint-disable vue/no-v-text-v-html-on-component vue/no-v-html -->
 
 <template>
   <n-element
