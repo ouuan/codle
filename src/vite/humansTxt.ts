@@ -15,7 +15,7 @@ export default function humansTxt(): Plugin {
     Chef: Yufan You
     GitHub: @ouuan
     Location: China
-    Donate: https://ouuan.github.io/about/#donate
+    Donate: https://ouuan.moe/sponsor
 
 /* THANKS */
 

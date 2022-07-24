@@ -64,7 +64,7 @@
       <n-p>
         If you enjoy this game, consider
         <external-link
-          href="https://ouuan.github.io/about/#donate"
+          href="https://ouuan.moe/sponsor"
           title="buy me a cup of coffee :)"
         />
         (currently only accepting WeChat and AliPay)
