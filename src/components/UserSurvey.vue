@@ -47,7 +47,7 @@
         </n-form-item>
         <n-form-item label="Suggestion / Comments (English or Chinese)">
           <template
-            v-if="feedback.length >= 60"
+            v-if="feedback.length >= 15"
             #feedback
           >
             Please consider opening a
@@ -55,7 +55,7 @@
               href="https://github.com/ouuan/codle/discussions"
               title="Discussion"
             />
-            on GitHub
+            on GitHub if you want further discussions or replies.
           </template>
           <n-input
             v-model:value="feedback"
