@@ -95,8 +95,7 @@
             Well, I have to admit that's not the main reason.
             Unlike Wordle and many other puzzle games, Codle's puzzles cannot be auto-generated.
             I need to manually select a coding problem that suits Codle well,
-            write a solution that is fun to guess and provides enough hints via variable names, etc,
-            and rewrite the problem statement in Markdown.
+            write a solution that is fun to guess and provides enough hints via variable names, etc.
             It takes at least a half and sometimes a few hours
             if puzzle quality is taken into count.
           </p>
