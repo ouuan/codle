@@ -3,4 +3,4 @@ export const puzzleInterval = 1000 * 60 * 60 * 24 * 7;
 export const host = 'codle.ouuan.moe';
 export const plausibleHost = 'https://plausible.ouuan.moe';
 export const correctPuzzleNumber = Math.floor((Date.now() - beginTimestamp) / puzzleInterval);
-export const timeToBuildEarlier = 3 * 60 * 1000;
+export const timeToBuildEarlier = 5 * 60 * 1000;
