@@ -67,7 +67,6 @@
           href="https://ouuan.moe/sponsor"
           title="buy me a cup of coffee :)"
         />
-        (currently only accepting WeChat and AliPay)
       </n-p>
       <n-p>
         Further information can be found at
