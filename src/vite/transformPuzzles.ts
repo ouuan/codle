@@ -13,6 +13,7 @@ import { Plugin } from 'vite';
 import { JSDOM } from 'jsdom';
 import createDOMPurify from 'dompurify';
 import MarkdownIt from 'markdown-it';
+import mila from 'markdown-it-link-attributes';
 import {
   beginTimestamp,
   host,
@@ -23,6 +24,12 @@ import {
 const { window } = new JSDOM('');
 const { sanitize } = createDOMPurify(window as any as Window);
 const md = new MarkdownIt('commonmark');
+md.use(mila, {
+  attrs: {
+    target: '_blank',
+    rel: 'noopener noreferrer',
+  },
+});
 
 async function clear() {
   await Promise.all(['statement', 'targetCode'].map(async (dir) => {
@@ -58,7 +65,7 @@ async function transformStatements(items: FeedItem[]) {
   return Promise.all(matches.map(async (path) => {
     const buffer = await readFile(path);
     const html = md.render(buffer.toString());
-    const content = sanitize(html);
+    const content = sanitize(html, { ADD_ATTR: ['target'] });
     const base = basename(path, '.md');
     const date = dateForBase(base);
     if (!datePublished(date)) return;

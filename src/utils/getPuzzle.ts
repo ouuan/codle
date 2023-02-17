@@ -6,7 +6,7 @@ export async function fetchStatement(id: number) {
     throw new Error(response.statusText);
   }
   const text = await response.text();
-  return DOMPurify.sanitize(text);
+  return DOMPurify.sanitize(text, { ADD_ATTR: ['target'] });
 }
 
 export async function fetchTargetCodeEncoded(id: number) {
