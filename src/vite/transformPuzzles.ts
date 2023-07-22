@@ -87,7 +87,7 @@ export default function transformPuzzles(): Plugin {
     async buildStart() {
       const feed = new Feed({
         title: 'Codle Puzzles',
-        description: "A game to guess a target code's AST like Wordle with AST nodes as letters",
+        description: "A game to guess a target code's parse tree like Wordle with tree nodes as letters",
         id: `https://${host}`,
         link: `https://${host}`,
         image: `https://${host}/images/og-image.png`,

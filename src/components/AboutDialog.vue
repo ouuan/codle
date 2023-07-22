@@ -10,14 +10,14 @@
           href="https://github.com/ouuan"
           title="ouuan"
         />.
-        In this game, you need to guess the Abstract Syntax Tree (AST)
+        In this game, you need to guess the parse tree (concrete syntax tree)
         of a piece of code called "target code".
         It's like
         <external-link
           href="https://www.nytimes.com/games/wordle/index.html"
           title="Wordle"
         />
-        with AST nodes as "letters".
+        with tree nodes as "letters".
       </n-p>
       <n-p>
         It's open-sourced at
@@ -133,7 +133,7 @@
           <p>
             That's how Codle works :)
             <br>
-            AST is the only thing that matters, and your code doesn't even need to compile.
+            Parse tree is the only thing that matters, and your code doesn't even need to compile.
           </p>
         </n-li>
       </n-ul>

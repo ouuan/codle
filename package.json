@@ -1,7 +1,7 @@
 {
   "name": "codle-game",
   "version": "1.0.0",
-  "description": "Guess code like Wordle with AST nodes as letters",
+  "description": "Guess code like Wordle with parse tree nodes as letters",
   "scripts": {
     "lint": "pnpm lint:nofix --fix",
     "lint:nofix": "eslint . --ignore-path .gitignore --ext .ts,.vue,.js",

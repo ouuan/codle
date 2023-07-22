@@ -21,18 +21,19 @@
         so the rule will be easier to understand if you are already familiar with Wordle.
         This game would also require some basic knowledge about the C++ programming language and its
         <external-link
-          href="https://en.wikipedia.org/wiki/Abstract_syntax_tree"
-          title="Abstract Syntax Tree (AST)"
+          href="https://en.wikipedia.org/wiki/Parse_tree"
+          title="parse tree"
         />,
         but you don't need to master them very well.
       </n-p>
       <n-p>
         In this game,
-        you need to guess the AST of a piece of C++ code called the <i>target code</i>.
-        You only need to find out the <i>type</i> of each node in the AST,
+        you need to guess the parse tree of a piece of C++ code called the <i>target code</i>.
+        You only need to find out the <i>type</i> of each node in the parse tree,
         so the actual content of the code does <strong>not</strong> matter.
         In each guess, you need to provide a piece of code,
-        and you'll get the difference between your code's AST and the target code's AST as a hint.
+        and you'll get the difference between your code's parse tree
+        and the target code's parse tree as a hint.
       </n-p>
       <n-p>
         The hint will be in a format similar to Wordle's hint:
@@ -56,7 +57,7 @@
         guess="int x = 0, y = 0, z, w;"
       />
       <n-p>
-        Since AST is a tree, the "correct position" needs more explanation.
+        Since parse tree is a tree, the "correct position" needs more explanation.
         In short, a necessary condition for a node to be
         <n-text
           v-for="(c, index) of 'colored'"
@@ -119,7 +120,7 @@
         However, only one type will be revealed after every single guess, by design.
       </n-p>
       <n-p>
-        So what is the <i>type</i> of an AST node?
+        So what is the <i>type</i> of a tree node?
         The answer is complicated, but you don't have to know every single node type.
         Just try a few guesses and you'll roughly know what they look like.
         You can hover on (in the real game, not in the demo above)
@@ -132,17 +133,17 @@
         >
           node
         </grammar-rule-dialog>
-        , either in the node type list or in the AST,
+        , either in the node type list or in the tree,
         to see the grammar structure of the corresponding node type.
         In the grammar structure,
         <n-text type="success">
           green nodes
         </n-text>
-        are node types displayed in the AST,
+        are node types displayed in the tree,
         <n-text type="warning">
           yellow nodes
         </n-text>
-        are "node types" that are not displayed in the AST.
+        are "node types" that are not displayed in the tree.
         Strings are shown as
         <n-text code>
           "string"
@@ -160,7 +161,7 @@
           href="https://tree-sitter.github.io/tree-sitter/playground"
           title="Tree-sitter Playground"
         />
-        which can show you the AST of a piece of code.
+        which can show you the parse tree of a piece of code.
       </n-p>
       <n-p>
         It could be troublesome to focus on editing a subtree of your code in the main code editor.
@@ -175,7 +176,7 @@
         there will be an associated algorithm or coding problem.
         The target code is guaranteed to be a valid solution to the problem,
         but your code doesn't need to solve the problem — it even doesn't need to compile,
-        as the only thing that matters is the AST.
+        as the only thing that matters is the parse tree.
         The problem won't be hard, since the goal is not to solve it.
       </n-p>
       <n-p>

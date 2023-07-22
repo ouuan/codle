@@ -1,5 +1,5 @@
 {
- "name": "Codle | Wordle with AST nodes as letters",
+ "name": "Codle | Wordle with parse tree nodes as letters",
  "short_name": "Codle",
  "start_url": "/",
  "display": "standalone",

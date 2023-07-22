@@ -11,7 +11,7 @@
       <n-page-header
         class="page-header"
         title="Codle"
-        subtitle="Wordle with AST nodes as letters"
+        subtitle="Wordle with parse tree nodes as letters"
       >
         <template #extra>
           <plausible-dialog />
@@ -260,7 +260,7 @@ onMounted(async () => {
     }
     loadPhase.value = 'Loading TreeSitter...';
     await initParser;
-    loadPhase.value = 'Constructing AST...';
+    loadPhase.value = 'Constructing parse tree...';
     const tree = await parse(targetCode.value);
     correctRoot.value = tree.rootNode;
     loadPhase.value = true;
