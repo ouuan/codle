@@ -15,7 +15,7 @@
     </n-gi>
     <n-gi>
       <syntax-tree
-        :global-root-tree-option="globalRootTreeOption"
+        :use-global-root-tree-option="useGlobalRootTreeOption"
         :guess-root="guessRoot"
         :correct-root="correctRoot"
         :mark-range="editor?.markRange"
@@ -37,7 +37,7 @@ import SyntaxTree from './SyntaxTree.vue';
 import { parse } from '../parse';
 
 const props = withDefaults(defineProps<{
-  globalRootTreeOption: boolean,
+  useGlobalRootTreeOption: boolean,
   correctRoot: SyntaxNode | null,
   code: string,
   maxHeight?: string,

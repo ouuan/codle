@@ -44,11 +44,11 @@ const props = defineProps<{
   guessRoot: SyntaxNode | null,
   correctRoot: SyntaxNode | null,
   markRange?: MarkRange,
-  globalRootTreeOption: boolean,
+  useGlobalRootTreeOption: boolean,
   maxHeight: string,
 }>();
 
-const rootTreeOption = props.globalRootTreeOption ? globalRootTreeOption : ref<TreeOptionEx>();
+const rootTreeOption = props.useGlobalRootTreeOption ? globalRootTreeOption : ref<TreeOptionEx>();
 
 const defaultExpandedKeys = ref<number[]>([]);
 

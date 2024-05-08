@@ -1,7 +1,6 @@
 import { defineConfig, splitVendorChunk } from 'vite';
 import { GetManualChunk } from 'rollup';
 import vue from '@vitejs/plugin-vue';
-import analyzer from 'rollup-plugin-analyzer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import viteCompression from 'vite-plugin-compression';
 import viteRestart from 'vite-plugin-restart';
@@ -55,10 +54,6 @@ export default defineConfig({
           host,
         },
       },
-    }),
-    analyzer({
-      limit: 10,
-      summaryOnly: true,
     }),
   ],
   base: '',

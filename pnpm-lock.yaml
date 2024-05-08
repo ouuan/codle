@@ -120,9 +120,6 @@ importers:
       rollup:
         specifier: ^2.75.7
         version: 2.79.1
-      rollup-plugin-analyzer:
-        specifier: ^4.0.0
-        version: 4.0.0
       sass:
         specifier: ^1.53.0
         version: 1.77.0
@@ -1732,10 +1729,6 @@ packages:
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
-
-  rollup-plugin-analyzer@4.0.0:
-    resolution: {integrity: sha512-LL9GEt3bkXp6Wa19SNR5MWcvHNMvuTFYg+eYBZN2OIFhSWN+pEJUQXEKu5BsOeABob3x9PDaLKW7w5iOJnsESQ==}
-    engines: {node: '>=8.0.0'}
 
   rollup@2.77.3:
     resolution: {integrity: sha512-/qxNTG7FbmefJWoeeYJFbHehJ2HNWnjkAFRKzWN/45eNBBF/r8lo992CwcJXEzyVxs5FmfId+vTSTQDb+bxA+g==}
@@ -3895,8 +3888,6 @@ snapshots:
   rimraf@3.0.2:
     dependencies:
       glob: 7.2.3
-
-  rollup-plugin-analyzer@4.0.0: {}
 
   rollup@2.77.3:
     optionalDependencies:

@@ -69,7 +69,7 @@
               </div>
               <div v-show="tab === 'code'">
                 <code-and-tree
-                  :global-root-tree-option="false"
+                  :use-global-root-tree-option="false"
                   :code="targetCode"
                   :correct-root="treeRoot"
                   :max-height="codeAndTreeHeight"

@@ -7,7 +7,7 @@
       />
       <syntax-tree
         max-height="60vh"
-        :global-root-tree-option="false"
+        :use-global-root-tree-option="false"
         :guess-root="guessRoot"
         :correct-root="targetRoot"
       />
