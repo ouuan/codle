@@ -14,6 +14,7 @@ import { JSDOM } from 'jsdom';
 import createDOMPurify from 'dompurify';
 import MarkdownIt from 'markdown-it';
 import mila from 'markdown-it-link-attributes';
+import mihljs from 'markdown-it-highlightjs';
 import {
   beginTimestamp,
   host,
@@ -30,6 +31,7 @@ md.use(mila, {
     rel: 'noopener noreferrer',
   },
 });
+md.use(mihljs);
 
 async function clear() {
   await Promise.all(['statement', 'targetCode'].map(async (dir) => {

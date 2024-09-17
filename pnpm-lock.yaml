@@ -27,8 +27,11 @@ importers:
         specifier: ^1.0.12
         version: 1.0.16
       highlight.js:
-        specifier: ^11.5.1
+        specifier: ^11.9.0
         version: 11.9.0
+      markdown-it-highlightjs:
+        specifier: ^4.1.0
+        version: 4.1.0
       naive-ui:
         specifier: ^2.31.0
         version: 2.38.2(vue@3.4.27(typescript@4.9.5))
@@ -1468,6 +1471,9 @@ packages:
 
   magic-string@0.30.10:
     resolution: {integrity: sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==}
+
+  markdown-it-highlightjs@4.1.0:
+    resolution: {integrity: sha512-aYcgme5aYn10BHEvLZaCNgwxU2oaAX9inK9dwCv38wJdq7tal5FzZrLdQQY8MR3I1H07S3BKgYGRX2kKuPT+sA==}
 
   markdown-it-link-attributes@4.0.1:
     resolution: {integrity: sha512-pg5OK0jPLg62H4k7M9mRJLT61gUp9nvG0XveKYHMOOluASo9OEF13WlXrpAp2aj35LbedAy3QOCgQCw0tkLKAQ==}
@@ -3626,6 +3632,10 @@ snapshots:
   magic-string@0.30.10:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  markdown-it-highlightjs@4.1.0:
+    dependencies:
+      highlight.js: 11.9.0
 
   markdown-it-link-attributes@4.0.1: {}
 

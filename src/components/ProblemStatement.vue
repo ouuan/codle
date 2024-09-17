@@ -2,20 +2,25 @@
 
 <template>
   <n-element
-    class="statement"
+    :class="['statement', theme]"
     v-html="statement"
   />
 </template>
 
 <script setup lang="ts">
-import { NElement } from 'naive-ui';
+import { computed } from 'vue';
+import { NElement, useOsTheme } from 'naive-ui';
+import { uiDark } from '../store/localStorage';
 
 defineProps<{
   statement: string;
 }>();
+
+const osTheme = useOsTheme();
+const theme = computed(() => (uiDark(osTheme) ? 'vue-diff-theme-custom-dark' : 'vue-diff-theme-custom-light'));
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .statement:deep(a) {
   cursor: pointer;
   transition: color .3s var(--cubic-bezier-ease-in-out),
