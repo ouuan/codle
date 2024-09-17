@@ -32,6 +32,7 @@ const theme = computed(() => (uiDark(osTheme) ? darkTheme : null));
 .vue-diff-theme-custom-dark pre {
   background: #282828;
   color: #ebdbb2;
+  white-space: pre-wrap;
 
   .hljs-attr,
   .hljs-attribute {
@@ -81,6 +82,7 @@ const theme = computed(() => (uiDark(osTheme) ? darkTheme : null));
 .vue-diff-theme-custom-light pre {
   background: white;
   color: black;
+  white-space: pre-wrap;
 
   .hljs-attr,
   .hljs-attribute {
