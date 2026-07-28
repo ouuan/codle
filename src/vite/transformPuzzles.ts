@@ -8,10 +8,10 @@ import {
 } from 'fs/promises';
 import { Feed, Item as FeedItem } from 'feed';
 import { basename } from 'path';
-import glob from 'glob-promise';
+import { glob } from 'glob';
 import { Plugin } from 'vite';
 import { JSDOM } from 'jsdom';
-import createDOMPurify from 'dompurify';
+import createDOMPurify, { WindowLike } from 'dompurify';
 import MarkdownIt from 'markdown-it';
 import mila from 'markdown-it-link-attributes';
 import mihljs from 'markdown-it-highlightjs';
@@ -23,7 +23,7 @@ import {
 } from '../../config';
 
 const { window } = new JSDOM('');
-const { sanitize } = createDOMPurify(window as any as Window);
+const { sanitize } = createDOMPurify(window as any as WindowLike);
 const md = new MarkdownIt('commonmark');
 md.use(mila, {
   attrs: {

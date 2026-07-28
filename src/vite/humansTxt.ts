@@ -9,6 +9,11 @@ export default function humansTxt(): Plugin {
     name: 'generate humans.txt',
     async buildStart() {
       const gitInfo = gitCommitInfo();
+      const buildDate = new Date().toISOString().slice(0, 10);
+      const commitDate = gitInfo.date ? new Date(gitInfo.date) : undefined;
+      const lastCommitDate = commitDate && !Number.isNaN(commitDate.getTime())
+        ? commitDate.toISOString().slice(0, 10)
+        : buildDate;
 
       const content = `/* TEAM */
 
@@ -40,8 +45,8 @@ export default function humansTxt(): Plugin {
     Language: English
 
     Build:
-        Last build date: ${new Date().toISOString().slice(0, 10)}
-        Last commit date: ${new Date(gitInfo.date ?? '').toISOString().slice(0, 10)}
+        Last build date: ${buildDate}
+        Last commit date: ${lastCommitDate}
         Last commit hash: ${gitInfo.shortHash}
 
     Source code:

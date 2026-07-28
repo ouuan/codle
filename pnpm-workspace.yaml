@@ -1,4 +1,5 @@
 allowBuilds:
+  '@parcel/watcher': true
   esbuild: true
   tree-sitter-c: true
   tree-sitter-cli: true
