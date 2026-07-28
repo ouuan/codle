@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: true
+  tree-sitter-cli: true
+  tree-sitter-cpp: true
+  vue-demi: true
